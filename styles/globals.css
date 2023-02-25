@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+   .btn-xs {
+      @apply py-2 px-4;
+   }
+   .btn-sm {
+      @apply py-2.5 px-4.5;
+   }
+   .btn-md {
+      @apply py-3.5 px-4.5;
+   }
+   .btn-lg {
+      @apply py-4 px-5.5;
+   }
+   .btn-sm {
+      @apply py-5 px-6.5;
+   }
+}
+
+body {
+   font-family: "Inter";
+}
+html,
+body {
+   height: 100%;
+}
+.sidenav {
+}
+
+/* Swatch */
