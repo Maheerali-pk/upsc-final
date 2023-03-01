@@ -19,7 +19,9 @@ const AuthPageWrapper: React.FC<AuthPageWrapperProps> = ({
             <div className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2 md:mb-3">
                {heading}
             </div>
-            <div className="mb-8 text-gray-600">{subHeading}</div>
+            <div className="mb-8 text-gray-600 text-center whitespace-nowrap">
+               {subHeading}
+            </div>
             {children}
          </div>
       </div>

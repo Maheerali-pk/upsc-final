@@ -11,7 +11,7 @@
 }
 @layer components {
    .btn {
-      @apply rounded-lg w-full justify-center flex font-semibold cursor-pointer;
+      @apply rounded-lg w-full justify-center flex items-center font-semibold cursor-pointer;
       background-color: var(--bg-color);
       box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
       transition: var(--box-shadow-anim), background-color 0s ease-in-out;
@@ -33,6 +33,9 @@
       background-color: var(--disabled-bg);
       color: var(--disabled-color);
       border-color: var(--disabled-border-color);
+   }
+   .btn-link {
+      box-shadow: none;
    }
 
    .btn-primary {
@@ -77,6 +80,16 @@
 
       --hover-bg: theme(colors.white);
       --hover-text-color: theme(colors.primary.600);
+
+      --disabled-bg: theme(colors.white);
+      --disabled-color: theme(colors.gray.300);
+   }
+   .btn-gray.btn-link {
+      --bg-color: theme(colors.white);
+      --text-color: theme(colors.gray.600);
+
+      --hover-bg: theme(colors.white);
+      --hover-text-color: theme(colors.gray.700);
 
       --disabled-bg: theme(colors.white);
       --disabled-color: theme(colors.gray.300);
