@@ -14,7 +14,7 @@
       @apply rounded-lg w-full justify-center flex font-semibold cursor-pointer;
       background-color: var(--bg-color);
       box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
-      transition: var(--box-shadow-anim), background-color 0.2s ease-in-out;
+      transition: var(--box-shadow-anim), background-color 0s ease-in-out;
       border: 1px solid var(--border-color);
       color: var(--text-color);
    }
@@ -26,6 +26,7 @@
    }
    .btn:hover {
       background-color: var(--hover-bg);
+      color: var(--hover-text-color);
       border-color: transparent;
    }
    .btn:disabled {
@@ -39,21 +40,46 @@
       --border-color: theme(colors.transparent);
       --text-color: theme(colors.white);
       --hover-bg: theme(colors.primary.600);
+      --hover-text-color: theme(colors.white);
       --focus-shadow-color1: var(--focus-shadow-overlay-color);
       --focus-shadow-color2: theme(colors.primary.200);
       --disabled-bg: theme(colors.primary.200);
       --disabled-color: theme(colors.white);
    }
+   .btn-gray.btn-outlined {
+      --bg-color: theme(colors.white);
+      --border-color: theme(colors.gray.300);
+      --text-color: theme(colors.gray.700);
+      --hover-bg: theme(colors.gray.50);
+      --hover-text-color: theme(colors.gray.700);
+      --focus-shadow-color1: var(--focus-shadow-overlay-color);
+      --focus-shadow-color2: theme(colors.gray.100);
+      --disabled-bg: theme(colors.white);
+      --disabled-color: theme(colors.gray.300);
+      --disabled-border-color: theme(colors.gray.200);
+   }
+
    .btn-primary.btn-outlined {
       --bg-color: theme(colors.white);
       --border-color: theme(colors.primary.400);
       --text-color: theme(colors.primary.400);
       --hover-bg: theme(colors.primary.50);
+      --hover-text-color: theme(colors.primary.400);
       --focus-shadow-color1: var(--focus-shadow-overlay-color);
       --focus-shadow-color2: theme(colors.primary.200);
       --disabled-bg: theme(colors.white);
       --disabled-color: theme(colors.primary.200);
       --disabled-border-color: theme(colors.primary.200);
+   }
+   .btn-primary.btn-link {
+      --bg-color: theme(colors.white);
+      --text-color: theme(colors.primary.400);
+
+      --hover-bg: theme(colors.white);
+      --hover-text-color: theme(colors.primary.600);
+
+      --disabled-bg: theme(colors.white);
+      --disabled-color: theme(colors.gray.300);
    }
 
    .input-primary {

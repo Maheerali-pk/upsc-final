@@ -39,7 +39,17 @@ const Login: NextPage = () => {
                   Forgot Password
                </div>
             </div>
-            <button className="btn-primary btn btn-sm ">Sign in</button>
+            <button className="btn-primary btn btn-sm mb-4">Sign in</button>
+            <button className="btn-gray btn-outlined btn btn-sm gap-3 mb-8">
+               {icons.brand.google}
+               Sign in with Google
+            </button>
+            <div className="flex gap-1 w-full justify-center items-center mb-10">
+               <div className="text-sm text-gray-600">
+                  Don’t have an account?
+               </div>
+               <div className="btn btn-link btn-primary w-fit">Sign up</div>
+            </div>
          </AuthPageWrapper>
       </>
    );
