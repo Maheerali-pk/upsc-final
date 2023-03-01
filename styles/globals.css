@@ -2,7 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+   --box-shadow-anim: box-shadow 0.1s ease-in-out;
+   --focus-shadow-overlay-color: rgba(16, 24, 40, 0.05);
+}
+* {
+   box-sizing: border-box;
+}
 @layer components {
+   .btn {
+      @apply rounded-lg w-full justify-center flex font-semibold cursor-pointer;
+      background-color: var(--bg-color);
+      box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+      transition: var(--box-shadow-anim), background-color 0.2s ease-in-out;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+   }
+   .btn:focus {
+      background-color: var(--bg-color) !important;
+      box-shadow: 0px 1px 2px var(--focus-shadow-color1),
+         0px 0px 0px 4px var(--focus-shadow-color2);
+      border-color: transparent;
+   }
+   .btn:hover {
+      background-color: var(--hover-bg);
+      border-color: transparent;
+   }
+   .btn:disabled {
+      background-color: var(--disabled-bg);
+      color: var(--disabled-color);
+      border-color: var(--disabled-border-color);
+   }
+
+   .btn-primary {
+      --bg-color: theme("colors.primary.400");
+      --border-color: theme(colors.transparent);
+      --text-color: theme(colors.white);
+      --hover-bg: theme(colors.primary.600);
+      --focus-shadow-color1: var(--focus-shadow-overlay-color);
+      --focus-shadow-color2: theme(colors.primary.200);
+      --disabled-bg: theme(colors.primary.200);
+      --disabled-color: theme(colors.white);
+   }
+   .btn-primary.btn-outlined {
+      --bg-color: theme(colors.white);
+      --border-color: theme(colors.primary.400);
+      --text-color: theme(colors.primary.400);
+      --hover-bg: theme(colors.primary.50);
+      --focus-shadow-color1: var(--focus-shadow-overlay-color);
+      --focus-shadow-color2: theme(colors.primary.200);
+      --disabled-bg: theme(colors.white);
+      --disabled-color: theme(colors.primary.200);
+      --disabled-border-color: theme(colors.primary.200);
+   }
+
+   .input-primary {
+      --focus-shadow-color1: rgb(255, 156, 102, 0.5);
+      --focus-shadow-color2: #ffe6d5;
+      --focus-border-color: theme("colors.primary.300");
+   }
    .btn-xs {
       @apply py-2 px-4;
    }
@@ -15,8 +73,37 @@
    .btn-lg {
       @apply py-4 px-5.5;
    }
-   .btn-sm {
+   .btn-xl {
       @apply py-5 px-6.5;
+   }
+   .auth-page-wrapper {
+      @apply md:w-90 w-full;
+   }
+   .input-wrapper {
+      @apply flex flex-col w-full;
+      gap: 6px;
+   }
+   .inputs-y {
+      @apply flex-col flex gap-5 w-full;
+   }
+   .input-base {
+      box-shadow: 1px 2px rgba(16, 24, 40, 0.05);
+      transition: var(--box-shadow-anim);
+      @apply border w-full border-gray-300
+         text-gray-900 px-3 py-2 rounded-lg flex items-center gap-2;
+   }
+   .input-base.focus {
+      box-shadow: 0px 1px 2px var(--focus-shadow-color1),
+         0px 0px 0px 4px var(--focus-shadow-color2);
+      border: 1px solid var(--focus-border-color);
+   }
+   .input-base::placeholder {
+      @apply text-gray-500;
+   }
+   .input-base input {
+      border: none;
+      outline: none;
+      @apply w-full;
    }
 }
 

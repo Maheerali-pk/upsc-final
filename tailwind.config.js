@@ -1,10 +1,34 @@
-const toRem = (px) => px / 16 + "rem";
 /** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss");
+console.log(plugin, "plugin");
+const toRem = (px) => px / 16 + "rem";
 module.exports = {
    content: [
       "./pages/**/*.{js,ts,jsx,tsx}",
       "./components/**/*.{js,ts,jsx,tsx}",
       "./app/**/*.{js,ts,jsx,tsx}",
+   ],
+
+   plugins: [
+      plugin(function ({ addBase, theme }) {
+         function extractColorVars(colorObj, colorGroup = "") {
+            return Object.keys(colorObj).reduce((vars, colorKey) => {
+               const value = colorObj[colorKey];
+
+               const newVars =
+                  typeof value === "string"
+                     ? { [`--color${colorGroup}-${colorKey}`]: value }
+                     : extractColorVars(value, `-${colorKey}`);
+
+               return { ...vars, ...newVars };
+            }, {});
+         }
+         console.log(extractColorVars(theme("colors")));
+
+         addBase({
+            ":root": extractColorVars(theme("colors")),
+         });
+      }),
    ],
    theme: {
       extend: {
@@ -38,6 +62,9 @@ module.exports = {
             5.5: toRem(22),
             6.5: toRem(30),
             18: toRem(72),
+         },
+         width: {
+            90: toRem(360),
          },
          backdropBlur: {},
          colors: {

@@ -27,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = () => {
    return (
       <div className="h-18 md:h-20 flex items-center px-4 lg:px-28 border-b border-b-gray-100 justify-between w-full">
          <div className="gap-10 flex w-full items-center">
-            <img src="/logo.png"></img>
+            <img src="/images/logo.png"></img>
             <div className="gap-8 hidden md:flex w-full">
                {navbarItems.map((item) => (
                   <NavbarItem {...item}></NavbarItem>
@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = () => {
             <div className="font-semibold text-gray-600 cursor-pointer">
                Log in
             </div>
-            <div className="bg-primary-400 cursor-pointer rounded-lg text-white font-bold py-2.5 px-3.5">
+            <div className="bg-primary-400 cursor-pointer rounded-lg text-white font-semibold py-2.5 px-3.5">
                Sign up
             </div>
          </div>
@@ -54,7 +54,10 @@ const Navbar: React.FC<NavbarProps> = () => {
                { "left-0": open, "-left-full": !open }
             )}
          >
-            <img src="/logo.png" className="mb-8 h-fit w-fit mx-4 "></img>
+            <img
+               src="/images/logo.png"
+               className="mb-8 h-fit w-fit mx-4 "
+            ></img>
             <div className="gap-1 flex flex-col w-full">
                {navbarItems.map((item) => (
                   <NavbarItem {...item}></NavbarItem>
