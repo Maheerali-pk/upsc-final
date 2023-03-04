@@ -4,12 +4,14 @@ import Image from "next/image";
 import { useState } from "react";
 import AuthPageWrapper from "../../components/AuthPageWrapper";
 import Checkbox from "../../components/Checkbox";
+import CustomRadioGroup from "../../components/CustomRadioGroup";
 import Input from "../../components/Input";
 import Navbar from "../../components/Navbar";
 import { icons } from "../../utils/helpers";
 
 const Login: NextPage = () => {
    const [checked, setChecked] = useState(false);
+   const [value, setValue] = useState("1");
    return (
       <>
          <Head>
@@ -53,6 +55,26 @@ const Login: NextPage = () => {
                </div>
                <div className="btn btn-link btn-primary w-fit">Sign up</div>
             </div>
+            {/* <CustomRadioGroup
+               value={value}
+               onChange={setValue}
+               items={[
+                  {
+                     heading: "Hire talent",
+                     icon: icons.customCheckbox.searchLarge,
+                     iconSmall: icons.customCheckbox.search,
+                     value: "0",
+                     text: "If you’re an organisation looking to hire great talent",
+                  },
+                  {
+                     heading: "Apply for job",
+                     icon: icons.customCheckbox.bagLarge,
+                     iconSmall: icons.customCheckbox.bagLarge,
+                     value: "1",
+                     text: "If you’re an individual looking for great job opportunities",
+                  },
+               ]}
+            ></CustomRadioGroup> */}
          </AuthPageWrapper>
       </>
    );

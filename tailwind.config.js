@@ -1,7 +1,5 @@
-const plugin = require("tailwindcss");
-console.log(plugin, "plugin");
-const toRem = (px) => px / 16 + "rem";
 /** @type {import('tailwindcss').Config} */
+const toRem = (px) => px / 16 + "rem";
 module.exports = {
    content: [
       "./pages/**/*.{js,ts,jsx,tsx}",
@@ -19,8 +17,6 @@ module.exports = {
             dsm: [toRem(30), toRem(38)],
             dxs: [toRem(24), toRem(32)],
          },
-         blur: {},
-         customCheckbox: {},
 
          backgroundImage: {
             "gray-600-600":
@@ -46,7 +42,6 @@ module.exports = {
          width: {
             90: toRem(360),
          },
-         backdropBlur: {},
          colors: {
             white: "#ffffff",
             black: "#000000",
@@ -132,21 +127,4 @@ module.exports = {
          },
       },
    },
-   plugins: [
-      ({ addComponents, addBase }) => {
-         addComponents({
-            // ".btn-xs": {},
-            // ".btn-sm": {},
-            // ".btn-md": {},
-            // ".btn-lg": {},
-            // ".btn-xl": {},
-            ".checkbox-sm": {},
-            //#endregion},
-            // ".btn-link": {},
-            // ".btn-primary": {},
-            // ".btn-gray": {},
-            // ".btn-outlined": {},
-         });
-      },
-   ],
 };
