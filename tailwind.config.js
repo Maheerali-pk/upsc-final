@@ -1,7 +1,7 @@
-/** @type {import('tailwindcss').Config} */
 const plugin = require("tailwindcss");
 console.log(plugin, "plugin");
 const toRem = (px) => px / 16 + "rem";
+/** @type {import('tailwindcss').Config} */
 module.exports = {
    content: [
       "./pages/**/*.{js,ts,jsx,tsx}",
@@ -9,27 +9,6 @@ module.exports = {
       "./app/**/*.{js,ts,jsx,tsx}",
    ],
 
-   plugins: [
-      plugin(function ({ addBase, theme }) {
-         function extractColorVars(colorObj, colorGroup = "") {
-            return Object.keys(colorObj).reduce((vars, colorKey) => {
-               const value = colorObj[colorKey];
-
-               const newVars =
-                  typeof value === "string"
-                     ? { [`--color${colorGroup}-${colorKey}`]: value }
-                     : extractColorVars(value, `-${colorKey}`);
-
-               return { ...vars, ...newVars };
-            }, {});
-         }
-         console.log(extractColorVars(theme("colors")));
-
-         addBase({
-            ":root": extractColorVars(theme("colors")),
-         });
-      }),
-   ],
    theme: {
       extend: {
          fontSize: {
@@ -41,6 +20,7 @@ module.exports = {
             dxs: [toRem(24), toRem(32)],
          },
          blur: {},
+         customCheckbox: {},
 
          backgroundImage: {
             "gray-600-600":
@@ -152,5 +132,21 @@ module.exports = {
          },
       },
    },
-   plugins: [],
+   plugins: [
+      ({ addComponents, addBase }) => {
+         addComponents({
+            // ".btn-xs": {},
+            // ".btn-sm": {},
+            // ".btn-md": {},
+            // ".btn-lg": {},
+            // ".btn-xl": {},
+            ".checkbox-sm": {},
+            //#endregion},
+            // ".btn-link": {},
+            // ".btn-primary": {},
+            // ".btn-gray": {},
+            // ".btn-outlined": {},
+         });
+      },
+   ],
 };

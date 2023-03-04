@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { useState } from "react";
 import AuthPageWrapper from "../../components/AuthPageWrapper";
 import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
@@ -8,6 +9,7 @@ import Navbar from "../../components/Navbar";
 import { icons } from "../../utils/helpers";
 
 const Login: NextPage = () => {
+   const [checked, setChecked] = useState(false);
    return (
       <>
          <Head>
@@ -29,13 +31,14 @@ const Login: NextPage = () => {
                   endIcon={icons.input.question}
                ></Input>
             </div>
-            <div className="flex justify-between w-full my-6">
+            <div className="flex  checkbox justify-between w-full my-6">
                <Checkbox
-                  checked={false}
+                  checked={checked}
                   label="Remember for 30 days"
-                  onChange={() => {}}
+                  onChange={setChecked}
+                  className="checkbox-sm"
                ></Checkbox>
-               <div className="cursor-pointer text-sm font-semibold text-primary-400">
+               <div className=" cursor-pointer text-sm font-semibold text-primary-400">
                   Forgot Password
                </div>
             </div>
