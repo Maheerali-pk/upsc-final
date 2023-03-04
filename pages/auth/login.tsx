@@ -8,6 +8,7 @@ import CustomOTPInput from "../../components/CustomOTPInput";
 import CustomRadioGroup from "../../components/CustomRadioGroup";
 import Input from "../../components/Input";
 import Navbar from "../../components/Navbar";
+import Select from "../../components/Select";
 import { icons } from "../../utils/helpers";
 
 const Login: NextPage = () => {
@@ -25,6 +26,53 @@ const Login: NextPage = () => {
             heading="Log in to your account"
             subHeading="Welcome back! Please enter your details."
          >
+            {/* <Select
+               value={value}
+               onChange={setValue}
+               placeholder="Please select"
+               options={[
+                  {
+                     heading: "Heading 1",
+                     text: "This is the description",
+                     value: "0",
+                  },
+                  {
+                     heading: "Heading 2",
+                     text: "This is the description",
+                     value: "1",
+                  },
+                  {
+                     heading: "Heading 3",
+                     text: "This is the description",
+                     value: "2",
+                  },
+                  {
+                     heading: "Heading 4",
+                     text: "This is the description",
+                     value: "3",
+                  },
+                  {
+                     heading: "Heading 5",
+                     text: "This is the description",
+                     value: "4",
+                  },
+                  {
+                     heading: "Heading 6",
+                     text: "This is the description",
+                     value: "5",
+                  },
+                  {
+                     heading: "Heading 7",
+                     text: "This is the description",
+                     value: "6",
+                  },
+                  {
+                     heading: "Heading 8",
+                     text: "This is the description",
+                     value: "7",
+                  },
+               ]}
+            ></Select> */}
             <div className="inputs-y">
                <Input label="Email" placeholder="Enter your email"></Input>
                <Input
