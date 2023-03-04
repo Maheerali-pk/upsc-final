@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import AuthPageWrapper from "../../components/AuthPageWrapper";
 import Checkbox from "../../components/Checkbox";
+import CustomOTPInput from "../../components/CustomOTPInput";
 import CustomRadioGroup from "../../components/CustomRadioGroup";
 import Input from "../../components/Input";
 import Navbar from "../../components/Navbar";
@@ -75,6 +76,11 @@ const Login: NextPage = () => {
                   },
                ]}
             ></CustomRadioGroup> */}
+            {/* <CustomOTPInput
+               errorState={true}
+               value={value}
+               onChange={setValue}
+            ></CustomOTPInput> */}
          </AuthPageWrapper>
       </>
    );
