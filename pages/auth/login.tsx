@@ -9,6 +9,7 @@ import CustomRadioGroup from "../../components/CustomRadioGroup";
 import DialogWrapper from "../../components/DialogWrapper";
 import Input from "../../components/Input";
 import Navbar from "../../components/Navbar";
+import ProfileSetupFooter from "../../components/ProfileSetupFooter";
 import Select from "../../components/Select";
 import { GlobalContextProvider } from "../../contexts/GlobalContext";
 import { icons } from "../../utils/helpers";
@@ -132,6 +133,7 @@ const Login: NextPage = () => {
                onChange={setValue}
             ></CustomOTPInput> */}
          </AuthPageWrapper>
+         {/* <ProfileSetupFooter stepNo={2}></ProfileSetupFooter> */}
       </GlobalContextProvider>
    );
 };

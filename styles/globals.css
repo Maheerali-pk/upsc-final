@@ -76,7 +76,7 @@
    .btn:hover {
       background-color: var(--hover-bg);
       color: var(--hover-text-color);
-      border-color: transparent;
+      border-color: var(--hover-border-color);
    }
    .btn:disabled {
       background-color: var(--disabled-bg);
@@ -104,6 +104,7 @@
       --text-color: theme(colors.gray.700);
       --hover-bg: theme(colors.gray.50);
       --hover-text-color: theme(colors.gray.700);
+      --hover-border-color: theme(colors.gray.300);
       --focus-shadow-color1: var(--focus-shadow-overlay-color);
       --focus-shadow-color2: theme(colors.gray.100);
       --disabled-bg: theme(colors.white);
@@ -149,20 +150,20 @@
       --focus-shadow-color2: #ffe6d5;
       --focus-border-color: theme("colors.primary.300");
    }
-   .btn-xs {
+   .btn-sm {
       @apply py-2 px-4;
    }
-   .btn-sm {
-      @apply py-2.5 px-4.5;
-   }
    .btn-md {
-      @apply py-3.5 px-4.5;
+      @apply py-2.5 px-4;
    }
    .btn-lg {
-      @apply py-4 px-5.5;
+      @apply py-2.5 px-4.5;
    }
    .btn-xl {
-      @apply py-5 px-6.5;
+      @apply py-3 px-5;
+   }
+   .btn-2xl {
+      @apply py-4 px-7;
    }
    .auth-page-wrapper {
       @apply md:w-90 w-full;
