@@ -6,16 +6,18 @@ import AuthPageWrapper from "../../components/AuthPageWrapper";
 import Checkbox from "../../components/Checkbox";
 import CustomOTPInput from "../../components/CustomOTPInput";
 import CustomRadioGroup from "../../components/CustomRadioGroup";
+import DialogWrapper from "../../components/DialogWrapper";
 import Input from "../../components/Input";
 import Navbar from "../../components/Navbar";
 import Select from "../../components/Select";
+import { GlobalContextProvider } from "../../contexts/GlobalContext";
 import { icons } from "../../utils/helpers";
 
 const Login: NextPage = () => {
    const [checked, setChecked] = useState(false);
    const [value, setValue] = useState("1");
    return (
-      <>
+      <GlobalContextProvider>
          <Head>
             <title>Create Next App</title>
             <link rel="icon" href="/favicon.ico" />
@@ -130,7 +132,7 @@ const Login: NextPage = () => {
                onChange={setValue}
             ></CustomOTPInput> */}
          </AuthPageWrapper>
-      </>
+      </GlobalContextProvider>
    );
 };
 

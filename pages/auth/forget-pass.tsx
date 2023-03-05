@@ -15,7 +15,7 @@ const ForgetPass: NextPage = () => {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <AuthPageWrapper
-            icon={icons.authPage.forgetPass}
+            icon={<></>}
             heading="Forgot password?"
             subHeading="No worries, we’ll send you reset instructions."
          >
