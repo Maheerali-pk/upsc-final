@@ -10,6 +10,8 @@ interface CustomInputProps {
    dropdownStart?: boolean;
    dropdownEnd?: boolean;
    placeholder?: string;
+   value: string;
+   onChange: (val: string) => void;
 }
 
 const Input: React.FC<CustomInputProps> = (props) => {
@@ -22,6 +24,8 @@ const Input: React.FC<CustomInputProps> = (props) => {
          >
             {props.startIcon && props.startIcon}
             <input
+               value={props.value}
+               onChange={(e) => props.onChange(e.target.value)}
                type="text"
                onFocus={() => setFocus(true)}
                onBlur={() => setFocus(false)}

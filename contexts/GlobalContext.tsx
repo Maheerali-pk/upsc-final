@@ -4,6 +4,8 @@ import { createCustomContext } from "../utils/CreateCustomContext";
 
 interface IGlobalState {
    dialog?: React.FC;
+   loading: boolean;
+   error: { title: string; message: string };
 }
 
 export interface IUser {
@@ -11,7 +13,10 @@ export interface IUser {
    image: string;
 }
 
-const initialState: IGlobalState = {};
+const initialState: IGlobalState = {
+   loading: false,
+   error: { title: "", message: "" },
+};
 
 const functions = {
    setDialog: (

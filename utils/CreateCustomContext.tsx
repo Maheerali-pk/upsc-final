@@ -29,6 +29,7 @@ function buildReducer<
    ActionsType
 >({ functions }: { functions: FunctionsObjectType }) {
    console.log("reducer called");
+   console.log("reducer called");
    return (state: StateType, action: Partial<ActionsType>) => {
       console.log("reducer called");
       let tempState: StateType = { ...state };

@@ -1,4 +1,12 @@
 export const toRem = (px: number) => `${px / 16}rem`;
+export const host = "https://api.csenaukri.com";
+export const customFetch = async <T extends any>(data: CustomFetchProps) => {
+   const res = await fetch(`${host}/${data.path}`, {
+      method: data.method,
+      headers: { Authorization: localStorage.getItem("auth-token") || "" },
+   });
+   return (await res.json()) as T;
+};
 export const icons = {
    chevronLeft: (
       <svg
