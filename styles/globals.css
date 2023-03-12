@@ -146,9 +146,20 @@
    }
 
    .input-primary {
+      --border-color: theme("colors.gray.300");
+      --text-color: theme("colors.gray.400");
       --focus-shadow-color1: rgb(255, 156, 102, 0.5);
       --focus-shadow-color2: #ffe6d5;
       --focus-border-color: theme("colors.primary.300");
+      --helper-text-color: theme("colors.gray.600");
+   }
+   .input-error {
+      --border-color: theme("colors.error.300");
+      --text-color: theme("colors.error.500");
+      --focus-shadow-color1: rgba(16, 24, 40, 0.05);
+      --focus-shadow-color2: #fee4e2;
+      --focus-border-color: theme("colors.error.300");
+      --helper-text-color: theme("colors.error.500");
    }
    .btn-sm {
       @apply py-2 px-4;
@@ -178,8 +189,10 @@
    .input-base {
       box-shadow: 1px 2px rgba(16, 24, 40, 0.05);
       transition: var(--box-shadow-anim);
-      @apply border w-full border-gray-300
-         text-gray-900 px-3 py-2 rounded-lg flex items-center gap-2;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      @apply border w-full 
+          px-3 py-2 rounded-lg flex items-center gap-2;
    }
    .input-base.focus {
       box-shadow: 0px 1px 2px var(--focus-shadow-color1),
@@ -192,9 +205,13 @@
    .input-base input {
       border: none;
       outline: none;
-      @apply w-full;
+      @apply w-full text-gray-900;
+   }
+   .helper-text {
+      color: var(--helper-text-color);
    }
 
+   /* OTP Input */
    .otp-input {
       @apply rounded-lg w-16 text-5xl aspect-square;
       width: 4rem !important;

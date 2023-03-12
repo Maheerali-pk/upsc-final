@@ -18,9 +18,12 @@ type InputStateType = "error" | "warn";
 interface InputState {
    text: string;
    type: InputStateType;
-   check: (val: string) => boolean;
 }
 
+interface InputCheck {
+   cond: (value: string) => boolean;
+   state: InputState;
+}
 interface IInput {
    type:
       | "number"
@@ -29,12 +32,23 @@ interface IInput {
       | "checkbox"
       | "multiple-checkbox"
       | "radio";
-   states?: InputState[];
+   state?: InputState;
    value?: IInputValue;
+   checks?: InputCheck[];
 }
 
-type IInputValue = string | string[] | boolean;
+interface ErrorObject {
+   statusCode: number;
+   message: string;
+   error: string;
+}
+
+type IInputValue = string;
 type UseFormProps<Names extends string> = { [k in Names]: IInput };
+type PartialFormProps<Names extends string> = Partial<
+   Record<Names, Partial<IInput>>
+>;
+type CreateStateObject<Names extends string> = { [k in Names]: InputState };
 
 type ValueObject<Names extends string> = { [k in Names]: IInputValue };
 

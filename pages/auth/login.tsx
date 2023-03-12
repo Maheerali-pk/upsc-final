@@ -25,19 +25,45 @@ import PageWrapper from "../../components/PageWrapper";
 const LoginComponent: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
    const [checked, setChecked] = useState(false);
-   const { onSubmit, onChangeEvents, values } = useForm<
-      "email" | "password",
-      LoginResponse
-   >({
-      inputs: {
-         email: { type: "text", value: "" },
-         password: { type: "text", value: "" },
-      },
-      api: "/account/login",
-      onSuccess: (data) => {
-         localStorage.setItem("auth-token", data.access_token);
-      },
-   });
+   const { onSubmit, onChangeEvents, values, inputsData, setData, data } =
+      useForm<"email" | "password", LoginResponse>({
+         inputs: {
+            email: {
+               type: "text",
+               value: "",
+               checks: [
+                  {
+                     cond: (x) => x.trim() === "",
+                     state: { text: "Please fill this field", type: "error" },
+                  },
+               ],
+            },
+            password: {
+               type: "text",
+               value: "",
+               checks: [
+                  {
+                     cond: (x) => x.trim() === "",
+                     state: { text: "Please fill this field", type: "error" },
+                  },
+               ],
+            },
+         },
+         api: "/account/login",
+         onSuccess: (data) => {
+            localStorage.setItem("auth-token", data.access_token);
+         },
+         onFail: (data) => {
+            // if (data.error === "Unauthorized") {
+            //    setData({
+            //       email: { state: { type: "error", text: "Wrong email" } },
+            //       password: {
+            //          state: { text: "Wrong password", type: "error" },
+            //       },
+            //    });
+            // }
+         },
+      });
    return (
       <>
          <Head>
@@ -53,14 +79,12 @@ const LoginComponent: React.FC = () => {
             <Loader></Loader>
             <div className="inputs-y">
                <Input
-                  value={values.email as string}
-                  onChange={onChangeEvents.onEmailChange}
+                  {...inputsData.email}
                   label="Email"
                   placeholder="Enter your email"
                ></Input>
                <Input
-                  value={values.password as string}
-                  onChange={onChangeEvents.onPasswordChange}
+                  {...inputsData.password}
                   label="Password"
                   placeholder="Enter your password"
                   helperText="This is a hint text to help user."

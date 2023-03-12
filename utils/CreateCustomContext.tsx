@@ -28,10 +28,7 @@ function buildReducer<
    FunctionsObjectType extends GeneralFucntionsObjectType,
    ActionsType
 >({ functions }: { functions: FunctionsObjectType }) {
-   console.log("reducer called");
-   console.log("reducer called");
    return (state: StateType, action: Partial<ActionsType>) => {
-      console.log("reducer called");
       let tempState: StateType = { ...state };
       Object.keys(action).forEach((key) => {
          let inferredKey = key as keyof FunctionsObjectType;
