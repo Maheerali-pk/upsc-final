@@ -82,3 +82,5 @@ type IStatePCAttempt = ValueObject<StatePCNames>;
 interface LoginResponse {
    access_token: string;
 }
+
+type TestId = "input_email" | "input_password" | "btn_sign-in";

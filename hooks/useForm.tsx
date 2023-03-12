@@ -82,7 +82,6 @@ export function useForm<Names extends string, ResponseData extends any>(
    type T = `on${Capitalize<Names>}Change`;
 
    const onSubmit = () => {
-      console.log(data, "data while submitting");
       const newData = { ...data };
       for (let key in data) {
          const k = key as Names;

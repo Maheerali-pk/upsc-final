@@ -13,6 +13,7 @@ interface CustomInputProps {
    value: string;
    onChange: (val: string) => void;
    state?: InputState;
+   testId: TestId;
 }
 
 const Input: React.FC<CustomInputProps> = (props) => {
@@ -23,6 +24,7 @@ const Input: React.FC<CustomInputProps> = (props) => {
             "input-error": props.state?.type === "error",
             "input-primary": props.state === undefined,
          })}
+         data-testid={props.testId}
       >
          <div className="text-sm text-gray-700 font-medium">{props.label}</div>
          <div

@@ -21,6 +21,7 @@ import { icons } from "../../utils/helpers";
 import * as React from "react";
 import { useEffect } from "react";
 import PageWrapper from "../../components/PageWrapper";
+import { errors } from "../../utils/messages";
 
 const LoginComponent: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
@@ -34,7 +35,7 @@ const LoginComponent: React.FC = () => {
                checks: [
                   {
                      cond: (x) => x.trim() === "",
-                     state: { text: "Please fill this field", type: "error" },
+                     state: { text: errors.requiredField, type: "error" },
                   },
                ],
             },
@@ -44,7 +45,7 @@ const LoginComponent: React.FC = () => {
                checks: [
                   {
                      cond: (x) => x.trim() === "",
-                     state: { text: "Please fill this field", type: "error" },
+                     state: { text: errors.requiredField, type: "error" },
                   },
                ],
             },
@@ -80,11 +81,13 @@ const LoginComponent: React.FC = () => {
             <div className="inputs-y">
                <Input
                   {...inputsData.email}
+                  testId="input_email"
                   label="Email"
                   placeholder="Enter your email"
                ></Input>
                <Input
                   {...inputsData.password}
+                  testId="input_password"
                   label="Password"
                   placeholder="Enter your password"
                   helperText="This is a hint text to help user."
@@ -102,7 +105,11 @@ const LoginComponent: React.FC = () => {
                   Forgot Password
                </div>
             </div>
-            <button className="btn-primary btn btn-sm mb-4" onClick={onSubmit}>
+            <button
+               className="btn-primary btn btn-sm mb-4"
+               data-testid="btn_sign-in"
+               onClick={onSubmit}
+            >
                Sign in
             </button>
             <button className="btn-gray btn-outlined btn btn-sm gap-3 mb-8">
