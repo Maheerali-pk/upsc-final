@@ -29,68 +29,75 @@ const LoginComponent: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
    const [checked, setChecked] = useState(false);
    const router = useRouter();
-   const { onSubmit, onChangeEvents, values, inputsData, setData, data } =
-      useForm<"email" | "password", LoginResponse>({
-         inputs: {
-            email: {
-               type: "text",
-               value: "",
-               checks: [
-                  {
-                     cond: (x) => x.trim() === "",
-                     state: { text: errors.requiredField, type: "error" },
-                  },
-               ],
-            },
-            password: {
-               type: "text",
-               value: "",
-               checks: [
-                  {
-                     cond: (x) => x.trim() === "",
-                     state: { text: errors.requiredField, type: "error" },
-                  },
-               ],
-            },
+   const { onSubmit, inputsData, setData, data } = useForm<
+      { email: string; password: string; rememberMe: boolean },
+      LoginResponse
+   >({
+      inputs: {
+         email: {
+            type: "text",
+            value: "",
+            checks: [
+               {
+                  cond: (x) => x?.trim() === "",
+                  state: { text: errors.requiredField, type: "error" },
+               },
+            ],
          },
-         api: "/account/login",
-         onSuccess: (data) => {
-            localStorage.setItem("auth-token", data.access_token);
-            setData({
-               email: { state: undefined },
-               password: { state: undefined },
-            });
-            dispatch({ setState: { loading: true } });
-            getCompanyProfile().then((data) => {
-               console.log("my data", data);
-               if (data) {
-                  router.push("/company/dashboard");
-                  dispatch({ setState: { loading: false } });
-               } else {
-                  getCandidateProfile().then((data) => {
-                     console.log("my data 2", data);
-                     if (data) {
-                        router.push("/student/dashboard");
-                        dispatch({ setState: { loading: false } });
-                     }
-                  });
-               }
-            });
+         password: {
+            type: "text",
+            value: "",
+            checks: [
+               {
+                  cond: (x) => x?.trim() === "",
+                  state: { text: errors.requiredField, type: "error" },
+               },
+            ],
          },
-         onFail: (data) => {
-            if (data.error === "Unauthorized") {
-               setData({
-                  email: {
-                     state: { type: "error", text: errors.wrongCredentials },
-                  },
-                  password: {
-                     state: { text: errors.wrongCredentials, type: "error" },
-                  },
-               });
+         rememberMe: {
+            type: "checkbox",
+            value: false,
+         },
+      },
+
+      api: "/account/login",
+      onSuccess: (data) => {
+         localStorage.setItem("auth-token", data.access_token);
+         setData({
+            email: { state: undefined },
+            password: { state: undefined },
+         });
+         dispatch({ setState: { loading: true } });
+         getCompanyProfile().then((data) => {
+            console.log("my data", data);
+            if (data) {
+               router.push("/company/dashboard");
+               dispatch({ setState: { loading: false } });
             } else {
+               getCandidateProfile().then((data) => {
+                  console.log("my data 2", data);
+                  if (data) {
+                     router.push("/student/dashboard");
+                     dispatch({ setState: { loading: false } });
+                  }
+               });
             }
-         },
-      });
+         });
+      },
+      onFail: (data) => {
+         if (data.error === "Unauthorized") {
+            setData({
+               email: {
+                  state: { type: "error", text: errors.wrongCredentials },
+               },
+               password: {
+                  state: { text: errors.wrongCredentials, type: "error" },
+               },
+            });
+         } else {
+         }
+      },
+   });
    return (
       <>
          <Head>
@@ -107,12 +114,14 @@ const LoginComponent: React.FC = () => {
             <div className="inputs-y">
                <Input
                   {...inputsData.email}
+                  value={""}
                   testId="input_email"
                   label="Email"
                   placeholder="Enter your email"
                ></Input>
                <Input
                   {...inputsData.password}
+                  value={""}
                   testId="input_password"
                   label="Password"
                   placeholder="Enter your password"
@@ -122,9 +131,8 @@ const LoginComponent: React.FC = () => {
             </div>
             <div className="flex  checkbox justify-between w-full my-6">
                <Checkbox
-                  checked={checked}
+                  {...inputsData.rememberMe}
                   label="Remember for 30 days"
-                  onChange={setChecked}
                   className="checkbox-sm"
                ></Checkbox>
                <div className=" cursor-pointer text-sm font-semibold text-primary-400">

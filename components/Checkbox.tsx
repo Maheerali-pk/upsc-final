@@ -1,12 +1,12 @@
 interface CheckboxProps {
-   checked: boolean;
-   onChange: (checked: boolean) => void;
+   value: boolean;
+   onChange: (value: boolean) => void;
    label: string;
    className?: string;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
-   checked,
+   value,
    onChange,
    label,
    className,
@@ -17,7 +17,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
             className={`text-primary-400 ${className || ""}`}
             type="checkbox"
             id={label}
-            checked={checked}
+            checked={value}
             onChange={(e) => onChange(e.target.checked)}
          ></input>
          <label htmlFor={label}>{label}</label>

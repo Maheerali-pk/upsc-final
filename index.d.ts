@@ -4,6 +4,9 @@ interface INavbarItem {
    icon: JSX.Element;
    subItems?: INavbarSubItem[];
 }
+
+type NamesObjectDefault = { [k in string]: IInputValue };
+
 interface INavbarSubItem {
    text: string;
    url: string;
@@ -20,11 +23,11 @@ interface InputState {
    type: InputStateType;
 }
 
-interface InputCheck {
-   cond: (value: string) => boolean;
+interface InputCheck<Value extends IInputValue> {
+   cond: (value?: Value) => boolean;
    state: InputState;
 }
-interface IInput {
+interface IInput<Value extends IInputValue> {
    type:
       | "number"
       | "text"
@@ -33,8 +36,8 @@ interface IInput {
       | "multiple-checkbox"
       | "radio";
    state?: InputState;
-   value?: IInputValue;
-   checks?: InputCheck[];
+   value?: Value;
+   checks?: InputCheck<Value>[];
 }
 
 interface ErrorObject {
@@ -43,14 +46,44 @@ interface ErrorObject {
    error: string;
 }
 
-type IInputValue = string;
-type UseFormProps<Names extends string> = { [k in Names]: IInput };
-type PartialFormProps<Names extends string> = Partial<
+type IInputValue = string | boolean | string[];
+type Test = {
+   email: string;
+   password: string;
+   rememberMe: boolean;
+   works: string[];
+};
+
+type X = UseFormProps<Test>;
+
+type UseFormProps<NamesObject extends NamesObjectDefault> = {
+   [k in keyof NamesObject]: IInput<NamesObject[k]>;
+};
+type PartialFormProps<NamesObject extends NamesObjectDefault> = Partial<
    Record<Names, Partial<IInput>>
 >;
-type CreateStateObject<Names extends string> = { [k in Names]: InputState };
+type CreateStateObject<NamesObject extends NamesObjectDefault> = {
+   [k in keyof Names]: InputState;
+};
 
-type ValueObject<Names extends string> = { [k in Names]: IInputValue };
+type CreateFormObject<NamesObject extends NamesObjectDefault> = {
+   [k in keyof NamesObject]: {
+      setState: (val: InputState) => void;
+      onChange: (val: NamesObject[k]) => void;
+      value: NamesObject[k];
+      state: InputState;
+   };
+};
+type T = CreateFormObject<{
+   email: string;
+   password: string;
+   rememberMe: boolean;
+   jobs: string[];
+}>;
+
+// type ValueObject<NamesObject extends NamesObjectDefault> = {
+//    [k in keyof NamesObject]: IInput<NamesObject[k]>;
+// };
 
 type IExperience = ValueObject<
    "compName" | "startDate" | "endDate" | "description" | "role"
