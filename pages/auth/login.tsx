@@ -22,10 +22,13 @@ import * as React from "react";
 import { useEffect } from "react";
 import PageWrapper from "../../components/PageWrapper";
 import { errors } from "../../utils/messages";
+import { useRouter } from "next/router";
+import { getCandidateProfile, getCompanyProfile } from "../../apis/getProfile";
 
 const LoginComponent: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
    const [checked, setChecked] = useState(false);
+   const router = useRouter();
    const { onSubmit, onChangeEvents, values, inputsData, setData, data } =
       useForm<"email" | "password", LoginResponse>({
          inputs: {
@@ -53,16 +56,39 @@ const LoginComponent: React.FC = () => {
          api: "/account/login",
          onSuccess: (data) => {
             localStorage.setItem("auth-token", data.access_token);
+            setData({
+               email: { state: undefined },
+               password: { state: undefined },
+            });
+            dispatch({ setState: { loading: true } });
+            getCompanyProfile().then((data) => {
+               console.log("my data", data);
+               if (data) {
+                  router.push("/company/dashboard");
+                  dispatch({ setState: { loading: false } });
+               } else {
+                  getCandidateProfile().then((data) => {
+                     console.log("my data 2", data);
+                     if (data) {
+                        router.push("/student/dashboard");
+                        dispatch({ setState: { loading: false } });
+                     }
+                  });
+               }
+            });
          },
          onFail: (data) => {
-            // if (data.error === "Unauthorized") {
-            //    setData({
-            //       email: { state: { type: "error", text: "Wrong email" } },
-            //       password: {
-            //          state: { text: "Wrong password", type: "error" },
-            //       },
-            //    });
-            // }
+            if (data.error === "Unauthorized") {
+               setData({
+                  email: {
+                     state: { type: "error", text: errors.wrongCredentials },
+                  },
+                  password: {
+                     state: { text: errors.wrongCredentials, type: "error" },
+                  },
+               });
+            } else {
+            }
          },
       });
    return (

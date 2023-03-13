@@ -3,7 +3,10 @@ export const host = "https://api.csenaukri.com";
 export const customFetch = async <T extends any>(data: CustomFetchProps) => {
    const res = await fetch(`${host}/${data.path}`, {
       method: data.method,
-      headers: { Authorization: localStorage.getItem("auth-token") || "" },
+      headers: {
+         Authorization: "Bearer " + localStorage.getItem("auth-token") || "",
+      },
+      body: data.data,
    });
    return (await res.json()) as T;
 };

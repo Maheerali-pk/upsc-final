@@ -10,11 +10,11 @@ interface INavbarSubItem {
 }
 
 interface CustomFetchProps {
-   data: any;
+   data?: any;
    method: "get" | "post" | "put";
    path: string;
 }
-type InputStateType = "error" | "warn";
+type InputStateType = "error" | "warn" | "primary";
 interface InputState {
    text: string;
    type: InputStateType;
