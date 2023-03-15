@@ -1,6 +1,10 @@
 // import messages from "../../frontend/src/utils/messages";
 import { mailServerId } from "./consts";
-type PageUrl = "/auth/login" | "/auth/signup";
+type PageUrl =
+   | "/auth/login"
+   | "/auth/signup"
+   | "/auth/signup/company"
+   | "/auth/signup/student";
 
 // const {} = typeof import("mailslurp-client");
 

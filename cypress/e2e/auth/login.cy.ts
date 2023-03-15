@@ -1,4 +1,4 @@
-import { errors } from "../../../utils/messages";
+import { errors } from "../../../utils/utils";
 import { mailServerAddress } from "../../support/consts";
 
 describe("Login", () => {

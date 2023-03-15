@@ -40,6 +40,7 @@ module.exports = {
             6.5: toRem(30),
             18: toRem(72),
             106: toRem(424),
+            200: toRem(800),
          },
          width: {
             90: toRem(360),

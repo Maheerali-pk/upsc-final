@@ -10,6 +10,7 @@ export const customFetch = async <T extends any>(data: CustomFetchProps) => {
    });
    return (await res.json()) as T;
 };
+
 export const icons = {
    chevronLeft: (
       <svg

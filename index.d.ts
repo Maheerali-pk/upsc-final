@@ -116,4 +116,11 @@ interface LoginResponse {
    access_token: string;
 }
 
-type TestId = "input_email" | "input_password" | "btn_sign-in";
+type TestId =
+   | "input_email"
+   | "input_password"
+   | "btn_sign-in"
+   | "signin-hire-talent"
+   | "signin-apply-for-job"
+   | "signin-get-started"
+   | "signin-login-link";

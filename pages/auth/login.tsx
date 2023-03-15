@@ -21,9 +21,9 @@ import { icons } from "../../utils/helpers";
 import * as React from "react";
 import { useEffect } from "react";
 import PageWrapper from "../../components/PageWrapper";
-import { errors } from "../../utils/messages";
 import { useRouter } from "next/router";
 import { getCandidateProfile, getCompanyProfile } from "../../apis/getProfile";
+import { errors, routes } from "../../utils/utils";
 
 const LoginComponent: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
@@ -135,9 +135,7 @@ const LoginComponent: React.FC = () => {
                   label="Remember for 30 days"
                   className="checkbox-sm"
                ></Checkbox>
-               <div className=" cursor-pointer text-sm font-semibold text-primary-400">
-                  Forgot Password
-               </div>
+               <div className=" cursor-pointer text-sm font-semibold text-primary-400"></div>
             </div>
             <button
                className="btn-primary btn btn-sm mb-4"
