@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { useState } from "react";
+import { icons } from "../utils/helpers";
 
 interface CustomInputProps {
    startIcon?: JSX.Element;
@@ -13,11 +14,22 @@ interface CustomInputProps {
    value: string;
    onChange: (val: string) => void;
    state?: InputState;
-   testId: TestId;
+   showEye?: boolean;
+   testId?: TestId;
+   type?: InputType;
 }
 
 const Input: React.FC<CustomInputProps> = (props) => {
    const [focus, setFocus] = useState(false);
+   const [showPass, setShowPass] = useState(false);
+   const renderEye = () => (showPass ? icons.eyeClose : icons.eye);
+   const renderType = () => {
+      if (!props.showEye) {
+         return props.type || "text";
+      } else {
+         return showPass ? "text" : "password";
+      }
+   };
    return (
       <div
          className={classNames("input-wrapper input-primary", {
@@ -36,11 +48,19 @@ const Input: React.FC<CustomInputProps> = (props) => {
             <input
                value={props.value}
                onChange={(e) => props.onChange(e.target.value)}
-               type="text"
+               type={renderType()}
                onFocus={() => setFocus(true)}
                onBlur={() => setFocus(false)}
                placeholder={props.placeholder}
+               autoComplete="off"
             />
+            <div
+               onClick={() => setShowPass(!showPass)}
+               className="cursor-pointer"
+            >
+               {props.showEye && renderEye()}
+            </div>
+
             {props.endIcon && props.endIcon}
          </div>
          <div className="text-sm helper-text">{props.state?.text}</div>

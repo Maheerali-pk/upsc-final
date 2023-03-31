@@ -17,7 +17,7 @@ import {
    useGlobalContext,
 } from "../../contexts/GlobalContext";
 import { useForm } from "../../hooks/useForm";
-import { icons } from "../../utils/helpers";
+import { checks, icons } from "../../utils/helpers";
 import * as React from "react";
 import { useEffect } from "react";
 import PageWrapper from "../../components/PageWrapper";
@@ -37,22 +37,12 @@ const LoginComponent: React.FC = () => {
          email: {
             type: "text",
             value: "",
-            checks: [
-               {
-                  cond: (x) => x?.trim() === "",
-                  state: { text: errors.requiredField, type: "error" },
-               },
-            ],
+            checks: [checks.required.string],
          },
          password: {
             type: "text",
             value: "",
-            checks: [
-               {
-                  cond: (x) => x?.trim() === "",
-                  state: { text: errors.requiredField, type: "error" },
-               },
-            ],
+            checks: [checks.required.string],
          },
          rememberMe: {
             type: "checkbox",

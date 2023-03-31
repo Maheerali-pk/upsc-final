@@ -27,14 +27,17 @@ interface InputCheck<Value extends IInputValue> {
    cond: (value?: Value) => boolean;
    state: InputState;
 }
+type InputType =
+   | "number"
+   | "text"
+   | "select"
+   | "checkbox"
+   | "multiple-checkbox"
+   | "password"
+   | "radio";
+
 interface IInput<Value extends IInputValue> {
-   type:
-      | "number"
-      | "text"
-      | "select"
-      | "checkbox"
-      | "multiple-checkbox"
-      | "radio";
+   type?: InputType;
    state?: InputState;
    value?: Value;
    checks?: InputCheck<Value>[];
@@ -115,6 +118,7 @@ type IStatePCAttempt = ValueObject<StatePCNames>;
 interface LoginResponse {
    access_token: string;
 }
+interface;
 
 type TestId =
    | "input_email"
