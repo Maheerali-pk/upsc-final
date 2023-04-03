@@ -276,6 +276,10 @@
    .select-menu.show {
       @apply scale-100;
    }
+
+   .custom-upload-file input {
+      display: none;
+   }
 }
 
 body {

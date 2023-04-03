@@ -15,3 +15,15 @@ export const routes = {
       student: "/auth/signup/student",
    },
 } as const;
+
+export const fileToBase64 = (
+   file: File
+): Promise<string | ArrayBuffer | null> => {
+   const reader = new FileReader();
+   reader.readAsDataURL(file);
+   return new Promise((res, rej) => {
+      reader.onload = () => {
+         res(reader.result);
+      };
+   });
+};
