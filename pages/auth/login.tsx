@@ -25,6 +25,7 @@ import { useRouter } from "next/router";
 import { getCandidateProfile, getCompanyProfile } from "../../apis/getProfile";
 import { errors, routes } from "../../utils/utils";
 import UploadFile from "../../components/UploadFile";
+import NotificationPopup from "../../components/NotificationPopup";
 
 const LoginComponent: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
@@ -105,6 +106,12 @@ const LoginComponent: React.FC = () => {
          >
             <Loader></Loader>
 
+            {/* <NotificationPopup
+               acceptText="Got it, thanks"
+               description="Your profile will be confidential and can be seen by recruiters only when you apply for their job."
+               title="Your identity is safe & confidential"
+               icon={icons.safety}
+            ></NotificationPopup> */}
             <div className="inputs-y">
                <Input
                   {...inputsData.email}
