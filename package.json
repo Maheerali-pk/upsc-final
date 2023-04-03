@@ -3,16 +3,18 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
+    "buildandexport": "next build && next export",
     "start": "next start"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.11.8",
-    "@next/font": "^13.1.6",
+    "@next/font": "^13.2.4",
     "classnames": "^2.3.2",
     "deep-clone": "^3.0.3",
-    "next": "latest",
+    "next": "^13.2.5",
     "postcss-css-variables": "^0.18.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

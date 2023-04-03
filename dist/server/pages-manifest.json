@@ -1,0 +1,13 @@
+{
+  "/_app": "pages/_app.js",
+  "/auth/login": "pages/auth/login.html",
+  "/auth/signup/company": "pages/auth/signup/company.html",
+  "/auth/forget-pass": "pages/auth/forget-pass.html",
+  "/auth/signup": "pages/auth/signup.html",
+  "/auth/signup/student": "pages/auth/signup/student.html",
+  "/": "pages/index.html",
+  "/student/dashboard": "pages/student/dashboard.html",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.html"
+}
