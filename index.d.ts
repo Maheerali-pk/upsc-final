@@ -127,4 +127,25 @@ type TestId =
    | "signin-hire-talent"
    | "signin-apply-for-job"
    | "signin-get-started"
-   | "signin-login-link";
+   | "signin-login-link"
+   | `signup-${SignUpTestId}`;
+
+type SignUpTestId =
+   | "firstname"
+   | "lastname"
+   | "phone"
+   | "email"
+   | "password"
+   | "submit";
+
+declare global {
+   namespace Cypress {
+      interface Chainable {
+         state(state: any): any;
+      }
+   }
+}
+
+interface cy {
+   state: State;
+}

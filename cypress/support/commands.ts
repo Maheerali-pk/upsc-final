@@ -8,6 +8,13 @@ type PageUrl =
 
 // const {} = typeof import("mailslurp-client");
 
+interface ISignupDetails {
+   email: string;
+   password: string;
+   firstname: string;
+   lastname: string;
+   phone: string;
+}
 declare global {
    namespace Cypress {
       interface Chainable {
@@ -17,6 +24,8 @@ declare global {
             testId: TestId,
             state: InputState
          ) => Chainable<HTMLElement>;
+         submitSignupForm: (props: ISignupDetails) => Chainable;
+         shouldBeCalled: (url: string, int: number) => Chainable;
          // expectError: (err?: string) => Cypress.Chainable;
          // expectMessage: (msg?: string) => Chainable;
          // expectNoMessage: () => Chainable;
@@ -55,6 +64,19 @@ Cypress.Commands.add(
          .should("have.text", state.text);
    }
 );
+Cypress.Commands.add("submitSignupForm", (props) => {
+   cy.getByTestId("signup-firstname")
+      .find("input")
+      .clear()
+      .type(props.firstname);
+
+   cy.getByTestId("signup-lastname").find("input").clear().type(props.lastname);
+   cy.getByTestId("signup-email").find("input").clear().type(props.email);
+   cy.getByTestId("signup-password").find("input").clear().type(props.password);
+   cy.getByTestId("signup-phone").find("input").clear().type(props.phone);
+   cy.getByTestId("signup-submit").click();
+});
+
 // Cypress.Commands.add("expectError", (err?: string) => {
 //    cy.get(".swal2-error").should("exist");
 //    if (err) {

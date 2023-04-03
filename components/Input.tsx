@@ -35,6 +35,7 @@ const Input: React.FC<CustomInputProps> = (props) => {
          className={classNames("input-wrapper input-primary", {
             "input-error": props.state?.type === "error",
             "input-primary": props.state === undefined,
+            "input-warn": props.state?.type === "warn",
          })}
          data-testid={props.testId}
       >

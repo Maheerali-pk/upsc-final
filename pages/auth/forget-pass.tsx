@@ -20,7 +20,10 @@ const ForgetPass: NextPage = () => {
             subHeading="No worries, we’ll send you reset instructions."
          >
             <div className="inputs-y">
-               <Input label="Email" placeholder="Enter your email"></Input>
+               {/* <Input
+                  label="Email"
+                  placeholder="Enter your email"
+               ></Input> */}
             </div>
 
             <button className="btn-primary btn btn-sm mt-6 mb-8">

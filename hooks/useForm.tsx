@@ -15,6 +15,7 @@ interface Props<
    // onAnyChange?: (data: ObjectFromNames<NamesObject>) => void;
    onSuccess?: (data: ResponseData) => void;
    onFail?: (data: ErrorObject) => void;
+
    api?: string;
 }
 
@@ -82,6 +83,7 @@ export function useForm<
 
    const onSubmit = () => {
       const newData = { ...data };
+      let error = false;
       for (let key in data) {
          const k = key;
          const input = data[k];
@@ -90,6 +92,9 @@ export function useForm<
             for (let check of input.checks) {
                if (check.cond(input.value)) {
                   newData[k].state = check.state;
+                  if (check.state.type === "error") {
+                     error = true;
+                  }
                   stateChanged = true;
                   break;
                }
@@ -107,6 +112,12 @@ export function useForm<
             }
          }
          setData({ ...newData });
+      }
+      if (error) {
+         return error;
+      }
+      if (!props.api) {
+         return error;
       }
       dispatch({ setState: { loading: true } });
       fetch(`${host}${props.api}`, {

@@ -50,7 +50,9 @@ const SignupForm: React.FC<SignupFormProps> = ({
       },
    });
    const handleSubmit = () => {
-      onSubmit();
+      const error = onSubmit();
+      if (!error) {
+      }
    };
    return (
       <div className={"flex flex-col  " + className}>
@@ -67,9 +69,11 @@ const SignupForm: React.FC<SignupFormProps> = ({
                <Input
                   placeholder="First name"
                   label="First Name"
+                  testId="signup-firstname"
                   {...inputsData.firstName}
                ></Input>
                <Input
+                  testId="signup-lastname"
                   placeholder="Last name"
                   label="Last Name"
                   {...inputsData.lastName}
@@ -82,12 +86,14 @@ const SignupForm: React.FC<SignupFormProps> = ({
                }
                startIcon={icons.input.message}
                label="Email"
+               testId="signup-email"
                {...inputsData.email}
             ></Input>
             <Input
                placeholder="Your phone number"
                startIcon={<div className="mr-1 text-gray-900">+91</div>}
                label="Phone number"
+               testId="signup-phone"
                {...inputsData.phone}
             ></Input>
             <Input
@@ -96,12 +102,14 @@ const SignupForm: React.FC<SignupFormProps> = ({
                {...inputsData.password}
                showEye={true}
                endIcon={icons.input.question}
+               testId="signup-password"
             ></Input>
          </div>
 
          <div
             className="btn btn-primary btn-lg mt-8 mb-6"
             onClick={handleSubmit}
+            data-testid="signup-submit"
          >
             Get started
          </div>
