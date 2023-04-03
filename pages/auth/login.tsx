@@ -24,11 +24,13 @@ import PageWrapper from "../../components/PageWrapper";
 import { useRouter } from "next/router";
 import { getCandidateProfile, getCompanyProfile } from "../../apis/getProfile";
 import { errors, routes } from "../../utils/utils";
+import UploadFile from "../../components/UploadFile";
 
 const LoginComponent: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
    const [checked, setChecked] = useState(false);
    const router = useRouter();
+   const [file, setFile] = useState<File | null>(null);
    const { onSubmit, inputsData, setData, data } = useForm<
       { email: string; password: string; rememberMe: boolean },
       LoginResponse
@@ -95,12 +97,14 @@ const LoginComponent: React.FC = () => {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <Navbar></Navbar>
+
          <AuthPageWrapper
             icon={icons.authPage.login}
             heading="Log in to your account"
             subHeading="Welcome back! Please enter your details."
          >
             <Loader></Loader>
+
             <div className="inputs-y">
                <Input
                   {...inputsData.email}

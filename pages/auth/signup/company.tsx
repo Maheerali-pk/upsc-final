@@ -21,6 +21,7 @@ import Input from "../../../components/Input";
 import OrDivider from "../../../components/OrDivider";
 import SignupForm from "../../../components/SignupForm";
 import Loader from "../../../components/Loader";
+import UploadFile from "../../../components/UploadFile";
 
 const SignupStudent: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
@@ -58,7 +59,6 @@ const SignupStudent: React.FC = () => {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <Navbar></Navbar>
-         <Loader></Loader>
          <SignupForm
             type="student"
             heading="Signup to hire talent"
