@@ -4,14 +4,19 @@ import { customFetch } from "../utils/helpers";
 interface AccountSignUpBody {
    email: string;
    password: string;
-   phoneNumber?: string;
-   firstName?: string;
-   lastName?: string;
+   purpose: "CANDIDATE" | "COMPANY";
+   phoneNum?: string;
+   name?: string;
+   confirmPassword?: string;
 }
-export const accountSignUp = () => {
-   return customFetch({ method: "get", path: "company/profile" });
-};
-
-export const getCandidateProfile = () => {
-   return customFetch({ method: "get", path: "candidate/profile" });
+interface SignUpResponse {
+   token: string;
+   onboardingState: "PERSONALINFO" | "COMPANYINFO" | "COMPLETE";
+}
+export const accountSignUp = (data: AccountSignUpBody) => {
+   return customFetch<SignUpResponse>({
+      method: "POST",
+      path: "account/signup",
+      data,
+   });
 };

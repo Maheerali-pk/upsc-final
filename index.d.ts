@@ -14,7 +14,7 @@ interface INavbarSubItem {
 
 interface CustomFetchProps {
    data?: any;
-   method: "get" | "post" | "put";
+   method: "GET" | "POST" | "PUT";
    path: string;
 }
 type InputStateType = "error" | "warn" | "primary";
@@ -63,7 +63,7 @@ type UseFormProps<NamesObject extends NamesObjectDefault> = {
    [k in keyof NamesObject]: IInput<NamesObject[k]>;
 };
 type PartialFormProps<NamesObject extends NamesObjectDefault> = Partial<
-   Record<Names, Partial<IInput>>
+   UseFormProps<NamesObject>
 >;
 type CreateStateObject<NamesObject extends NamesObjectDefault> = {
    [k in keyof Names]: InputState;

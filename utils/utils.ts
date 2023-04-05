@@ -2,6 +2,7 @@ export const errors = {
    requiredField: "Please fill this field!",
    wrongCredentials: "Wrong email or password",
    weakPassword: "Minimum 8 characters with at least one uppercase character",
+   userAlreadyExist: "User already exists !",
 };
 export const warnings = {
    gmailAddress:
@@ -13,6 +14,18 @@ export const routes = {
       base: "/auth/signup",
       company: "/auth/signup/company",
       student: "/auth/signup/student",
+   },
+
+   company: {
+      setupProfile: {
+         base: "/company/setup-profile",
+      },
+   },
+
+   student: {
+      setupProfile: {
+         base: "/student/setup-profile",
+      },
    },
 } as const;
 
