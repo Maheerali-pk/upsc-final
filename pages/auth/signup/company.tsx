@@ -60,7 +60,7 @@ const SignupStudent: React.FC = () => {
          </Head>
          <Navbar></Navbar>
          <SignupForm
-            type="student"
+            type="company"
             heading="Signup to hire talent"
             className="min-h-full justify-center px-4 my-16 border-none md:border md:w-160 mx-auto border-gray-200  md:px-20 pb-10"
          ></SignupForm>

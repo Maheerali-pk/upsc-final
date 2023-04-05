@@ -2,15 +2,22 @@ import { errors, warnings } from "./utils";
 
 export const toRem = (px: number) => `${px / 16}rem`;
 export const host = "https://api.csenaukri.com";
-export const customFetch = async <T extends any>(data: CustomFetchProps) => {
+export const customFetch = async <T extends { [key: string]: any }>(
+   data: CustomFetchProps
+) => {
    const res = await fetch(`${host}/${data.path}`, {
       method: data.method,
       headers: {
-         Authorization: "Bearer " + localStorage.getItem("auth-token") || "",
+         "Content-Type": "application/json",
       },
-      body: data.data,
+      // headers: {
+      //    Authorization: "Bearer " + localStorage.getItem("auth-token") || "",
+      // },
+      body: JSON.stringify(data.data),
    });
-   return (await res.json()) as T;
+   return { ...(await res.json()), status: res.status } as T & {
+      status: number;
+   };
 };
 
 export const icons = {
