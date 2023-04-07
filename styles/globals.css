@@ -214,6 +214,14 @@
       outline: none;
       @apply w-full text-gray-900;
    }
+   .input-inner-wrapper {
+      grid-template-columns: min-content auto;
+   }
+   .input-inner-wrapper .input-base {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+   }
+
    .helper-text {
       color: var(--helper-text-color);
    }
@@ -279,6 +287,15 @@
 
    .custom-upload-file input {
       display: none;
+   }
+   textarea {
+      border: none;
+      outline: none;
+      width: 100%;
+   }
+
+   .setup-wrapper {
+      @apply flex flex-col mb-10 mt-6 md:mb-18  md:mt-18  px-4 md:px-0 max-w-[600px] m-auto;
    }
 }
 

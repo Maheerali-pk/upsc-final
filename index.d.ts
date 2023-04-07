@@ -49,7 +49,7 @@ interface ErrorObject {
    error: string;
 }
 
-type IInputValue = string | boolean | string[];
+type IInputValue = string | boolean | string[] | (File | null);
 type Test = {
    email: string;
    password: string;

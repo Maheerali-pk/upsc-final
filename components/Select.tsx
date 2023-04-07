@@ -49,7 +49,7 @@ const Select: React.FC<SelectProps> = ({
          className="flex justify-between w-full py-2.5 px-3.5 items-center rounded-lg border border-gray-300 cursor-pointer relative"
       >
          <div className="text-gray-500">
-            {selectedOption?.heading || placeholder}
+            {selectedOption?.heading || selectedOption?.text || placeholder}
          </div>
          <div>{icons.chevronDown}</div>
          {

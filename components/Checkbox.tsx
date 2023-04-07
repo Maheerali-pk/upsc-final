@@ -12,9 +12,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
    className,
 }) => {
    return (
-      <div className="flex gap-2 items-center  text-sm text-gray-700 font-medium">
+      <div className="flex gap-2   text-sm text-gray-600 ">
          <input
-            className={`text-primary-400 ${className || ""}`}
+            className={`text-primary-400 aspect-square ${className || ""}`}
             type="checkbox"
             id={label}
             checked={value}
