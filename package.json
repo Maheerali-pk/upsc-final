@@ -6,7 +6,7 @@
     "build": "next build",
     "export": "next export",
     "buildandexport": "next build && next export",
-    "buildanddeploy": "rm -r -f out/ && next build && next export && aws s3 sync --delete out/ s3://upscwork-web --acl public-read --profile upscwork && aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id E2HOMEKL5KHO6F --paths \"/*\" --debug --profile upscwork",
+    "buildanddeploy": "rm -r -f dist/ && next build && next export && aws s3 sync --delete dist/ s3://upscwork-web --acl public-read --profile upscwork && aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id E2HOMEKL5KHO6F --paths \"/*\" --debug --profile upscwork",
     "start": "next start"
   },
   "dependencies": {
