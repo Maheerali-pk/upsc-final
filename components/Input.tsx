@@ -4,6 +4,7 @@ import { icons } from "../utils/helpers";
 
 interface CustomInputProps {
    startIcon?: JSX.Element;
+   labelSubtext?: string;
    endIcon?: JSX.Element;
    label?: string;
    helperText?: string;
@@ -17,6 +18,8 @@ interface CustomInputProps {
    showEye?: boolean;
    testId?: TestId;
    type?: InputType;
+
+   startText?: string | JSX.Element;
 }
 
 const Input: React.FC<CustomInputProps> = (props) => {
@@ -30,15 +33,8 @@ const Input: React.FC<CustomInputProps> = (props) => {
          return showPass ? "text" : "password";
       }
    };
-   return (
-      <div
-         className={classNames("input-wrapper input-primary", {
-            "input-error": props.state?.type === "error",
-            "input-primary": props.state === undefined,
-         })}
-         data-testid={props.testId}
-      >
-         <div className="text-sm text-gray-700 font-medium">{props.label}</div>
+   const renderInputBase = () => {
+      return (
          <div
             className={classNames("input-base", {
                focus: focus,
@@ -63,6 +59,36 @@ const Input: React.FC<CustomInputProps> = (props) => {
 
             {props.endIcon && props.endIcon}
          </div>
+      );
+   };
+   return (
+      <div
+         className={classNames("input-wrapper input-primary", {
+            "input-error": props.state?.type === "error",
+            "input-primary": props.state === undefined,
+            "input-warn": props.state?.type === "warn",
+         })}
+         data-testid={props.testId}
+      >
+         <div className="text-sm text-gray-700 font-medium">
+            {props.label}{" "}
+            {props.labelSubtext ? (
+               <span className="text-gray-400 font-normal">
+                  ({props.labelSubtext})
+               </span>
+            ) : null}
+         </div>
+
+         {props.startText ? (
+            <div className="grid grid-flow-col input-inner-wrapper">
+               <div className="px-3 border text-gray-500 flex items-center h-full rounded-l-lg border-r-0 border-gray-300">
+                  {props.startText}
+               </div>
+               {renderInputBase()}
+            </div>
+         ) : (
+            renderInputBase()
+         )}
          <div className="text-sm helper-text">{props.state?.text}</div>
       </div>
    );

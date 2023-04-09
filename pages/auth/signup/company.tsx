@@ -20,6 +20,8 @@ import { useForm } from "../../../hooks/useForm";
 import Input from "../../../components/Input";
 import OrDivider from "../../../components/OrDivider";
 import SignupForm from "../../../components/SignupForm";
+import Loader from "../../../components/Loader";
+import UploadFile from "../../../components/UploadFile";
 
 const SignupStudent: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
@@ -58,7 +60,7 @@ const SignupStudent: React.FC = () => {
          </Head>
          <Navbar></Navbar>
          <SignupForm
-            type="student"
+            type="company"
             heading="Signup to hire talent"
             className="min-h-full justify-center px-4 my-16 border-none md:border md:w-160 mx-auto border-gray-200  md:px-20 pb-10"
          ></SignupForm>

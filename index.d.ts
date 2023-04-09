@@ -14,7 +14,7 @@ interface INavbarSubItem {
 
 interface CustomFetchProps {
    data?: any;
-   method: "get" | "post" | "put";
+   method: "GET" | "POST" | "PUT";
    path: string;
 }
 type InputStateType = "error" | "warn" | "primary";
@@ -49,7 +49,7 @@ interface ErrorObject {
    error: string;
 }
 
-type IInputValue = string | boolean | string[];
+type IInputValue = string | boolean | string[] | (File | null);
 type Test = {
    email: string;
    password: string;
@@ -63,7 +63,7 @@ type UseFormProps<NamesObject extends NamesObjectDefault> = {
    [k in keyof NamesObject]: IInput<NamesObject[k]>;
 };
 type PartialFormProps<NamesObject extends NamesObjectDefault> = Partial<
-   Record<Names, Partial<IInput>>
+   UseFormProps<NamesObject>
 >;
 type CreateStateObject<NamesObject extends NamesObjectDefault> = {
    [k in keyof Names]: InputState;
@@ -127,4 +127,25 @@ type TestId =
    | "signin-hire-talent"
    | "signin-apply-for-job"
    | "signin-get-started"
-   | "signin-login-link";
+   | "signin-login-link"
+   | `signup-${SignUpTestId}`;
+
+type SignUpTestId =
+   | "firstname"
+   | "lastname"
+   | "phone"
+   | "email"
+   | "password"
+   | "submit";
+
+declare global {
+   namespace Cypress {
+      interface Chainable {
+         state(state: any): any;
+      }
+   }
+}
+
+interface cy {
+   state: State;
+}

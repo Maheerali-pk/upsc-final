@@ -2,6 +2,7 @@ export const errors = {
    requiredField: "Please fill this field!",
    wrongCredentials: "Wrong email or password",
    weakPassword: "Minimum 8 characters with at least one uppercase character",
+   userAlreadyExist: "User already exists !",
 };
 export const warnings = {
    gmailAddress:
@@ -14,4 +15,28 @@ export const routes = {
       company: "/auth/signup/company",
       student: "/auth/signup/student",
    },
+
+   company: {
+      setupProfile: {
+         base: "/company/setup-profile",
+      },
+   },
+
+   student: {
+      setupProfile: {
+         base: "/student/setup-profile",
+      },
+   },
 } as const;
+
+export const fileToBase64 = (
+   file: File
+): Promise<string | ArrayBuffer | null> => {
+   const reader = new FileReader();
+   reader.readAsDataURL(file);
+   return new Promise((res, rej) => {
+      reader.onload = () => {
+         res(reader.result);
+      };
+   });
+};

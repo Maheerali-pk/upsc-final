@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import { useForm } from "../hooks/useForm";
-import { checks, icons } from "../utils/helpers";
-import { routes } from "../utils/utils";
+import { checks, customFetch, icons } from "../utils/helpers";
+import { errors, routes } from "../utils/utils";
 import Input from "./Input";
 import OrDivider from "./OrDivider";
+import { accountSignUp } from "../apis/accountSignUp";
 
 interface SignupFormProps {
    className?: string;
@@ -21,7 +22,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
 }) => {
    const [state, dispatch] = useGlobalContext();
    const router = useRouter();
-   const { inputsData, onSubmit } = useForm<
+   const { inputsData, onSubmit, setData } = useForm<
       {
          firstName: string;
          lastName: string;
@@ -36,21 +37,64 @@ const SignupForm: React.FC<SignupFormProps> = ({
             value: "",
             checks: [checks.required.string, checks.workEmailWarning],
          },
-         firstName: { value: "", checks: [checks.required.string] },
-         lastName: { value: "", checks: [checks.required.string] },
+         firstName: { value: "" },
+         lastName: { value: "" },
          password: {
             value: "",
             state: {
                text: "Minimum 8 characters with at least one uppercase character",
                type: "primary",
             },
-            checks: [checks.required.string, checks.password],
+            checks: [checks.required.string],
          },
-         phone: { value: "", checks: [checks.required.string] },
+         phone: { value: "" },
       },
    });
    const handleSubmit = () => {
-      onSubmit();
+      const error = onSubmit();
+      if (!error) {
+         accountSignUp({
+            email: inputsData.email.value,
+            password: inputsData.password.value,
+            confirmPassword: inputsData.password.value,
+            // name: inputsData.firstName.value + " " + inputsData.lastName.value,
+            // phoneNum: inputsData.phone.value,
+            purpose: type === "student" ? "CANDIDATE" : "COMPANY",
+         })
+            .then((res) => {
+               if (res.status === 409) {
+                  setData({
+                     email: {
+                        state: { text: errors.userAlreadyExist, type: "error" },
+                     },
+                  });
+                  return;
+               } else if (res.status === 200) {
+                  router.push(routes[type].setupProfile.base);
+               }
+            })
+            .catch((err) => {
+               console.log(err);
+            });
+      }
+      // var myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "application/json");
+
+      // var raw = JSON.stringify({
+      //    email: "bodegi1530@haizail.com",
+      //    password: "123456",
+      //    purpose: "CANDIDATE",
+      // });
+
+      // fetch("https://api.csenaukri.com/account/signup", {
+      //    method: "POST",
+      //    headers: myHeaders,
+      //    body: raw,
+      //    redirect: "follow",
+      // })
+      //    .then((response) => response.text())
+      //    .then((result) => console.log(result))
+      //    .catch((error) => console.log("error", error));
    };
    return (
       <div className={"flex flex-col  " + className}>
@@ -67,9 +111,11 @@ const SignupForm: React.FC<SignupFormProps> = ({
                <Input
                   placeholder="First name"
                   label="First Name"
+                  testId="signup-firstname"
                   {...inputsData.firstName}
                ></Input>
                <Input
+                  testId="signup-lastname"
                   placeholder="Last name"
                   label="Last Name"
                   {...inputsData.lastName}
@@ -82,12 +128,14 @@ const SignupForm: React.FC<SignupFormProps> = ({
                }
                startIcon={icons.input.message}
                label="Email"
+               testId="signup-email"
                {...inputsData.email}
             ></Input>
             <Input
                placeholder="Your phone number"
                startIcon={<div className="mr-1 text-gray-900">+91</div>}
                label="Phone number"
+               testId="signup-phone"
                {...inputsData.phone}
             ></Input>
             <Input
@@ -96,12 +144,14 @@ const SignupForm: React.FC<SignupFormProps> = ({
                {...inputsData.password}
                showEye={true}
                endIcon={icons.input.question}
+               testId="signup-password"
             ></Input>
          </div>
 
          <div
             className="btn btn-primary btn-lg mt-8 mb-6"
             onClick={handleSubmit}
+            data-testid="signup-submit"
          >
             Get started
          </div>
