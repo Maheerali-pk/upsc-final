@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "test": "cypress open",
     "dev": "next dev",
     "build": "next build",
     "export": "next export",

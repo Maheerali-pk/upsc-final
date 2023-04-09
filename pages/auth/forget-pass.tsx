@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import AuthPageWrapper from "../../components/AuthPageWrapper";
-import Input from "../../components/Input";
 import { icons } from "../../utils/helpers";
 
 const ForgetPass: NextPage = () => {
@@ -17,12 +16,10 @@ const ForgetPass: NextPage = () => {
         subHeading="No worries, we’ll send you reset instructions."
       >
         <div className="inputs-y">
-          <Input
-            label="Email"
-            placeholder="Enter your email"
-            value=""
-            onChange={() => console.log("email")}
-          ></Input>
+          {/* <Input
+                  label="Email"
+                  placeholder="Enter your email"
+               ></Input> */}
         </div>
 
         <button className="btn-primary btn btn-sm mt-6 mb-8">
