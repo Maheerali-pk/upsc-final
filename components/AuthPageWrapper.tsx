@@ -29,7 +29,7 @@ const AuthPageWrapper: React.FC<AuthPageWrapperProps> = ({
    }, [state.loading]);
    return (
       <>
-         <div className="flex justify-center relative w-full py-20">
+         <div className="flex justify-center relative w-full py-12 md:py-20">
             <Loader></Loader>
             {state.dialog && <state.dialog></state.dialog>}
             <div className="flex flex-col md:w-90 w-full items-center h-full pt-12 md:pt-24 px-4 ">

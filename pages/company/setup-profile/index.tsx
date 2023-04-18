@@ -26,6 +26,7 @@ import ProfileSetupHeader from "../../../components/ProfileSetupHeader";
 import Select from "../../../components/Select";
 import Textarea from "../../../components/Textarea";
 import Checkbox from "../../../components/Checkbox";
+import SocialMediaInput from "../../../components/SocialMediaInput";
 
 const CompanyProfileSetup: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
@@ -45,6 +46,9 @@ const CompanyProfileSetup: React.FC = () => {
          pincode: string;
          verify: boolean;
          understand: boolean;
+         facebook: string;
+         instagram: string;
+         linkedin: string;
       },
       {}
    >({
@@ -61,6 +65,9 @@ const CompanyProfileSetup: React.FC = () => {
          pincode: { value: "" },
          verify: { value: false },
          understand: { value: false },
+         facebook: { value: "" },
+         instagram: { value: "" },
+         linkedin: { value: "" },
       },
    });
 
@@ -98,7 +105,7 @@ const CompanyProfileSetup: React.FC = () => {
                ></Textarea>
                <div className="flex-col gap-4 flex">
                   <Input {...inputsData.address} label="Address" />
-                  <div className="gap-6 flex">
+                  <div className="gap-6 flex flex-col md:flex-row">
                      <Select
                         {...inputsData.city}
                         placeholder="City"
@@ -130,7 +137,30 @@ const CompanyProfileSetup: React.FC = () => {
                   startText={"https://"}
                ></Input>
             </div>
-            <div className="flex flex-col gap-8">
+            <div className="flex gap-1.5 mb-12 flex-col">
+               <div className="text-sm text-gray-700 font-medium">
+                  Social links
+                  <span className="text-gray-400 font-normal">(optional)</span>
+               </div>
+               <div className="flex-col w-full gap-4 flex md:flex-row ">
+                  <SocialMediaInput
+                     {...inputsData.facebook}
+                     iconUrl="/images/social-media/facebook-link.png"
+                     placeholder="Facebook"
+                  ></SocialMediaInput>
+                  <SocialMediaInput
+                     {...inputsData.instagram}
+                     iconUrl="/images/social-media/instagram-link.png"
+                     placeholder="Instagram"
+                  ></SocialMediaInput>
+                  <SocialMediaInput
+                     {...inputsData.linkedin}
+                     iconUrl="/images/social-media/linkedin-link.png"
+                     placeholder="Linkedin"
+                  ></SocialMediaInput>
+               </div>
+            </div>
+            <div className="flex flex-col gap-8 mb-12">
                <Checkbox
                   {...inputsData.verify}
                   label="I verify that I am an authorised representative of this organisation and have the right to act on its behalf in the creation and management of this page. The organisation and I agree to the additional terms for Pages."
@@ -140,6 +170,9 @@ const CompanyProfileSetup: React.FC = () => {
                   label="I verify that I am an authorised representative of this organisation and have the right to act on its behalf in the creation and management of this page. The organisation and I agree to the additional terms for Pages."
                ></Checkbox>
             </div>
+            <button className="btn btn-primary w-full btn-xl mb-28">
+               Continue
+            </button>
          </div>
       </>
    );
