@@ -167,7 +167,24 @@ const CompanyProfileSetup: React.FC = () => {
                ></Checkbox>
                <Checkbox
                   {...inputsData.understand}
-                  label="I verify that I am an authorised representative of this organisation and have the right to act on its behalf in the creation and management of this page. The organisation and I agree to the additional terms for Pages."
+                  label={
+                     <>
+                        Yes I understand and agree to the{" "}
+                        <span className="text-primary-400">
+                           Upscnaukri Employer Terms
+                        </span>
+                        , including the
+                        <span className="text-primary-400">
+                           {" "}
+                           User Agreement
+                        </span>{" "}
+                        and
+                        <span className="text-primary-400">
+                           {" "}
+                           Privacy Policy.
+                        </span>
+                     </>
+                  }
                ></Checkbox>
             </div>
             <button className="btn btn-primary w-full btn-xl mb-28">
