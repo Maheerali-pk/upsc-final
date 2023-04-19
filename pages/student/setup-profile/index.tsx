@@ -153,12 +153,12 @@ const StudentProfileSetup: React.FC = () => {
          <div className="setup-wrapper">
             <Loader></Loader>
 
-            <div className="flex flex-col md:mb-12">
+            <div className="flex flex-col ">
                <ProfileSetupHeader
                   text="Hi Amit! Let’s set up your profile"
                   icon={icons.profileSetup.company}
                ></ProfileSetupHeader>
-               <div className="student-profile-setup-item">
+               <div className="student-profile-setup-item ">
                   <RadioGroup
                      {...inputsData.gender}
                      label="Gender"

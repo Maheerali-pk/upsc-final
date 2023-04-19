@@ -189,6 +189,23 @@ type IOtherExam = {
    description: string;
 };
 
+type IGrad = {
+   type: string;
+   status: string;
+   college: string;
+   degree: string;
+   yearOfPassing: string;
+   marks: string;
+   totalCgpa: string;
+   stream: string;
+};
+
+interface ISelectOption {
+   heading?: string;
+   text?: string;
+   value: string;
+}
+
 interface cy {
    state: State;
 }

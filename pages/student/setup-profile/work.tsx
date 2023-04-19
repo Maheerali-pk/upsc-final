@@ -56,7 +56,7 @@ const defaultOtherExamObject: IOtherExam = {
 const convertYearOfAtemptToNumber = (arr: IExam[] | IOtherExam[]) =>
    arr.map((x) => ({ ...x, yearOfAttempt: Number(x.yearOfAttempt) }));
 
-const ExamsSetup: React.FC = () => {
+const WorkSetup: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
    const router = useRouter();
    const [disableNext, setDisableNext] = useState(true);
@@ -224,7 +224,7 @@ const ExamsSetup: React.FC = () => {
             </div>
          </div>
          <ProfileSetupFooter
-            stepNo={2}
+            stepNo={3}
             onClickOnNext={onClickOnNext}
             disableNext={!allowNext}
          ></ProfileSetupFooter>
@@ -232,8 +232,8 @@ const ExamsSetup: React.FC = () => {
    );
 };
 
-const Exams: NextPage = () => {
-   return <PageWrapper Component={ExamsSetup}></PageWrapper>;
+const Work: NextPage = () => {
+   return <PageWrapper Component={WorkSetup}></PageWrapper>;
 };
 
-export default Exams;
+export default Work;

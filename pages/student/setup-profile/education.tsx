@@ -38,21 +38,11 @@ import DialogWrapper from "../../../components/DialogWrapper";
 import ExamInput from "../../../components/ExamInput";
 import OtherExamInput from "../../../components/OtherExamInput";
 
-const defaultExamObject: IExam = {
-   language: "",
-   optSubject: "",
-   qualifiedForInterview: false,
-   qualifiedForMains: false,
-   state: "UPSC",
-   yearOfAttempt: "",
-};
-
-const defaultOtherExamObject: IOtherExam = {
-   yearOfAttempt: "",
-   description: "",
-   title: "",
-};
-
+const degreeTypeOptions: ISelectOption[] = [
+   { value: "Graduation", heading: "Graduation" },
+   { value: "Post Graduation", heading: "Post Graduation" },
+   { value: "PhD", heading: "PhD" },
+];
 const convertYearOfAtemptToNumber = (arr: IExam[] | IOtherExam[]) =>
    arr.map((x) => ({ ...x, yearOfAttempt: Number(x.yearOfAttempt) }));
 
@@ -61,24 +51,24 @@ const EdutcationSetup: React.FC = () => {
    const router = useRouter();
    const [disableNext, setDisableNext] = useState(true);
    const [showDialog, setShowDialog] = useState(false);
-   const { inputsData, onSubmit, checkForErrors } = useForm<
-      {
-         upsc: boolean;
-         statepcs: boolean;
-         others: boolean;
-         upscAttempts: IExam[];
-         statePscAttempts: IExam[];
-         otherAttempts: IOtherExam[];
-      },
-      {}
-   >({
+   const { inputsData, onSubmit, checkForErrors } = useForm<IGrad, {}>({
       inputs: {
-         upsc: { value: false },
-         statepcs: { value: false },
-         others: { value: false },
-         upscAttempts: { value: [] },
-         statePscAttempts: { value: [] },
-         otherAttempts: { value: [] },
+         college: { value: "", checks: [checks.required.string] },
+         degree: { value: "", checks: [checks.required.string] },
+         yearOfPassing: { value: "", checks: [checks.required.string] },
+         marks: { value: "", checks: [checks.required.string] },
+         status: { value: "", checks: [checks.required.string] },
+         totalCgpa: { value: "", checks: [checks.required.string] },
+         type: { value: "", checks: [checks.required.string] },
+         stream: { value: "", checks: [checks.required.string] },
+      },
+      onAnyChange: (data) => {
+         const error = checkForErrors(data);
+         if (error) {
+            setDisableNext(true);
+         } else {
+            setDisableNext(false);
+         }
       },
    });
 
@@ -87,29 +77,24 @@ const EdutcationSetup: React.FC = () => {
       if (!error) {
          dispatch({ setState: { loading: true } });
          const res = await UpdateStudentProfile({
-            upscJourney: {
-               statePscAttempts: convertYearOfAtemptToNumber(
-                  inputsData.statePscAttempts.value
-               ),
-               upscAttempts: convertYearOfAtemptToNumber(
-                  inputsData.upscAttempts.value
-               ),
-               others: convertYearOfAtemptToNumber(
-                  inputsData.otherAttempts.value
-               ),
-            },
+            grads: [
+               {
+                  type: inputsData.type.value,
+                  value: Number(inputsData.marks.value),
+               },
+            ],
          });
          if (res.status === 200) {
             dispatch({ setState: { loading: false } });
-            router.push(routes.student.setupProfile.education);
+            router.push(routes.student.setupProfile.work);
          }
       }
    };
 
-   const allowNext =
-      inputsData.otherAttempts.value.length > 0 ||
-      inputsData.upscAttempts.value.length > 0 ||
-      inputsData.statePscAttempts.value.length > 0;
+   // const allowNext =
+   //    inputsData.otherAttempts.value.length > 0 ||
+   //    inputsData.upscAttempts.value.length > 0 ||
+   //    inputsData.statePscAttempts.value.length > 0;
    return (
       <>
          <Head>
@@ -120,17 +105,69 @@ const EdutcationSetup: React.FC = () => {
 
          <div className="setup-wrapper overflow-auto">
             <Loader></Loader>
-            <div className="flex flex-col mb-8">
+            <div className="flex flex-col ">
                <ProfileSetupHeader
                   text="Add details about your education"
                   icon={icons.profileSetup.education}
                ></ProfileSetupHeader>
             </div>
+            <div className="flex flex-col gap-10 md:mt-20 mt-12">
+               <Select
+                  label="Current / highest level of education"
+                  placeholder="Select"
+                  options={degreeTypeOptions}
+                  {...inputsData.type}
+               ></Select>
+               <RadioGroup
+                  items={[
+                     { text: "Pursuing", value: "Pursuing" },
+                     { text: "Completed", value: "Completed" },
+                  ]}
+                  {...inputsData.status}
+                  label="Graduation status"
+               ></RadioGroup>
+               <Input
+                  label="College"
+                  {...inputsData.college}
+                  placeholder="e.g. Hindu College"
+               ></Input>
+               <div className="md:gap-6 gap-10 flex flex-col md:flex-row">
+                  <Input
+                     label="Degree"
+                     {...inputsData.degree}
+                     placeholder="e.g. B.Sc (Hons.)"
+                  ></Input>
+                  <Input
+                     label="Stream"
+                     {...inputsData.stream}
+                     placeholder="e.g. Economics"
+                  ></Input>
+               </div>
+               <Input
+                  {...inputsData.yearOfPassing}
+                  label="Year of passing"
+                  placeholder="Choose Year"
+               ></Input>
+
+               <div className="grid md:grid-cols-2 grid-cols-[2fr_1fr] gap-6 items-end">
+                  <Select
+                     {...inputsData.totalCgpa}
+                     label="Marks obtained"
+                     placeholder="Select"
+                     options={[{ value: "10", heading: "CGPA(out of 10)" }]}
+                  ></Select>
+                  <Input
+                     type="number"
+                     {...inputsData.marks}
+                     placeholder=""
+                  ></Input>
+               </div>
+            </div>
          </div>
          <ProfileSetupFooter
             stepNo={2}
             onClickOnNext={onClickOnNext}
-            disableNext={!allowNext}
+            disableNext={disableNext}
          ></ProfileSetupFooter>
       </>
    );
