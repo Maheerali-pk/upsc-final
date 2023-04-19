@@ -56,7 +56,7 @@ const defaultOtherExamObject: IOtherExam = {
 const convertYearOfAtemptToNumber = (arr: IExam[] | IOtherExam[]) =>
    arr.map((x) => ({ ...x, yearOfAttempt: Number(x.yearOfAttempt) }));
 
-const ExamsSetup: React.FC = () => {
+const EdutcationSetup: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
    const router = useRouter();
    const [disableNext, setDisableNext] = useState(true);
@@ -122,105 +122,9 @@ const ExamsSetup: React.FC = () => {
             <Loader></Loader>
             <div className="flex flex-col mb-8">
                <ProfileSetupHeader
-                  text="Which civil service exams have you appeared for?"
-                  icon={icons.profileSetup.exam}
+                  text="Add details about your education"
+                  icon={icons.profileSetup.education}
                ></ProfileSetupHeader>
-               <div className="flex flex-col gap-6 border-b border-b-gray-200 pb-6 md:mt-20 mt-12">
-                  <Checkbox
-                     label={
-                        <div className="font-bold text-base flex ">UPSC</div>
-                     }
-                     {...inputsData.upsc}
-                  ></Checkbox>
-                  {inputsData.upsc.value && (
-                     <>
-                        {inputsData.upscAttempts.value.map((item, i) => (
-                           <ExamInput
-                              state="UPSC"
-                              value={item}
-                              onChange={(value) =>
-                                 inputsData.upscAttempts.updateItem(i, value)
-                              }
-                           ></ExamInput>
-                        ))}
-                        <button
-                           onClick={() =>
-                              inputsData.upscAttempts.addItem(defaultExamObject)
-                           }
-                           className="btn btn-primary btn-outlined btn-sm gap-2 flex items-center w-full"
-                        >
-                           {icons.add} Add Attempt
-                        </button>
-                     </>
-                  )}
-               </div>
-               <div className="flex flex-col gap-6 border-b border-b-gray-200 py-6">
-                  <Checkbox
-                     label={
-                        <div className="font-bold text-base flex ">
-                           State PCS
-                        </div>
-                     }
-                     {...inputsData.statepcs}
-                  ></Checkbox>
-                  {inputsData.statepcs.value && (
-                     <>
-                        {inputsData.statePscAttempts.value.map((item, i) => (
-                           <ExamInput
-                              state="UPSC"
-                              value={item}
-                              onChange={(value) =>
-                                 inputsData.statePscAttempts.updateItem(
-                                    i,
-                                    value
-                                 )
-                              }
-                           ></ExamInput>
-                        ))}
-                        <button
-                           onClick={() =>
-                              inputsData.statePscAttempts.addItem(
-                                 defaultExamObject
-                              )
-                           }
-                           className="btn btn-primary btn-outlined btn-sm gap-2 flex items-center w-full"
-                        >
-                           {icons.add} Add Attempt
-                        </button>
-                     </>
-                  )}
-               </div>
-               <div className="flex flex-col gap-6 border-b border-b-gray-200 py-6">
-                  <Checkbox
-                     label={
-                        <div className="font-bold text-base flex ">Others</div>
-                     }
-                     {...inputsData.others}
-                  ></Checkbox>
-                  {inputsData.others.value && (
-                     <>
-                        {inputsData.otherAttempts.value.map((item, i) => (
-                           <OtherExamInput
-                              state="UPSC"
-                              value={item}
-                              onChange={(value) =>
-                                 inputsData.otherAttempts.updateItem(i, value)
-                              }
-                           ></OtherExamInput>
-                        ))}
-                        <button
-                           onClick={() =>
-                              inputsData.otherAttempts.addItem(
-                                 defaultOtherExamObject
-                              )
-                           }
-                           className="btn btn-primary btn-outlined btn-sm gap-2 flex items-center w-full"
-                        >
-                           {icons.add} Add Attempt
-                        </button>
-                     </>
-                  )}
-               </div>
             </div>
          </div>
          <ProfileSetupFooter
@@ -232,8 +136,8 @@ const ExamsSetup: React.FC = () => {
    );
 };
 
-const Exams: NextPage = () => {
-   return <PageWrapper Component={ExamsSetup}></PageWrapper>;
+const Education: NextPage = () => {
+   return <PageWrapper Component={EdutcationSetup}></PageWrapper>;
 };
 
-export default Exams;
+export default Education;

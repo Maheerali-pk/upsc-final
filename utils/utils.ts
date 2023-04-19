@@ -28,6 +28,9 @@ export const routes = {
       setupProfile: {
          base: "/student/setup-profile",
          exams: "/student/setup-profile/exams",
+         work: "/student/setup-profile/work",
+         education: "/student/setup-profile/education",
+         success: "/company/setup-profile/success",
       },
    },
 } as const;

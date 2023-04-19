@@ -19,6 +19,70 @@ export const customFetch = async <T extends { [key: string]: any }>(
 };
 
 export const icons = {
+   featured: (
+      <svg
+         width="52"
+         height="52"
+         viewBox="0 0 52 52"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg"
+      >
+         <g filter="url(#filter0_d_1950_18311)">
+            <rect x="2" y="1" width="48" height="48" rx="10" fill="white" />
+            <path
+               d="M28.0904 19.7222H34.0442C34.5163 19.7222 34.7524 19.7222 34.8904 19.8215C35.0109 19.9081 35.0893 20.0414 35.1065 20.1888C35.1263 20.3577 35.0116 20.564 34.7823 20.9768L33.3615 23.5343C33.2783 23.684 33.2367 23.7589 33.2204 23.8381C33.206 23.9083 33.206 23.9806 33.2204 24.0508C33.2367 24.13 33.2783 24.2049 33.3615 24.3545L34.7823 26.9121C35.0116 27.3248 35.1263 27.5312 35.1065 27.7001C35.0893 27.8475 35.0109 27.9808 34.8904 28.0674C34.7524 28.1667 34.5163 28.1667 34.0442 28.1667H26.6126C26.0215 28.1667 25.7259 28.1667 25.5001 28.0516C25.3015 27.9504 25.14 27.7889 25.0388 27.5903C24.9237 27.3645 24.9237 27.0689 24.9237 26.4778V23.9444M21.2293 34.5L17.0071 17.6111M18.5905 23.9444H26.4015C26.9927 23.9444 27.2883 23.9444 27.5141 23.8294C27.7127 23.7282 27.8742 23.5667 27.9754 23.3681C28.0904 23.1423 28.0904 22.8467 28.0904 22.2556V17.1889C28.0904 16.5977 28.0904 16.3021 27.9754 16.0763C27.8742 15.8777 27.7127 15.7162 27.5141 15.615C27.2883 15.5 26.9927 15.5 26.4015 15.5H18.6424C17.905 15.5 17.5364 15.5 17.2842 15.6528C17.0632 15.7867 16.899 15.997 16.8227 16.2439C16.7357 16.5256 16.8251 16.8832 17.0039 17.5985L18.5905 23.9444Z"
+               stroke="#344054"
+               stroke-width="2"
+               stroke-linecap="round"
+               stroke-linejoin="round"
+            />
+            <rect
+               x="2.5"
+               y="1.5"
+               width="47"
+               height="47"
+               rx="9.5"
+               stroke="#EAECF0"
+            />
+         </g>
+         <defs>
+            <filter
+               id="filter0_d_1950_18311"
+               x="0"
+               y="0"
+               width="52"
+               height="52"
+               filterUnits="userSpaceOnUse"
+               color-interpolation-filters="sRGB"
+            >
+               <feFlood flood-opacity="0" result="BackgroundImageFix" />
+               <feColorMatrix
+                  in="SourceAlpha"
+                  type="matrix"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  result="hardAlpha"
+               />
+               <feOffset dy="1" />
+               <feGaussianBlur stdDeviation="1" />
+               <feColorMatrix
+                  type="matrix"
+                  values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.05 0"
+               />
+               <feBlend
+                  mode="normal"
+                  in2="BackgroundImageFix"
+                  result="effect1_dropShadow_1950_18311"
+               />
+               <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow_1950_18311"
+                  result="shape"
+               />
+            </filter>
+         </defs>
+      </svg>
+   ),
    add: (
       <svg
          width="21"

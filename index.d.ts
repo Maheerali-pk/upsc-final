@@ -49,7 +49,14 @@ interface ErrorObject {
    error: string;
 }
 
-type IInputValue = string | boolean | string[] | (File | null) | ILanguage[];
+type IInputValue =
+   | string
+   | boolean
+   | string[]
+   | (File | null)
+   | ILanguage[]
+   | IExam[]
+   | IOtherExam[];
 type Test = {
    email: string;
    password: string;
@@ -116,8 +123,8 @@ type StatePCNames =
    | "language"
    | "state";
 
-type OtherExamNames = "title" | "yearOfAttempt" | "description";
-type IOtherExam = ValueObject<OtherExamNames>;
+// type OtherExamNames = "title" | "yearOfAttempt" | "description";
+// type IOtherExam = ValueObject<OtherExamNames>;
 
 type IStatePCAttempt = ValueObject<StatePCNames>;
 
@@ -167,6 +174,20 @@ interface ILanguage {
    language: string;
    proficiency: string;
 }
+type IExam = {
+   state: string;
+   yearOfAttempt: string;
+   qualifiedForMains: boolean;
+   qualifiedForInterview: boolean;
+   optSubject: string;
+   language: string;
+};
+
+type IOtherExam = {
+   title: string;
+   yearOfAttempt: string;
+   description: string;
+};
 
 interface cy {
    state: State;
