@@ -9,10 +9,8 @@ export const customFetch = async <T extends { [key: string]: any }>(
       method: data.method,
       headers: {
          "Content-Type": "application/json",
+         Authorization: "Bearer " + localStorage.getItem("auth-token") || "",
       },
-      // headers: {
-      //    Authorization: "Bearer " + localStorage.getItem("auth-token") || "",
-      // },
       body: JSON.stringify(data.data),
    });
    return { ...(await res.json()), status: res.status } as T & {
@@ -35,6 +33,33 @@ export const icons = {
             stroke-width="1.4"
             stroke-linecap="round"
             stroke-linejoin="round"
+         />
+      </svg>
+   ),
+   success: (
+      <svg
+         width="66"
+         height="66"
+         viewBox="0 0 66 66"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg"
+      >
+         <rect x="5" y="5" width="56" height="56" rx="28" fill="#D1FADF" />
+         <path
+            d="M27.7507 33L31.2507 36.5L38.2507 29.5M44.6673 33C44.6673 39.4433 39.444 44.6667 33.0007 44.6667C26.5573 44.6667 21.334 39.4433 21.334 33C21.334 26.5567 26.5573 21.3333 33.0007 21.3333C39.444 21.3333 44.6673 26.5567 44.6673 33Z"
+            stroke="#039855"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+         />
+         <rect
+            x="5"
+            y="5"
+            width="56"
+            height="56"
+            rx="28"
+            stroke="#ECFDF3"
+            stroke-width="10"
          />
       </svg>
    ),
@@ -943,12 +968,21 @@ export const colors = {
    },
 };
 export const checks = {
+   mustBeTrue: {
+      cond: (x) => !x,
+      state: { text: "", type: "error" },
+   } as InputCheck<boolean>,
    required: {
       string: {
          cond: (x) => x?.trim() === "",
          state: { text: errors.requiredField, type: "error" },
       } as InputCheck<string>,
    },
+   alteast90: {
+      cond: (x) => (x as string)?.trim().length < 90,
+      state: { text: errors.atleast90, type: "error" },
+   } as InputCheck<string>,
+
    password: {
       cond: (x) => (x?.length || 0) >= 8 && x?.toLowerCase() !== x,
       state: { text: errors.weakPassword, type: "error" },

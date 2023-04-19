@@ -138,6 +138,17 @@ type SignUpTestId =
    | "password"
    | "submit";
 
+type CompanyProfileSetupTestId =
+   | "name"
+   | "type"
+   | "description"
+   | "url"
+   | "address"
+   | "city"
+   | "state"
+   | "pincode"
+   | "verify-checkbox"
+   | "understand-checkbox";
 declare global {
    namespace Cypress {
       interface Chainable {

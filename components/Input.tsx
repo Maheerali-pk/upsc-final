@@ -70,14 +70,16 @@ const Input: React.FC<CustomInputProps> = (props) => {
          })}
          data-testid={props.testId}
       >
-         <div className="text-sm text-gray-700 font-medium">
-            {props.label}{" "}
-            {props.labelSubtext ? (
-               <span className="text-gray-400 font-normal">
-                  ({props.labelSubtext})
-               </span>
-            ) : null}
-         </div>
+         {props.label && (
+            <div className="text-sm text-gray-700 font-medium">
+               {props.label}{" "}
+               {props.labelSubtext ? (
+                  <span className="text-gray-400 font-normal">
+                     ({props.labelSubtext})
+                  </span>
+               ) : null}
+            </div>
+         )}
 
          {props.startText ? (
             <div className="grid grid-flow-col input-inner-wrapper">

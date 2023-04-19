@@ -3,6 +3,7 @@ export const errors = {
    wrongCredentials: "Wrong email or password",
    weakPassword: "Minimum 8 characters with at least one uppercase character",
    userAlreadyExist: "User already exists !",
+   atleast90: "The description should be at least 90 characters long",
 };
 export const warnings = {
    gmailAddress:
@@ -19,6 +20,7 @@ export const routes = {
    company: {
       setupProfile: {
          base: "/company/setup-profile",
+         success: "/company/setup-profile/success",
       },
    },
 

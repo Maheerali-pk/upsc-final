@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useId } from "react";
 
 interface CheckboxProps {
@@ -5,6 +6,7 @@ interface CheckboxProps {
    onChange: (value: boolean) => void;
    label: string | JSX.Element;
    className?: string;
+   state?: InputState;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
@@ -12,12 +14,15 @@ const Checkbox: React.FC<CheckboxProps> = ({
    onChange,
    label,
    className,
+   state,
 }) => {
    const id = useId();
    return (
       <div className="flex gap-2 text-sm text-gray-600 ">
          <input
-            className={`text-primary-400 aspect-square ${className || ""}`}
+            className={classNames(
+               `text-primary-400 aspect-square ${className || ""}`
+            )}
             type="checkbox"
             id={id}
             checked={value}

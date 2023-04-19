@@ -47,6 +47,7 @@ const Textarea: React.FC<CustomInputProps> = (props) => {
                onBlur={() => setFocus(false)}
                placeholder={props.placeholder}
                autoComplete="off"
+               className="text-gray-900"
             />
          </div>
          <div className="text-sm helper-text">{props.state?.text}</div>

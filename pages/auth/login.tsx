@@ -115,14 +115,12 @@ const LoginComponent: React.FC = () => {
             <div className="inputs-y">
                <Input
                   {...inputsData.email}
-                  value={""}
                   testId="input_email"
                   label="Email"
                   placeholder="Enter your email"
                ></Input>
                <Input
                   {...inputsData.password}
-                  value={""}
                   testId="input_password"
                   label="Password"
                   placeholder="Enter your password"

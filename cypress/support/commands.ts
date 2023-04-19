@@ -1,4 +1,5 @@
 // import messages from "../../frontend/src/utils/messages";
+import { UpdateCompanyProfileDetailsBody } from "../../apis/updateCompanyProfile";
 import { mailServerId } from "./consts";
 type PageUrl =
    | "/auth/login"
@@ -25,6 +26,9 @@ declare global {
             state: InputState
          ) => Chainable<HTMLElement>;
          submitSignupForm: (props: ISignupDetails) => Chainable;
+         updateCompanyProfile: (
+            props: UpdateCompanyProfileDetailsBody
+         ) => Chainable;
          shouldBeCalled: (url: string, int: number) => Chainable;
          // expectError: (err?: string) => Cypress.Chainable;
          // expectMessage: (msg?: string) => Chainable;

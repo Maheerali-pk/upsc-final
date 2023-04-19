@@ -7,7 +7,7 @@ import {
    GlobalContextProvider,
    useGlobalContext,
 } from "../../../contexts/GlobalContext";
-import { icons } from "../../../utils/helpers";
+import { checks, icons } from "../../../utils/helpers";
 import * as React from "react";
 import { useEffect } from "react";
 import PageWrapper from "../../../components/PageWrapper";
@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 
 import CustomRadioGroup from "../../../components/CustomRadioGroup";
 import classNames from "classnames";
-import { errors, routes } from "../../../utils/utils";
+import { errors, fileToBase64, routes } from "../../../utils/utils";
 import { useForm } from "../../../hooks/useForm";
 import Input from "../../../components/Input";
 import OrDivider from "../../../components/OrDivider";
@@ -27,11 +27,13 @@ import Select from "../../../components/Select";
 import Textarea from "../../../components/Textarea";
 import Checkbox from "../../../components/Checkbox";
 import SocialMediaInput from "../../../components/SocialMediaInput";
+import { updateCompanyProfile } from "../../../apis/updateCompanyProfile";
 
 const CompanyProfileSetup: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
    const [signupType, setSignupType] = useState("");
    const router = useRouter();
+   const [logoUrl, setLogoUrl] = useState("");
    const { inputsData, onSubmit } = useForm<
       {
          name: string;
@@ -53,24 +55,67 @@ const CompanyProfileSetup: React.FC = () => {
       {}
    >({
       inputs: {
+         name: { value: "", checks: [checks.required.string] },
          city: { value: "" },
-         name: { value: "" },
          phoneNum: { value: "" },
          url: { value: "" },
          logo: { value: null },
-         orgType: { value: "" },
-         description: { value: "" },
+         orgType: { value: "", checks: [checks.required.string] },
+         description: {
+            value: "",
+            checks: [checks.required.string, checks.alteast90],
+         },
          state: { value: "" },
-         address: { value: "" },
-         pincode: { value: "" },
-         verify: { value: false },
-         understand: { value: false },
+         address: { value: "", checks: [checks.required.string] },
+         pincode: { value: "", checks: [checks.required.string] },
+         verify: { value: false, checks: [checks.mustBeTrue] },
+         understand: { value: false, checks: [checks.mustBeTrue] },
          facebook: { value: "" },
          instagram: { value: "" },
          linkedin: { value: "" },
       },
    });
+   useEffect(() => {
+      if (inputsData.logo.value) {
+         fileToBase64(inputsData.logo.value as File).then((res) => {
+            setLogoUrl(res as string);
+         });
+      }
+   }, [inputsData.logo.value]);
 
+   const onClickOnContinue = async () => {
+      const error = onSubmit();
+      if (!error) {
+         dispatch({ setState: { loading: true } });
+         const res = await updateCompanyProfile({
+            address: {
+               city: inputsData.city.value,
+               state: inputsData.state.value,
+               pincode: inputsData.pincode.value,
+               firstLine: inputsData.address.value,
+            },
+            description: inputsData.description.value,
+            logo: logoUrl,
+
+            // name: inputsData.name.value,
+            type: inputsData.orgType.value,
+            phoneNum: inputsData.phoneNum.value,
+            socialLinks: [
+               inputsData.facebook.value,
+               inputsData.instagram.value,
+               inputsData.linkedin.value,
+            ],
+            url: inputsData.url.value,
+            organisationName: inputsData.name.value,
+         });
+         if (res.status === 200) {
+            dispatch({ setState: { loading: false } });
+            router.push(routes.company.setupProfile.success);
+         } else {
+         }
+      }
+   };
+   console.log("loading", state.loading);
    return (
       <>
          <Head>
@@ -80,6 +125,7 @@ const CompanyProfileSetup: React.FC = () => {
          <Navbar></Navbar>
 
          <div className="setup-wrapper">
+            <Loader></Loader>
             <div className="flex flex-col gap-12 mb-12">
                <ProfileSetupHeader
                   text="Welcome aboard! Let’s set up your profile"
@@ -88,6 +134,10 @@ const CompanyProfileSetup: React.FC = () => {
                <UploadFile {...inputsData.logo}></UploadFile>
             </div>
             <div className="flex flex-col gap-10 mb-12">
+               <Input
+                  {...inputsData.name}
+                  placeholder="What is your organisation’s name?"
+               ></Input>
                <Select
                   {...inputsData.orgType}
                   placeholder="Select"
@@ -187,7 +237,10 @@ const CompanyProfileSetup: React.FC = () => {
                   }
                ></Checkbox>
             </div>
-            <button className="btn btn-primary w-full btn-xl mb-28">
+            <button
+               onClick={onClickOnContinue}
+               className="btn btn-primary w-full btn-xl mb-28"
+            >
                Continue
             </button>
          </div>

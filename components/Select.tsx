@@ -12,6 +12,7 @@ interface SelectProps {
    value: string;
    onChange: (val: string) => void;
    placeholder: string;
+   state: InputState;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -19,6 +20,7 @@ const Select: React.FC<SelectProps> = ({
    value,
    onChange,
    placeholder,
+   state,
 }) => {
    const [open, setOpen] = useState(false);
    const elmRef = useRef<HTMLDivElement>(null);
@@ -46,7 +48,14 @@ const Select: React.FC<SelectProps> = ({
       <div
          ref={elmRef}
          onClick={onOpenMenu}
-         className="flex justify-between w-full py-2.5 px-3.5 items-center rounded-lg border border-gray-300 cursor-pointer relative"
+         className={classNames(
+            "flex justify-between w-full py-2.5 h-fit px-3.5 items-center rounded-lg border border-gray-300 cursor-pointer relative",
+            {
+               "select-error": state?.type === "error",
+               "select-primary": state === undefined,
+               "select-warn": state?.type === "warn",
+            }
+         )}
       >
          <div className="text-gray-500">
             {selectedOption?.heading || selectedOption?.text || placeholder}
