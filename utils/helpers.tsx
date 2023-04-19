@@ -19,6 +19,23 @@ export const customFetch = async <T extends { [key: string]: any }>(
 };
 
 export const icons = {
+   add: (
+      <svg
+         width="21"
+         height="20"
+         viewBox="0 0 21 20"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg"
+      >
+         <path
+            d="M10.5003 4.16666V15.8333M4.66699 9.99999H16.3337"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+         />
+      </svg>
+   ),
    addCircle: (
       <svg
          width="23"
@@ -60,6 +77,23 @@ export const icons = {
             rx="28"
             stroke="#ECFDF3"
             stroke-width="10"
+         />
+      </svg>
+   ),
+   edit: (
+      <svg
+         width="20"
+         height="20"
+         viewBox="0 0 20 20"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg"
+      >
+         <path
+            d="M14.9997 8.33333L11.6664 5M2.08301 17.9167L4.90331 17.6033C5.24789 17.565 5.42018 17.5459 5.58121 17.4937C5.72408 17.4475 5.86005 17.3821 5.98541 17.2995C6.12672 17.2063 6.2493 17.0837 6.49445 16.8386L17.4997 5.83333C18.4202 4.91286 18.4202 3.42047 17.4997 2.5C16.5792 1.57952 15.0868 1.57952 14.1664 2.49999L3.16112 13.5052C2.91596 13.7504 2.79339 13.873 2.70021 14.0143C2.61753 14.1396 2.55219 14.2756 2.50594 14.4185C2.4538 14.5795 2.43466 14.7518 2.39637 15.0964L2.08301 17.9167Z"
+            stroke="#98A2B3"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
          />
       </svg>
    ),
@@ -349,6 +383,23 @@ export const icons = {
             d="M8 17.4192H16M11.0177 3.18319L4.23539 8.45831C3.78202 8.81093 3.55534 8.98724 3.39203 9.20805C3.24737 9.40363 3.1396 9.62397 3.07403 9.85824C3 10.1227 3 10.4099 3 10.9842V18.2192C3 19.3393 3 19.8993 3.21799 20.3272C3.40973 20.7035 3.71569 21.0094 4.09202 21.2012C4.51984 21.4192 5.07989 21.4192 6.2 21.4192H17.8C18.9201 21.4192 19.4802 21.4192 19.908 21.2012C20.2843 21.0094 20.5903 20.7035 20.782 20.3272C21 19.8993 21 19.3393 21 18.2192V10.9842C21 10.4099 21 10.1227 20.926 9.85824C20.8604 9.62397 20.7526 9.40363 20.608 9.20805C20.4447 8.98724 20.218 8.81094 19.7646 8.45832L12.9823 3.18319C12.631 2.90994 12.4553 2.77331 12.2613 2.72079C12.0902 2.67445 11.9098 2.67445 11.7387 2.72079C11.5447 2.77331 11.369 2.90994 11.0177 3.18319Z"
             stroke="#667085"
             stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+         />
+      </svg>
+   ),
+   closeSmall: (
+      <svg
+         width="12"
+         height="12"
+         viewBox="0 0 12 12"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg"
+      >
+         <path
+            d="M9 3L3 9M3 3L9 9"
+            stroke="#667085"
+            stroke-width="1.5"
             stroke-linecap="round"
             stroke-linejoin="round"
          />
@@ -977,6 +1028,10 @@ export const checks = {
          cond: (x) => x?.trim() === "",
          state: { text: errors.requiredField, type: "error" },
       } as InputCheck<string>,
+      array: {
+         cond: (x) => x?.length === 0,
+         state: { text: errors.requiredField, type: "error" },
+      } as InputCheck<any[]>,
    },
    alteast90: {
       cond: (x) => (x as string)?.trim().length < 90,

@@ -1,5 +1,5 @@
-/** @type {import('tailwindcss').Config} */
 const toRem = (px) => px / 16 + "rem";
+/** @type {import('tailwindcss').Config} */
 module.exports = {
    content: [
       "./pages/**/*.{js,ts,jsx,tsx}",

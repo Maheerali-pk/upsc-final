@@ -1,11 +1,18 @@
+import classNames from "classnames";
 import { icons } from "../utils/helpers";
 
 interface ProfileSetupFooterProps {
    stepNo: number;
+   disableNext?: boolean;
+   onClickOnNext?: () => void;
 }
 const totalSteps = 4;
 
-const ProfileSetupFooter: React.FC<ProfileSetupFooterProps> = ({ stepNo }) => {
+const ProfileSetupFooter: React.FC<ProfileSetupFooterProps> = ({
+   stepNo,
+   disableNext = false,
+   onClickOnNext,
+}) => {
    return (
       <div className="w-full flex flex-col">
          <div className="bg-gray-200 h-1.5 relative w-full">
@@ -21,7 +28,13 @@ const ProfileSetupFooter: React.FC<ProfileSetupFooterProps> = ({ stepNo }) => {
                   Back
                </div>
             ) : null}
-            <div className="w-72 btn btn-primary btn-xl">Next</div>
+            <button
+               onClick={onClickOnNext}
+               disabled={disableNext}
+               className={classNames("w-72 btn btn-primary btn-xl", {})}
+            >
+               Next
+            </button>
          </div>
       </div>
    );

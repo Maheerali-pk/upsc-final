@@ -16,6 +16,10 @@ interface Props<
    onSuccess?: (data: ResponseData) => void;
    onFail?: (data: ErrorObject) => void;
 
+   onAnyChange?: (data: UseFormProps<NamesObject>) => void;
+   onAnyChangeWithoutData?: () => void;
+
+   checkForErrors?: (data: UseFormProps<NamesObject>) => boolean;
    api?: string;
 }
 
@@ -40,14 +44,45 @@ export function useForm<
          x as keyof NamesObject,
          {
             onChange: (val: unknown) => {
-               setData({ ...data, [x]: { ...data[x], value: val } });
-               // onAnyChange();
+               const newData = {
+                  ...data,
+                  [x]: { ...data[x], value: val },
+               } as UseFormProps<NamesObject>;
+               setData(newData);
+               props.onAnyChange?.(newData);
             },
             setState: (val: InputState) => {
                setData({ ...data, [x]: { ...data[x], state: val } });
             },
             value: data[x].value,
             state: data[x].state,
+            updateItem: (index: number, value: unknown) => {
+               if (Array.isArray(data[x].value)) {
+                  const newArr = deepClone(data[x].value) as unknown[];
+                  newArr[index] = value;
+                  const newData = {
+                     ...data,
+                     [x]: { ...data[x], value: newArr },
+                  } as UseFormProps<NamesObject>;
+
+                  setData(newData);
+                  props.onAnyChange?.(newData);
+               }
+            },
+            addItem: (value: unknown) => {
+               if (Array.isArray(data[x].value)) {
+                  const newData = {
+                     ...data,
+                     [x]: {
+                        ...data[x],
+                        value: [...(data[x].value as unknown[]), value],
+                     },
+                  };
+                  setData(newData);
+                  props.onAnyChange?.(newData);
+               }
+            },
+
             // value: data[x].value,
          },
       ])
@@ -103,12 +138,8 @@ export function useForm<
 
                // }
             }
-            console.log("state changed", stateChanged);
             if (!stateChanged) {
                newData[k].state = undefined;
-               // setPartialData({
-               //    [k ]: { state: undefined },
-               // } as PartialFormProps<Names>);
             }
          }
          setData({ ...newData });
@@ -134,7 +165,7 @@ export function useForm<
       })
          .then((res) => res.json())
          .then((data) => {
-            console.log(data, "Response from api");
+            // console.log(data, "Response from api");
             if (data.statusCode === undefined) {
                if (props.onSuccess) {
                   props.onSuccess(data);
@@ -160,11 +191,35 @@ export function useForm<
       );
       setData({ ...data, ...newData });
    };
+   const checkForErrors = (data: UseFormProps<NamesObject>) => {
+      const newData = { ...data };
+      let error = false;
+      for (let key in data) {
+         const k = key;
+         const input = data[k];
+         if (input.checks) {
+            let stateChanged = false;
+            for (let check of input.checks) {
+               if (check.cond(input.value)) {
+                  if (check.state.type === "error") {
+                     error = true;
+                  }
+                  stateChanged = true;
+                  break;
+               }
+            }
+         }
+         setData({ ...newData });
+      }
+      return error;
+   };
 
-   console.log(inputsData, "inputs data");
+   // console.log(inputsData, "inputs data");
    return {
       // onChangeEvents,
       // values,
+
+      checkForErrors,
       onSubmit,
       inputsData,
       data,

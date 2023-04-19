@@ -20,11 +20,11 @@ const DialogWrapper: React.FC<DialogWrapperProps> = ({
                dispatch({ setDialog: undefined });
             }
          }}
-         className={`flex justify-center items-center fixed top-0 left-0 h-screen w-screen backdrop-blur `}
+         className={`flex justify-center items-center fixed top-0 left-0 h-screen w-screen backdrop-blur z-10`}
       >
          <div
             style={{ boxShadow: " 0px 0px 0px 1000px rgba(16, 24, 40, 0.8)" }}
-            className={`flex bg-white rounded-2xl backdrop-blur`}
+            className={`flex bg-white rounded-2xl backdrop-blur ${className}`}
          >
             {children}
          </div>

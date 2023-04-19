@@ -49,7 +49,7 @@ interface ErrorObject {
    error: string;
 }
 
-type IInputValue = string | boolean | string[] | (File | null);
+type IInputValue = string | boolean | string[] | (File | null) | ILanguage[];
 type Test = {
    email: string;
    password: string;
@@ -69,9 +69,15 @@ type CreateStateObject<NamesObject extends NamesObjectDefault> = {
    [k in keyof Names]: InputState;
 };
 
+type GetArrayType<ArrType> = ArrType extends readonly (infer ElementType)[]
+   ? ElementType
+   : never;
+
 type CreateFormObject<NamesObject extends NamesObjectDefault> = {
    [k in keyof NamesObject]: {
       setState: (val: InputState) => void;
+      updateItem: (index: number, val: GetArrayType<NamesObject[k]>) => void;
+      addItem: (val: GetArrayType<NamesObject[k]>) => void;
       onChange: (val: NamesObject[k]) => void;
       value: NamesObject[k];
       state: InputState;
@@ -155,6 +161,11 @@ declare global {
          state(state: any): any;
       }
    }
+}
+
+interface ILanguage {
+   language: string;
+   proficiency: string;
 }
 
 interface cy {

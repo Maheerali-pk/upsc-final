@@ -27,6 +27,7 @@ export const routes = {
    student: {
       setupProfile: {
          base: "/student/setup-profile",
+         exams: "/student/setup-profile/exams",
       },
    },
 } as const;

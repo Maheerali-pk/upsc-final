@@ -12,7 +12,7 @@ interface SelectProps {
    value: string;
    onChange: (val: string) => void;
    placeholder: string;
-   state: InputState;
+   state?: InputState;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -25,18 +25,13 @@ const Select: React.FC<SelectProps> = ({
    const [open, setOpen] = useState(false);
    const elmRef = useRef<HTMLDivElement>(null);
    const selectedOption = options.find((x) => x.value === value);
-   console.log(selectedOption);
-   console.log(options, value);
    const onOpenMenu = () => {
       setOpen(!open);
    };
    useEffect(() => {
       const func = (e: MouseEvent) => {
-         console.log(e.target, "target");
          if (open) {
-            console.log("open", open);
             if (!elmRef.current?.contains(e.target as Node)) {
-               console.log("Ref set to false");
                setOpen(false);
             }
          }
