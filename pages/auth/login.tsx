@@ -134,7 +134,12 @@ const LoginComponent: React.FC = () => {
                   label="Remember for 30 days"
                   className="checkbox-sm"
                ></Checkbox>
-               <div className=" cursor-pointer text-sm font-semibold text-primary-400"></div>
+               <div
+                  onClick={() => router.push(routes.forgetPass.base)}
+                  className=" cursor-pointer text-sm font-semibold text-primary-400"
+               >
+                  Forgot Password?
+               </div>
             </div>
             <button
                className="btn-primary btn btn-sm mb-4"

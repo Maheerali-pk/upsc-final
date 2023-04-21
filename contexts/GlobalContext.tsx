@@ -6,6 +6,7 @@ interface IGlobalState {
    dialog?: React.FC;
    loading: boolean;
    error: { title: string; message: string };
+   email: string;
 }
 
 export interface IUser {
@@ -16,6 +17,7 @@ export interface IUser {
 const initialState: IGlobalState = {
    loading: false,
    error: { title: "", message: "" },
+   email: "",
 };
 
 const functions = {

@@ -33,6 +33,12 @@ export const routes = {
          success: "/company/setup-profile/success",
       },
    },
+   forgetPass: {
+      base: "/auth/forget-pass",
+      sent: "/auth/reset-link-sent",
+      newpass: "/auth/new-password",
+      newpassSuccess: "/auth/set-new-password-success",
+   },
 } as const;
 
 export const fileToBase64 = (
