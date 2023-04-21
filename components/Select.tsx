@@ -38,7 +38,7 @@ const Select: React.FC<SelectProps> = ({
       return () => window.removeEventListener("click", func);
    }, [open]);
    return (
-      <div className="select-wrapper flex flex-col gap-1.5">
+      <div className="select-wrapper flex flex-col gap-1.5 w-full">
          {props.label && (
             <div className="text-sm text-gray-700 font-medium">
                {props.label}{" "}
@@ -66,7 +66,7 @@ const Select: React.FC<SelectProps> = ({
             </div>
             <div>{icons.chevronDown}</div>
             {
-               <div className={classNames("select-menu", { show: open })}>
+               <div className={classNames("select-menu z-10", { show: open })}>
                   {options.map((opt) => (
                      <div
                         onClick={() => onChange(opt.value)}

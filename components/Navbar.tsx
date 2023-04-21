@@ -2,6 +2,8 @@ import classNames from "classnames";
 import { useState } from "react";
 import { icons } from "../utils/helpers";
 import NavbarItem from "./NavbarItem";
+import { useRouter } from "next/router";
+import { routes } from "../utils/utils";
 
 interface NavbarProps {}
 
@@ -24,6 +26,7 @@ const navbarItems: INavbarItem[] = [
 
 const Navbar: React.FC<NavbarProps> = () => {
    const [open, setOpen] = useState(false);
+   const router = useRouter();
    return (
       <div className="h-18 md:h-20 flex items-center px-4 lg:px-28 border-b border-b-gray-100 justify-between w-full">
          <div className="gap-10 flex w-full items-center">
@@ -35,10 +38,16 @@ const Navbar: React.FC<NavbarProps> = () => {
             </div>
          </div>
          <div className="gap-8 hidden md:flex whitespace-nowrap items-center">
-            <div className="font-semibold text-gray-600 cursor-pointer">
+            <div
+               className="font-semibold text-gray-600 cursor-pointer"
+               onClick={() => router.push(routes.login)}
+            >
                Log in
             </div>
-            <div className="bg-primary-400 cursor-pointer rounded-lg text-white font-semibold py-2.5 px-3.5">
+            <div
+               onClick={() => router.push(routes.signup.base)}
+               className="bg-primary-400 cursor-pointer rounded-lg text-white font-semibold py-2.5 px-3.5"
+            >
                Sign up
             </div>
          </div>

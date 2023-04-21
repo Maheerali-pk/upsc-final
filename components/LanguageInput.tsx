@@ -98,8 +98,11 @@ const LanguageInput: React.FC<LanguageInputProps> = (props) => {
                placeholder="Proficiency"
             ></Select>
 
-            <div className="cursor-pointer" onClick={() => setEditing(false)}>
-               {icons.edit}
+            <div
+               className="btn btn-link btn-primary w-fit"
+               onClick={() => setEditing(false)}
+            >
+               Save
             </div>
          </div>
       );

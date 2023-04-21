@@ -5,6 +5,7 @@ interface ProfileSetupFooterProps {
    stepNo: number;
    disableNext?: boolean;
    onClickOnNext?: () => void;
+   onClickOnBack?: () => void;
 }
 const totalSteps = 4;
 
@@ -12,6 +13,7 @@ const ProfileSetupFooter: React.FC<ProfileSetupFooterProps> = ({
    stepNo,
    disableNext = false,
    onClickOnNext,
+   onClickOnBack,
 }) => {
    return (
       <div className="w-full flex flex-col   fixed bottom-0 bg-white">
@@ -23,7 +25,10 @@ const ProfileSetupFooter: React.FC<ProfileSetupFooterProps> = ({
          </div>
          <div className="flex gap-6  md:p-0 p-4 justify-center md:pb-12 md:pt-8">
             {stepNo > 1 ? (
-               <div className="btn btn-gray btn-outlined w-72 btn-sm  gap-1.5 flex items-center justify-center text-gray-700">
+               <div
+                  onClick={onClickOnBack}
+                  className="btn btn-gray btn-outlined w-72 btn-sm  gap-1.5 flex items-center justify-center text-gray-700"
+               >
                   {icons.chevronLeft}
                   Back
                </div>

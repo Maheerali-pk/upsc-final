@@ -56,7 +56,8 @@ type IInputValue =
    | (File | null)
    | ILanguage[]
    | IExam[]
-   | IOtherExam[];
+   | IOtherExam[]
+   | IWork[];
 type Test = {
    email: string;
    password: string;
@@ -198,6 +199,19 @@ type IGrad = {
    marks: string;
    totalCgpa: string;
    stream: string;
+};
+
+type IWork = {
+   compName: string;
+   role: string;
+   description: string;
+   currentlyWorking: boolean;
+   startMonth: string;
+   startYear: string;
+   endMonth: string;
+   endYear: string;
+   state: string;
+   location: string;
 };
 
 interface ISelectOption {
