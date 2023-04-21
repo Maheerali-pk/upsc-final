@@ -3,7 +3,7 @@ import OTPDialog from "../dialogs/OTPDialog";
 import { createCustomContext } from "../utils/CreateCustomContext";
 
 interface IGlobalState {
-   dialog?: React.FC;
+   dialog?: React.FC<any>;
    loading: boolean;
    error: { title: string; message: string };
    email: string;

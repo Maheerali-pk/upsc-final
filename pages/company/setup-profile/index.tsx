@@ -124,7 +124,7 @@ const CompanyProfileSetup: React.FC = () => {
          </Head>
          <Navbar></Navbar>
 
-         <div className="setup-wrapper">
+         <div className="setup-wrapper md:pb-28 pb-10">
             <Loader></Loader>
             <div className="flex flex-col gap-12 mb-12">
                <ProfileSetupHeader
@@ -239,7 +239,7 @@ const CompanyProfileSetup: React.FC = () => {
             </div>
             <button
                onClick={onClickOnContinue}
-               className="btn btn-primary w-full btn-xl mb-28"
+               className="btn btn-primary w-full btn-xl"
             >
                Continue
             </button>

@@ -8,6 +8,7 @@ import { errors, routes } from "../utils/utils";
 import Input from "./Input";
 import OrDivider from "./OrDivider";
 import { accountSignUp } from "../apis/accountSignUp";
+import OTPDialog from "../dialogs/OTPDialog";
 
 interface SignupFormProps {
    className?: string;
@@ -56,7 +57,10 @@ const SignupForm: React.FC<SignupFormProps> = ({
          accountSignUp({
             email: inputsData.email.value,
             password: inputsData.password.value,
-            confirmPassword: inputsData.password.value,
+            name: {
+               firstName: inputsData.firstName.value,
+               lastName: inputsData.lastName.value,
+            },
             // name: inputsData.firstName.value + " " + inputsData.lastName.value,
             // phoneNum: inputsData.phone.value,
             purpose: type === "student" ? "CANDIDATE" : "COMPANY",
@@ -70,7 +74,8 @@ const SignupForm: React.FC<SignupFormProps> = ({
                   });
                   return;
                } else if (res.status === 200) {
-                  router.push(routes[type].setupProfile.base);
+                  // router.push(routes[type].setupProfile.base);
+                  dispatch({ setState: { dialog: OTPDialog } });
                }
             })
             .catch((err) => {
@@ -98,6 +103,11 @@ const SignupForm: React.FC<SignupFormProps> = ({
    };
    return (
       <div className={"flex flex-col  " + className}>
+         {state.dialog === OTPDialog && (
+            <OTPDialog
+               onSuccess={() => router.push(routes[type].setupProfile.base)}
+            ></OTPDialog>
+         )}
          <div
             className={classNames(
                "font-semibold text-2xl md:text-3xl mb-10 text-center md:text-left md:mb-14",

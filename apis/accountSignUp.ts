@@ -6,8 +6,7 @@ interface AccountSignUpBody {
    password: string;
    purpose: "CANDIDATE" | "COMPANY";
    phoneNum?: string;
-   name?: string;
-   confirmPassword?: string;
+   name: { firstName: string; lastName: string };
 }
 interface SignUpResponse {
    token: string;
