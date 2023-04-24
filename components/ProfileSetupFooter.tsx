@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { icons } from "../utils/helpers";
+import ProgressBar from "./ProgressBar";
 
 interface ProfileSetupFooterProps {
    stepNo: number;
@@ -17,12 +18,7 @@ const ProfileSetupFooter: React.FC<ProfileSetupFooterProps> = ({
 }) => {
    return (
       <div className="w-full flex flex-col   fixed bottom-0 bg-white">
-         <div className="bg-gray-200  h-1 md:h-1.5  relative w-full">
-            <div
-               className="bg-primary-400  h-1 md:h-1.5 absolute left-0 top-0"
-               style={{ width: (stepNo / totalSteps) * 100 + "%" }}
-            ></div>
-         </div>
+         <ProgressBar percentage={(stepNo / totalSteps) * 100}></ProgressBar>
          <div className="flex gap-6  md:p-0 p-4 justify-center md:pb-12 md:pt-8">
             {stepNo > 1 ? (
                <div
