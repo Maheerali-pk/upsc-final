@@ -1,11 +1,20 @@
-import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { Inter, Roboto } from "@next/font/google";
-const inter = Inter({ subsets: ["latin"] });
+import localFont from "@next/font/local";
+import "../styles/globals.css";
+
+// const inter = localFont({
+//    src: [{ path: "./fonts/Inter/Inter-Regular.ttf", weight: "400" }],
+//    preload: true,
+// });
 
 function MyApp({ Component, pageProps }: AppProps) {
    return (
-      <main className={inter.className}>
+      <main>
+         {/* <style jsx global>{`
+            html {
+               font-family: ${inter.style.fontFamily};
+            }
+         `}</style> */}
          <Component {...pageProps} />
       </main>
    );

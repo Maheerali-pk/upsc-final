@@ -4,6 +4,9 @@
     "test": "cypress open",
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
+    "buildandexport": "next build && next export",
+    "buildanddeploy": "rm -r -f dist/ && next build && next export && aws s3 sync --delete dist/ s3://upscwork-web --acl public-read --profile upscwork && aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id E2HOMEKL5KHO6F --paths \"/*\" --debug --profile upscwork",
     "start": "next start"
   },
   "dependencies": {
@@ -15,7 +18,7 @@
     "@types/uuid": "^9.0.1",
     "classnames": "^2.3.2",
     "deep-clone": "^3.0.3",
-    "next": "latest",
+    "next": "^13.2.5",
     "postcss-css-variables": "^0.18.0",
     "react": "18.2.0",
     "react-datepicker": "^4.11.0",

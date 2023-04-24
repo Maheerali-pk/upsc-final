@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import AuthPageWrapper from "../../components/AuthPageWrapper";
 import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
