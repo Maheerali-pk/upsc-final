@@ -20,6 +20,9 @@ import {
    convertJobApplicationToOpportunity,
    createJob,
 } from "../../../apis/createJob";
+import { useGlobalContext } from "../../../contexts/GlobalContext";
+import { useRouter } from "next/router";
+import { routes } from "../../../utils/utils";
 
 interface DashboardProps {}
 
@@ -55,11 +58,17 @@ const PostJobContent: React.FC<DashboardProps> = () => {
    });
    const { inputsData, checkForErrors } = res;
    const [page, setPage] = useState(0);
+   const [state, dispatch] = useGlobalContext();
+   const router = useRouter();
    const submitJob = () => {
       const values = Object.fromEntries(
          Object.entries(inputsData).map(([key, value]) => [key, value.value])
       ) as IJobApplication;
-      createJob(convertJobApplicationToOpportunity(values));
+      dispatch({ setState: { loading: true } });
+      createJob(convertJobApplicationToOpportunity(values)).then((res) => {
+         router.push(routes.company.successfulPostJob);
+         dispatch({ setState: { loading: false } });
+      });
    };
    const disableNext = () => {
       if (inputsData.opportunityType.value === "Academic") {
