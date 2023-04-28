@@ -1,12 +1,13 @@
 import { useId } from "react";
-interface RadioProps {
-   value: string;
+interface RadioProps<Name extends string = string> {
+   value: Name;
    text: string;
    name: string;
-   onChange: (value: string) => void;
+   checked?: boolean;
+   onChange: (value: Name) => void;
 }
 
-const Radio: React.FC<RadioProps> = (props) => {
+const Radio = <Name extends string = string>(props: RadioProps<Name>) => {
    const id = useId();
    return (
       <div className="flex gap-3 items-center">
@@ -15,7 +16,8 @@ const Radio: React.FC<RadioProps> = (props) => {
             type="radio"
             name={props.name}
             value={props.value}
-            onChange={(e) => props.onChange(e.target.value)}
+            checked={props.checked}
+            onChange={(e) => props.onChange(e.target.value as Name)}
          ></input>
          <label htmlFor={id}>{props.text}</label>
       </div>

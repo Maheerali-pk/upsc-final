@@ -3,6 +3,8 @@ interface INavbarItem {
    url?: string;
    icon: JSX.Element;
    subItems?: INavbarSubItem[];
+   badge?: string;
+   selected?: boolean;
 }
 
 type NamesObjectDefault = { [k in string]: IInputValue };
@@ -87,6 +89,7 @@ type CreateFormObject<NamesObject extends NamesObjectDefault> = {
       updateItem: (index: number, val: GetArrayType<NamesObject[k]>) => void;
       addItem: (val: GetArrayType<NamesObject[k]>) => void;
       onChange: (val: NamesObject[k]) => void;
+      removeItem: (index: number) => void;
       value: NamesObject[k];
       state: InputState;
    };
@@ -214,12 +217,75 @@ type IWork = {
    location: string;
 };
 
-interface ISelectOption {
+interface ISelectOption<Name extends string = string> {
    heading?: string;
    text?: string;
-   value: string;
+   value: Name;
 }
 
 interface cy {
    state: State;
+}
+
+type IJobLocation = "OFFICE" | "REMOTE" | "FLEXIBLE" | "";
+type IStipendType = "FIXED" | "NEGOTIABLE" | "FREELACE_BASED" | "";
+type IJobDuration = "FT" | "PT" | "FR" | "";
+type IJobQualification = "INTERVIEW" | "MAIN" | "NONE" | "";
+type IJobExperience = "NONE" | "1" | "2" | "3" | "";
+type IJobApplication = {
+   opportunityType: "Academic" | "Other" | "";
+   position: string;
+   description: string;
+   exam: string;
+   subjects: string[];
+   workLanguage: string[];
+   locationType: IJobLocation;
+   city: string;
+   state: string;
+   stipendType: IStipendType;
+   stipend: string;
+   maxStipend: string;
+   stipendPeriod: string;
+   skillSets: string[];
+   noOfMainsAttempted: string;
+   workExp: IJobExperience;
+   minQualification: IJobQualification;
+   openings: string;
+   perks: string[];
+   deadline: string;
+   isCoverLetterRequired: boolean;
+   questions: string[];
+   status: string;
+   minMainAttempts: string;
+   timeAvail: IJobDuration;
+};
+
+interface ICompanyDetails {
+   _id: string;
+   email: string;
+   onboardingState: string;
+   jobPostings: any[];
+   __v: number;
+   address: {
+      firstLine: string;
+      secondLine: string;
+      landmark: string;
+      city: string;
+      state: string;
+      pincode: string;
+      _id: string;
+   };
+   name: {
+      firstName: string;
+      lastName: string;
+      _id: string;
+   };
+   phoneNum: string;
+   url: string;
+   description: string;
+   logo: string;
+   organisationName: string;
+   socialLinks: string[];
+   type: string;
+   updatedAt: string;
 }

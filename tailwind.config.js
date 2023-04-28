@@ -4,6 +4,7 @@ module.exports = {
    content: [
       "./pages/**/*.{js,ts,jsx,tsx}",
       "./components/**/*.{js,ts,jsx,tsx}",
+      "./subpages/**/*.{js,ts,jsx,tsx}",
       "./dialogs/**/*.{js,ts,jsx,tsx}",
       "./app/**/*.{js,ts,jsx,tsx}",
    ],
@@ -46,6 +47,8 @@ module.exports = {
          width: {
             90: toRem(360),
             106: toRem(424),
+            150: toRem(600),
+            904: toRem(904),
          },
          colors: {
             white: "#ffffff",

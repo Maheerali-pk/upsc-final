@@ -2,24 +2,24 @@ import { icons } from "../utils/helpers";
 import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 
-interface SelectProps {
+interface SelectProps<Name extends string = string> {
    options: ISelectOption[];
-   value: string;
-   onChange: (val: string) => void;
+   value: Name;
+   onChange: (val: Name) => void;
    placeholder: string;
    state?: InputState;
    label?: string;
    labelSubtext?: string;
 }
 
-const Select: React.FC<SelectProps> = ({
+const Select = <Name extends string = string>({
    options,
    value,
    onChange,
    placeholder,
    state,
    ...props
-}) => {
+}: SelectProps<Name>) => {
    const [open, setOpen] = useState(false);
    const elmRef = useRef<HTMLDivElement>(null);
    const selectedOption = options.find((x) => x.value === value);
@@ -69,7 +69,7 @@ const Select: React.FC<SelectProps> = ({
                <div className={classNames("select-menu z-10", { show: open })}>
                   {options.map((opt) => (
                      <div
-                        onClick={() => onChange(opt.value)}
+                        onClick={() => onChange(opt.value as Name)}
                         className={classNames(
                            "flex w-full justify-between gap-2 items-center py-2.5 px-2 hover:bg-gray-50 rounded-md",
                            { "bg-gray-50": value === opt.value }

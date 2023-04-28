@@ -7,6 +7,7 @@ interface CheckboxProps {
    label: string | JSX.Element;
    className?: string;
    state?: InputState;
+   wrapperClassName?: string;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
@@ -15,10 +16,15 @@ const Checkbox: React.FC<CheckboxProps> = ({
    label,
    className,
    state,
+   wrapperClassName,
 }) => {
    const id = useId();
    return (
-      <div className="flex gap-2 text-sm text-gray-600 items-center">
+      <div
+         className={`flex gap-2 text-sm text-gray-600 items-center ${
+            wrapperClassName || ""
+         }`}
+      >
          <input
             className={classNames(
                `text-primary-400 aspect-square ${className || ""}`

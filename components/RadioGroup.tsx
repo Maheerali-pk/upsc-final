@@ -1,19 +1,23 @@
+import classNames from "classnames";
 import Radio from "./Radio";
 
 import { useId } from "react";
-interface RadioItem {
+interface RadioItem<Name extends string = string> {
    text: string;
-   value: string;
+   value: Name;
 }
-interface RadioGroupProps {
-   items: RadioItem[];
-   onChange: (value: string) => void;
-   value: string;
+interface RadioGroupProps<Name extends string = string> {
+   items: RadioItem<Name>[];
+   onChange: (value: Name) => void;
+   value: Name;
    label?: string;
    labelSubtext?: string;
+   column?: boolean;
 }
 
-const RadioGroup: React.FC<RadioGroupProps> = (props) => {
+const RadioGroup = <Name extends string = string>(
+   props: RadioGroupProps<Name>
+) => {
    const id = useId();
    return (
       <div className="flex flex-col gap-4">
@@ -27,12 +31,17 @@ const RadioGroup: React.FC<RadioGroupProps> = (props) => {
                ) : null}
             </div>
          )}
-         <div className="flex md:flex-row flex-col gap-8">
+         <div
+            className={classNames("flex md:flex-row flex-col gap-8", {
+               "md:flex-col": props.column,
+            })}
+         >
             {props.items.map((item) => (
-               <Radio
+               <Radio<Name>
                   text={item.text}
                   onChange={props.onChange}
                   value={item.value}
+                  checked={props.value === item.value}
                   name={id}
                ></Radio>
             ))}

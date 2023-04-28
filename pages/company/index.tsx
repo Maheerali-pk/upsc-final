@@ -4,19 +4,19 @@ import CompanyNavbar from "../../components/CompanyNavbar";
 
 interface DashboardProps {}
 
-const DashboardContent: React.FC<DashboardProps> = () => {
+const HomeContent: React.FC<DashboardProps> = () => {
    return (
       <>
          <Head>
             <title>Create Next App</title>
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <CompanyNavbar selectedItem={1}></CompanyNavbar>
+         <CompanyNavbar selectedItem={0}></CompanyNavbar>
       </>
    );
 };
 
-const Dashboard: React.FC<DashboardProps> = () => {
-   return <PageWrapper Component={DashboardContent}></PageWrapper>;
+const Home: React.FC<DashboardProps> = () => {
+   return <PageWrapper Component={HomeContent}></PageWrapper>;
 };
-export default Dashboard;
+export default Home;

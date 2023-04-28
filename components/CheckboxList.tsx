@@ -3,7 +3,7 @@ import Checkbox from "./Checkbox";
 interface OptionsListProps {
    value: string[];
    onChange: (val: string[]) => void;
-   items: string[];
+   items: { text: string; value: string }[];
    label?: string;
    labelSubtext?: string;
 }
@@ -26,13 +26,15 @@ const CheckboxList: React.FC<OptionsListProps> = (props) => {
                <Checkbox
                   onChange={(val) => {
                      if (val) {
-                        props.onChange([...props.value, item]);
+                        props.onChange([...props.value, item.value]);
                      } else {
-                        props.onChange(props.value.filter((x) => x !== item));
+                        props.onChange(
+                           props.value.filter((x) => x !== item.value)
+                        );
                      }
                   }}
-                  label={item}
-                  value={props.value.includes(item)}
+                  label={item.text || item.value}
+                  value={props.value.includes(item.value)}
                ></Checkbox>
             ))}
          </div>

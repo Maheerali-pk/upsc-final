@@ -3,7 +3,7 @@ import PageWrapper from "../../../components/PageWrapper";
 import ProfileSetupHeader from "../../../components/ProfileSetupHeader";
 import SuccessMessage from "../../../components/SuccessMessage";
 import { icons } from "../../../utils/helpers";
-import Navbar from "../../../components/Navbar";
+import Navbar from "../../../components/NavbarBase";
 
 interface SuccessProps {}
 

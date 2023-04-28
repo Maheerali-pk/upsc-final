@@ -7,14 +7,17 @@ interface ProfileSetupFooterProps {
    disableNext?: boolean;
    onClickOnNext?: () => void;
    onClickOnBack?: () => void;
+   totalSteps?: number;
+   buttonText?: string;
 }
-const totalSteps = 4;
 
 const ProfileSetupFooter: React.FC<ProfileSetupFooterProps> = ({
    stepNo,
    disableNext = false,
    onClickOnNext,
    onClickOnBack,
+   totalSteps = 4,
+   buttonText = "Next",
 }) => {
    return (
       <div className="w-full flex flex-col   fixed bottom-0 bg-white">
@@ -34,7 +37,7 @@ const ProfileSetupFooter: React.FC<ProfileSetupFooterProps> = ({
                disabled={disableNext}
                className={classNames("w-72 btn btn-primary btn-xl", {})}
             >
-               Next
+               {buttonText}
             </button>
          </div>
       </div>

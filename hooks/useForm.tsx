@@ -82,6 +82,22 @@ export function useForm<
                   props.onAnyChange?.(newData);
                }
             },
+            removeItem: (index: number) => {
+               if (Array.isArray(data[x].value)) {
+                  const newData = {
+                     ...data,
+                     [x]: {
+                        ...data[x],
+                        value: [
+                           ...(data[x].value as unknown[]).slice(0, index),
+                           ...(data[x].value as unknown[]).slice(index + 1),
+                        ],
+                     },
+                  };
+                  setData(newData);
+                  props.onAnyChange?.(newData);
+               }
+            },
 
             // value: data[x].value,
          },
@@ -191,30 +207,42 @@ export function useForm<
       );
       setData({ ...data, ...newData });
    };
-   const checkForErrors = (data: UseFormProps<NamesObject>) => {
+   const checkForErrors = (
+      myData?: UseFormProps<NamesObject>,
+      include?: (keyof NamesObject)[]
+   ) => {
       const newData = { ...data };
       let error = false;
-      for (let key in data) {
+      myData = myData || data;
+      include = include || Object.keys(myData);
+      console.log(myData, "myData");
+      for (let key in myData) {
+         if (!include.includes(key)) {
+            continue;
+         }
+
          const k = key;
-         const input = data[k];
+         const input = myData[k];
          if (input.checks) {
+            console.log("has checks", input.checks);
             let stateChanged = false;
             for (let check of input.checks) {
                if (check.cond(input.value)) {
                   if (check.state.type === "error") {
                      error = true;
+                     console.log("Error is true for key: ", key);
                   }
                   stateChanged = true;
                   break;
                }
             }
          }
-         setData({ ...newData });
+         // setData({ ...newData });
       }
       return error;
    };
 
-   // console.log(inputsData, "inputs data");
+   // console.log(inputsData, "inputs myData");
    return {
       // onChangeEvents,
       // values,

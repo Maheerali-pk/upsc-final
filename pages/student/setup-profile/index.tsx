@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import Navbar from "../../../components/Navbar";
 import {
    GlobalContextProvider,
    useGlobalContext,
@@ -34,6 +33,7 @@ import CheckboxList from "../../../components/CheckboxList";
 import ProfileSetupFooter from "../../../components/ProfileSetupFooter";
 import { UpdateStudentProfile } from "../../../apis/updateStudentProfile";
 import NotificationPopup from "../../../components/NotificationPopup";
+import Navbar from "../../../components/Navbar";
 
 const StudentProfileSetup: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
@@ -184,10 +184,10 @@ const StudentProfileSetup: React.FC = () => {
                   <CheckboxList
                      {...inputsData.timeAvail}
                      items={[
-                        "Full-time",
-                        "Part-time",
-                        "Work from home",
-                        "Work from office",
+                        { text: "Full-time", value: "Full-time" },
+                        { text: "Part-time", value: "Part-time" },
+                        { text: "Work from home", value: "Work from home" },
+                        { text: "Work from office", value: "Work from office" },
                      ]}
                   ></CheckboxList>
                </div>
@@ -237,11 +237,11 @@ const StudentProfileSetup: React.FC = () => {
                      label="What academic roles you’re interested in"
                      labelSubtext="optional"
                      items={[
-                        "Tutor",
-                        "Mentor",
-                        "Option1",
-                        "Option 2",
-                        "Option 3",
+                        { text: "Tutor", value: "Tutor" },
+                        { text: "Mentor", value: "Mentor" },
+                        { text: "Option1", value: "Option1" },
+                        { text: "Option 2", value: "Option 2" },
+                        { text: "Option 3", value: "Option 3" },
                      ]}
                   ></CheckboxList>
                </div>

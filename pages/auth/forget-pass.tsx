@@ -3,7 +3,7 @@ import Head from "next/head";
 import AuthPageWrapper from "../../components/AuthPageWrapper";
 import Checkbox from "../../components/Checkbox";
 import Input from "../../components/Input";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/NavbarBase";
 import { checks, icons } from "../../utils/helpers";
 import { useState } from "react";
 import { useRouter } from "next/router";

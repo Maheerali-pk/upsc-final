@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { useState } from "react";
 import { icons } from "../utils/helpers";
+import SelectMenu from "./SelectMenu";
 
 interface CustomInputProps {
    startIcon?: JSX.Element;
@@ -20,13 +21,16 @@ interface CustomInputProps {
    type?: InputType;
    tags?: boolean;
 
+   options?: string[];
    startText?: string | JSX.Element;
 }
 
 const Input: React.FC<CustomInputProps> = (props) => {
    const [focus, setFocus] = useState(false);
    const [showPass, setShowPass] = useState(false);
+   const [showMenu, setShowMenu] = useState(false);
    // const [tags, setTags] = useState<string[]>([]);
+   const [selectedItem, setSelectedItem] = useState(0);
    const renderEye = () => (showPass ? icons.eyeClose : icons.eye);
    const renderType = () => {
       if (!props.showEye) {
@@ -34,6 +38,12 @@ const Input: React.FC<CustomInputProps> = (props) => {
       } else {
          return showPass ? "text" : "password";
       }
+   };
+   const onBlurOnInput = () => {
+      setFocus(false);
+      setTimeout(() => {
+         setShowMenu(false);
+      }, 200);
    };
    const renderInputBase = () => {
       const tags = props.tags ? props.value.split(":") : [];
@@ -63,8 +73,11 @@ const Input: React.FC<CustomInputProps> = (props) => {
                   props.onChange(onChangeValue);
                }}
                type={renderType()}
-               onFocus={() => setFocus(true)}
-               onBlur={() => setFocus(false)}
+               onFocus={() => {
+                  setFocus(true);
+                  setShowMenu(true);
+               }}
+               onBlur={onBlurOnInput}
                placeholder={props.placeholder}
                autoComplete="off"
             />
@@ -113,10 +126,14 @@ const Input: React.FC<CustomInputProps> = (props) => {
          </>
       );
    };
+   const itemsToShow =
+      props.options?.filter((x) =>
+         x.toLowerCase().includes(props.value.toLowerCase())
+      ) || [];
 
    return (
       <div
-         className={classNames("input-wrapper input-primary", {
+         className={classNames("input-wrapper input-primary relative", {
             "input-error": props.state?.type === "error",
             "input-primary": props.state === undefined,
             "input-warn": props.state?.type === "warn",
@@ -143,6 +160,21 @@ const Input: React.FC<CustomInputProps> = (props) => {
             </div>
          ) : (
             renderInputBase()
+         )}
+
+         {props.options ? (
+            <SelectMenu
+               items={itemsToShow}
+               open={showMenu}
+               onItemSelect={(item) => {
+                  console.log("On item select called", item);
+                  props.onChange(item);
+               }}
+               selectedItem={selectedItem}
+            ></SelectMenu>
+         ) : null}
+         {props.state?.text && (
+            <div className="text-sm helper-text">{props.state?.text}</div>
          )}
          {props.state?.text && (
             <div className="text-sm helper-text">{props.state?.text}</div>

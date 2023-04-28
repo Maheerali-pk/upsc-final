@@ -9,6 +9,103 @@
 * {
    box-sizing: border-box;
 }
+.react-datepicker__header {
+   background-color: white !important;
+   border-bottom: none !important;
+   padding: 0 !important;
+   margin-bottom: 1.075rem !important;
+}
+.react-datepicker__day-names {
+   font-size: theme("fontSize.sm") !important;
+   font-weight: 500 !important;
+   color: theme("colors.gray.700") !important;
+   margin-top: theme("margin[5.5]") !important;
+}
+.react-datepicker__month-container {
+   padding: 1.25rem 1.5rem;
+}
+.react-datepicker__day-name {
+   font-size: theme("fontSize.sm") !important;
+   font-weight: 500 !important;
+   color: theme("colors.gray.700") !important;
+   margin-top: theme("margin[5.5]") !important;
+   width: theme("width.10") !important;
+}
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__day--keyboard-selected:hover {
+   background-color: theme("colors.gray.100") !important;
+   color: theme("colors.gray.700") !important;
+   font-weight: 500 !important;
+   border: none !important;
+   outline: none !important;
+}
+.react-datepicker__day--today {
+   position: relative !important;
+   font-weight: normal !important;
+}
+.react-datepicker__day--today::after {
+   content: "";
+   display: block;
+   position: absolute;
+   height: 5px;
+   width: 5px;
+   background-color: theme("colors.primary.400") !important;
+   border-radius: 100% !important;
+   bottom: 10% !important;
+   left: 50%;
+   transform: translate(-50%, 0) !important;
+}
+.datepicker-custom-wrapper {
+}
+.react-datepicker-popper {
+   box-shadow: 0px 20px 24px -4px rgba(16, 24, 40, 0.08),
+      0px 8px 8px -4px rgba(16, 24, 40, 0.03);
+   border: 1px solid theme("colors.gray.100");
+   border-radius: theme("borderRadius.lg");
+   overflow: hidden;
+}
+.react-datepicker__month-container {
+   background-color: white;
+}
+.react-datepicker__month {
+   margin: 0 !important;
+}
+.react-datepicker__day {
+   height: theme("height.10") !important;
+   width: theme("width.10") !important;
+   display: inline-flex !important;
+   align-items: center;
+   justify-content: center;
+   border-radius: 100% !important;
+   user-select: none;
+}
+.react-datepicker__day:hover {
+   background-color: theme("colors.gray.50") !important;
+}
+.react-datepicker__day--selected {
+   background-color: theme("colors.primary.400") !important;
+   color: white !important;
+   font-weight: 500 !important;
+}
+.react-datepicker__day--selected:hover {
+   background-color: theme("colors.primary.400") !important;
+   color: white !important;
+   font-weight: 500 !important;
+}
+
+.react-datepicker {
+   font-family: "Inter" !important;
+   padding: 1.25rem 1.5rem !important;
+}
+.react-datepicker__current-month {
+   color: theme("colors.gray.700") !important;
+   font-size: 1rem !important;
+   font-family: "Inter" !important;
+   font-weight: 600 !important;
+}
+.items-start {
+   align-items: flex-start !important;
+}
 @layer components {
    input[type="checkbox"] {
       color: theme("colors.primary.400");
@@ -187,8 +284,11 @@
       @apply md:w-90 w-full;
    }
    .input-wrapper {
-      @apply flex flex-col w-full;
-      gap: 6px;
+      @apply gap-0.5 flex flex-col w-full;
+   }
+
+   .input-with-tags {
+      @apply gap-4;
    }
    .inputs-y {
       @apply flex-col flex gap-5 w-full;
@@ -301,6 +401,7 @@
       @apply py-10 border-b border-gray-200;
    }
 }
+
 @font-face {
    font-family: Inter;
    src: url("/fonts/Inter/Inter-Regular.ttf") format("truetype");
