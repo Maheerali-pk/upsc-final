@@ -14,6 +14,11 @@ interface NavbarProps {
 const NavbarBase: React.FC<NavbarProps> = (props) => {
    const [open, setOpen] = useState(false);
    const router = useRouter();
+   const logout = () => {
+      localStorage.removeItem("loggedin");
+      localStorage.removeItem("auth-token");
+      router.push(routes.login);
+   };
    return (
       <div className="h-18 md:h-20 flex items-center px-4 lg:px-28 border-b border-b-gray-100 justify-between w-full">
          <div className="gap-10 flex w-full items-center">
@@ -28,6 +33,9 @@ const NavbarBase: React.FC<NavbarProps> = (props) => {
             </div>
          </div>
          {props.rightContent || null}
+         <button className="btn btn-primary btn-sm w-fit" onClick={logout}>
+            Logout
+         </button>
 
          <div
             className="cursor-pointer flex items-center md:hidden"

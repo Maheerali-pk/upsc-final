@@ -176,9 +176,9 @@ const Input: React.FC<CustomInputProps> = (props) => {
          {props.state?.text && (
             <div className="text-sm helper-text">{props.state?.text}</div>
          )}
-         {props.state?.text && (
+         {/* {props.state?.text && (
             <div className="text-sm helper-text">{props.state?.text}</div>
-         )}
+         )} */}
       </div>
    );
 };

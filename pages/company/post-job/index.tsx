@@ -23,6 +23,7 @@ import {
 import { useGlobalContext } from "../../../contexts/GlobalContext";
 import { useRouter } from "next/router";
 import { routes } from "../../../utils/utils";
+import PrivateRoute from "../../../components/PrivateRoute";
 
 interface DashboardProps {}
 
@@ -121,7 +122,7 @@ const PostJobContent: React.FC<DashboardProps> = () => {
    }
 
    return (
-      <>
+      <PrivateRoute purpose="COMPANY">
          <Head>
             <title>Create Next App</title>
             <link rel="icon" href="/favicon.ico" />
@@ -292,7 +293,7 @@ const PostJobContent: React.FC<DashboardProps> = () => {
             disableNext={disableNext()}
             onClickOnNext={() => setPage(1)}
          ></ProfileSetupFooter>
-      </>
+      </PrivateRoute>
    );
 };
 

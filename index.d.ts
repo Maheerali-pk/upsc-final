@@ -227,6 +227,7 @@ interface cy {
    state: State;
 }
 
+type IAccountPurpose = "CANDIDATE" | "COMPANY";
 type IJobLocation = "OFFICE" | "REMOTE" | "FLEXIBLE" | "";
 type IStipendType = "FIXED" | "NEGOTIABLE" | "FREELACE_BASED" | "";
 type IJobDuration = "FT" | "PT" | "FR" | "";

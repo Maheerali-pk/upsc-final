@@ -6,18 +6,19 @@ interface IGlobalState {
    dialog?: React.FC<any>;
    loading: boolean;
    error: { title: string; message: string };
+   user: IUser | null;
    email: string;
 }
 
 export interface IUser {
-   name: string;
-   image: string;
+   purpose: IAccountPurpose;
 }
 
 const initialState: IGlobalState = {
    loading: false,
    error: { title: "", message: "" },
    email: "",
+   user: null,
 };
 
 const functions = {

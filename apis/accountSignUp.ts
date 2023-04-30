@@ -4,7 +4,7 @@ import { customFetch } from "../utils/helpers";
 interface AccountSignUpBody {
    email: string;
    password: string;
-   purpose: "CANDIDATE" | "COMPANY";
+   purpose: IAccountPurpose;
    phoneNum?: string;
    name: { firstName: string; lastName: string };
 }

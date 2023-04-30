@@ -65,12 +65,15 @@ const LoginComponent: React.FC = () => {
             console.log("my data", data);
             if (data) {
                router.push("/company/dashboard");
+
+               localStorage.setItem("loggedin", "true");
                dispatch({ setState: { loading: false } });
             } else {
                getCandidateProfile().then((data) => {
                   console.log("my data 2", data);
                   if (data) {
                      router.push("/student/dashboard");
+                     localStorage.setItem("loggedin", "true");
                      dispatch({ setState: { loading: false } });
                   }
                });
