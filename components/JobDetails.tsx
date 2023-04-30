@@ -12,6 +12,12 @@ const minQualificationToTextObject: { [k in IJobQualification]: string } = {
    MAIN: "Candidates who have qualified for mains",
    NONE: "Not any qualification required",
 };
+const stipendTypeToTextObject: { [k in IStipendType]: string } = {
+   "": "",
+   FIXED: "Fixed stipend",
+   FREELACE_BASED: "Freelance based stipend",
+   NEGOTIABLE: "Negotiable stipend: ",
+};
 
 const JobDetails: React.FC<IJobDetailsProps> = ({
    details,
@@ -70,25 +76,22 @@ const JobDetails: React.FC<IJobDetailsProps> = ({
                </div>
             ) : null}
             <div className="flex gap-2 items-center">
-               <div className="text-gray-500">Years of experience</div>
-               <div className="text-gray-800">{details.workExpYears}</div>
+               <div className="text-gray-500">Years of experience: </div>
+               <div className="text-gray-800">{details.workExp}</div>
             </div>
          </div>
          <div className="gap-4 flex flex-col pb-4 ">
             <div className="text-gray-900 text-xl font-semibold">
                Stipend & Perks
             </div>
+
             <div className="flex gap-2 items-center">
-               <div className="text-gray-500">Fixed stipend:</div>
-               <div className="text-gray-800">
-                  Candidates who have {details.minQualification}
+               <div className="text-gray-500">
+                  {stipendTypeToTextObject[details.stipendType]}
                </div>
+               <div className="text-gray-800 font-medium">₹{stipend}</div>
             </div>
-            <div className="flex gap-2 items-center">
-               <div className="text-gray-500">Fixed stipend</div>
-               <div className="text-gray-800">{stipend}</div>
-            </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
                <div className="text-gray-500">Language:</div>
                {details.perks.map((x) => (
                   <div className="bg-blue-50 text-blue-700 px-2.5 py-0.5 rounded-3xl">

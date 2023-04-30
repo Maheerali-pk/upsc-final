@@ -46,7 +46,7 @@ const PostJobPage2: React.FC<PostJobPage2Props> = ({
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <CompanyNavbar selectedItem={2}></CompanyNavbar>
-         <div className="pt-14 pb-10 md:pb-60">
+         <div className="pt-14 md:pb-60 pb-28 px-4">
             <div className="md:w-150 w-full mx-auto flex flex-col">
                <div className="flex flex-col gap-10 mt-12">
                   <div className="flex flex-col gap-4">

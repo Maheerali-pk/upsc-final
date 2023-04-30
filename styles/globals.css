@@ -395,7 +395,7 @@
    }
 
    .setup-wrapper {
-      @apply flex flex-col pb-10 mt-6 md:pb-60  md:mt-18  px-4 md:px-0 max-w-[600px] m-auto;
+      @apply flex flex-col mt-6 md:pb-60 pb-28  md:mt-18  px-4 md:px-0 max-w-[600px] m-auto;
    }
    .student-profile-setup-item {
       @apply py-10 border-b border-gray-200;

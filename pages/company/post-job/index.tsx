@@ -127,7 +127,7 @@ const PostJobContent: React.FC<DashboardProps> = () => {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <CompanyNavbar selectedItem={2}></CompanyNavbar>
-         <div className="pt-14 pb-10 md:pb-60">
+         <div className="pt-14 md:pb-60 pb-28 px-4">
             <div className="md:w-150 w-full mx-auto flex flex-col">
                {/* Header */}
                <div className="flex flex-col gap-12">

@@ -55,10 +55,10 @@ const JobReviewPage: React.FC<JobReviewPageProps> = ({
          </Head>
          <CompanyNavbar selectedItem={2}></CompanyNavbar>
          <Loader></Loader>
-         <div className="pt-14 pb-10 md:pb-60">
+         <div className="pt-14 md:pb-60 pb-28 px-4">
             <div className="w-full md:w-904 mx-auto flex flex-col">
                {/* Header */}
-               <div className="flex flex-col gap-12 mb-14">
+               <div className="flex flex-col gap-12 md:mb-14 mb-12">
                   <div className="flex flex-col gap-5 items-center  pb-6">
                      {icons.reviewJob}
                      <div className="text-3xl font-semibold text-gray-900">

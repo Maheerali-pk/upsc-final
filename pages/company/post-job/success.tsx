@@ -18,32 +18,6 @@ import ComapnyNavbar from "../../../components/CompanyNavbar";
 
 const SuccessfulJobPostPage: React.FC = () => {
    const router = useRouter();
-   const [state, dispatch] = useGlobalContext();
-   const { inputsData, onSubmit } = useForm<
-      { password: string; confirmPassword: string },
-      {}
-   >({
-      inputs: {
-         password: {
-            value: "",
-            checks: [checks.required.string, checks.password],
-         },
-         confirmPassword: {
-            value: "",
-            checks: [checks.required.string, checks.password],
-         },
-      },
-   });
-   const resetPassword = () => {
-      if (!onSubmit()) {
-         // dispatch({ setState: { email: inputsData.email.value } });
-         dispatch({ setState: { loading: true } });
-         // forgetPassword({ email: inputsData.email.value }).then((res) => {
-         //    setSent(true);
-         // });
-         dispatch({ setState: { loading: false } });
-      }
-   };
 
    return (
       <>

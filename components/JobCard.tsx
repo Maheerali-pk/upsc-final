@@ -61,7 +61,7 @@ const JobCard: React.FC<IJobApplication> = (props) => {
                   {props.workLanguage.join(", ")}
                </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
                <div className="text-gray-500">Skills:</div>
                {props.skillSets.map((x) => (
                   <div className="bg-purple-50 text-purple-700 px-2.5 py-0.5 rounded-3xl">
@@ -69,7 +69,7 @@ const JobCard: React.FC<IJobApplication> = (props) => {
                   </div>
                ))}
             </div>
-            <div className="pt-6 border-t border-gray-200 flex items-center gap-8 ">
+            <div className="pt-6 border-t border-gray-200 grid grid-cols-2 md:flex items-center gap-8">
                <div className="gap-1.5 flex items-center">
                   {icons.jobCard.location}
                   <div className="font-medium text-gray-600">{location}</div>
