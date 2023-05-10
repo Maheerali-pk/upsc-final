@@ -12,6 +12,8 @@ interface IGlobalState {
 
 export interface IUser {
    purpose: IAccountPurpose;
+   name?: string;
+   emai?: string;
 }
 
 const initialState: IGlobalState = {

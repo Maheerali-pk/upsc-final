@@ -22,6 +22,7 @@ export const routes = {
          base: "/company/setup-profile",
          success: "/company/setup-profile/success",
       },
+      editProfile: "/company/edit-profile",
       dashboard: "/company/dashboard",
       postJob: "/company/post-job",
       successfulPostJob: "/company/post-job/success",

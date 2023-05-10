@@ -29,7 +29,6 @@ const Input: React.FC<CustomInputProps> = (props) => {
    const [focus, setFocus] = useState(false);
    const [showPass, setShowPass] = useState(false);
    const [showMenu, setShowMenu] = useState(false);
-   // const [tags, setTags] = useState<string[]>([]);
    const [selectedItem, setSelectedItem] = useState(0);
    const renderEye = () => (showPass ? icons.eyeClose : icons.eye);
    const renderType = () => {

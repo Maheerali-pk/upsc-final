@@ -33,9 +33,6 @@ const NavbarBase: React.FC<NavbarProps> = (props) => {
             </div>
          </div>
          {props.rightContent || null}
-         <button className="btn btn-primary btn-sm w-fit" onClick={logout}>
-            Logout
-         </button>
 
          <div
             className="cursor-pointer flex items-center md:hidden"
