@@ -20,7 +20,7 @@ const ProfileSetupFooter: React.FC<ProfileSetupFooterProps> = ({
    buttonText = "Next",
 }) => {
    return (
-      <div className="w-full flex flex-col   fixed bottom-0 bg-white">
+      <div className="w-full flex flex-col   fixed bottom-0 bg-white z-20">
          <ProgressBar percentage={(stepNo / totalSteps) * 100}></ProgressBar>
          <div className="flex gap-6  md:p-0 p-4 justify-center md:pb-12 md:pt-8">
             {stepNo > 1 ? (

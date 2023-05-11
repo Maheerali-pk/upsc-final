@@ -28,6 +28,7 @@ import Textarea from "../../../components/Textarea";
 import Checkbox from "../../../components/Checkbox";
 import SocialMediaInput from "../../../components/SocialMediaInput";
 import { updateCompanyProfile } from "../../../apis/updateCompanyProfile";
+import PrivateRoute from "../../../components/PrivateRoute";
 
 const CompanyProfileSetup: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
@@ -117,7 +118,7 @@ const CompanyProfileSetup: React.FC = () => {
    };
    console.log("loading", state.loading);
    return (
-      <>
+      <PrivateRoute purpose="COMPANY">
          <Head>
             <title>Create Next App</title>
             <link rel="icon" href="/favicon.ico" />
@@ -244,7 +245,7 @@ const CompanyProfileSetup: React.FC = () => {
                Continue
             </button>
          </div>
-      </>
+      </PrivateRoute>
    );
 };
 

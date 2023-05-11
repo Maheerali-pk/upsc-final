@@ -34,19 +34,21 @@ import ProfileSetupFooter from "../../../components/ProfileSetupFooter";
 import { UpdateStudentProfile } from "../../../apis/updateStudentProfile";
 import NotificationPopup from "../../../components/NotificationPopup";
 import Navbar from "../../../components/Navbar";
+import InputWithTags from "../../../components/InputWithTags";
+import PrivateRoute from "../../../components/PrivateRoute";
 
 const StudentProfileSetup: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
    const router = useRouter();
    const [logoUrl, setLogoUrl] = useState("");
    const [disableNext, setDisableNext] = useState(true);
-   const [showNotification, setShowNotification] = useState(true);
+   const [showNotification, setShowNotification] = useState(false);
    const { inputsData, onSubmit, checkForErrors } = useForm<
       {
          gender: string;
          timeAvail: string[];
          languages: ILanguage[];
-         strongSub: string;
+         strongSub: string[];
          roleType: string;
          roles: string[];
          city: string;
@@ -61,7 +63,7 @@ const StudentProfileSetup: React.FC = () => {
          gender: { value: "", checks: [checks.required.string] },
          timeAvail: { value: [], checks: [checks.required.array] },
          languages: { value: [], checks: [checks.required.array] },
-         strongSub: { value: "" },
+         strongSub: { value: [] },
          roleType: { value: "", checks: [checks.required.string] },
          roles: { value: [] },
          city: { value: "", checks: [checks.required.string] },
@@ -97,7 +99,7 @@ const StudentProfileSetup: React.FC = () => {
                   inputsData.prefferedLocation2.value,
                   inputsData.prefferedLocation3.value,
                ],
-               strongSub: inputsData.strongSub.value,
+               strongSub: inputsData.strongSub.value[0],
             },
             personalInfo: { city: inputsData.city.value },
          });
@@ -133,6 +135,11 @@ const StudentProfileSetup: React.FC = () => {
          // }
       }
    };
+   useEffect(() => {
+      setTimeout(() => {
+         setShowNotification(true);
+      }, 5000);
+   }, []);
    // useEffect(() => {
    //    const error = onSubmit();
    //    console.log("submit error", error);
@@ -142,8 +149,9 @@ const StudentProfileSetup: React.FC = () => {
    //       setDisableNext(true);
    //    }
    // });
+
    return (
-      <>
+      <PrivateRoute purpose="CANDIDATE">
          <Head>
             <title>Create Next App</title>
             <link rel="icon" href="/favicon.ico" />
@@ -225,13 +233,13 @@ const StudentProfileSetup: React.FC = () => {
                         { text: "Open to both", value: "Open to both" },
                      ]}
                   ></RadioGroup>
-                  <Input
+                  <InputWithTags
+                     items={["Hindi", "English", "Social Science", "History"]}
                      {...inputsData.strongSub}
                      label="What are your strong subjects?"
                      labelSubtext="Optional"
-                     tags={true}
                      placeholder="e.g. sociology"
-                  ></Input>
+                  ></InputWithTags>
                   <CheckboxList
                      {...inputsData.roles}
                      label="What academic roles you’re interested in"
@@ -289,12 +297,12 @@ const StudentProfileSetup: React.FC = () => {
                            placeholder="Select preference 1"
                         ></Input>
                         <Input
-                           {...inputsData.prefferedLocation1}
-                           placeholder="Select preference 1"
+                           {...inputsData.prefferedLocation2}
+                           placeholder="Select preference 2"
                         ></Input>
                         <Input
-                           {...inputsData.prefferedLocation1}
-                           placeholder="Select preference 1"
+                           {...inputsData.prefferedLocation3}
+                           placeholder="Select preference 3"
                         ></Input>
                      </div>
                   </div>
@@ -306,7 +314,7 @@ const StudentProfileSetup: React.FC = () => {
             onClickOnNext={onClickOnNext}
             disableNext={disableNext}
          ></ProfileSetupFooter>
-      </>
+      </PrivateRoute>
    );
 };
 

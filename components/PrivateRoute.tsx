@@ -23,6 +23,10 @@ const PrivateRoute: React.FC<AuthenticatedRouteProps> = ({
       if (!state.user) {
          if (localStorage.getItem("loggedin") === "true") {
             verifyToken({ purpose }).then((res) => {
+               if (res.status === 401) {
+                  router.push(routes.login);
+                  return;
+               }
                if (res.verified) {
                   dispatch({ setState: { user: { purpose } } });
                }

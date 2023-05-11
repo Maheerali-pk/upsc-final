@@ -93,7 +93,7 @@ const InputWithTags: React.FC<CustomInputProps> = (props) => {
       return (
          <>
             {props.value.length ? (
-               <div className="flex gap-2 mb-4 mt-4 flex-wrap">
+               <div className="flex gap-2 flex-wrap">
                   {props.value.map((tag) => (
                      <InputTag
                         key={tag}
