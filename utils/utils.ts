@@ -26,6 +26,7 @@ export const routes = {
       dashboard: "/company/dashboard",
       postJob: "/company/post-job",
       successfulPostJob: "/company/post-job/success",
+      jobDetails: (id: string) => `/company/job-details/${id}`,
    },
 
    student: {

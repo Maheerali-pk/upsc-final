@@ -290,3 +290,11 @@ interface ICompanyDetails {
    type: string;
    updatedAt: string;
 }
+type IJobStatus = "UNDER_REVIEW" | "HOLD" | "OPEN" | "CLOSED";
+interface IJobPostMini {
+   _id: string;
+   position: string;
+   status: IJobStatus;
+   createdAt: string;
+   applications: number;
+}

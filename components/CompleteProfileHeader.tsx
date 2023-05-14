@@ -2,14 +2,16 @@ import { icons } from "../utils/helpers";
 import ProgressBar from "./ProgressBar";
 
 interface CompleteProfileHeaderProps {
-   completePercentage: number;
+   totalSteps: number;
+   completedSteps: number;
 }
 
 const CompleteProfileHeader: React.FC<CompleteProfileHeaderProps> = ({
-   completePercentage,
+   totalSteps,
+   completedSteps,
 }) => {
    return (
-      <div className="py-8 px-28 bg-white">
+      <div className="bg-white">
          <div className="gap-8 rounded-2xl py-6 px-8 flex flex-col border-gray-300 border">
             <div className="flex justify-between w-full items-center">
                <div className="flex gap-4">
@@ -34,7 +36,7 @@ const CompleteProfileHeader: React.FC<CompleteProfileHeaderProps> = ({
             <div className="flex gap-6 items-center">
                <ProgressBar percentage={56}></ProgressBar>
                <div className="text-gray-600 whitespace-nowrap">
-                  {completePercentage} % completed
+                  {completedSteps}/{totalSteps} steps remaining
                </div>
             </div>
          </div>

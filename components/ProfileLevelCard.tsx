@@ -4,9 +4,10 @@ import { icons } from "../utils/helpers";
 
 interface ProfileLevelCardProps {
    completedPercentage: number;
+   items: IProfileLevelCardItem[];
 }
 
-interface IProfileLevelCardItem {
+export interface IProfileLevelCardItem {
    icon: JSX.Element;
    text: string;
    url: string;
@@ -28,40 +29,6 @@ const ProfileLevelCardItem: React.FC<IProfileLevelCardItem> = (props) => {
    );
 };
 
-const items: IProfileLevelCardItem[] = [
-   {
-      icon: icons.profileLevelCardIcons.skills,
-      text: "Add your skills",
-      url: "/update-profile/skills",
-   },
-   {
-      icon: icons.profileLevelCardIcons.markSheets,
-      text: "Upload your marksheets",
-      url: "/update-profile/marksheets",
-   },
-   {
-      icon: icons.profileLevelCardIcons.addBio,
-      text: "Add a bio",
-      url: "/update-profile/bio",
-   },
-   {
-      icon: icons.profileLevelCardIcons.uploadImage,
-      text: "Upload a profile picture",
-      url: "/update-profile/profile-picture",
-   },
-   {
-      icon: icons.profileLevelCardIcons.addEdutcation,
-      text: "Add your education",
-      url: "/update-profile/education",
-   },
-   {
-      icon: icons.profileLevelCardIcons.addAchievements,
-      text: "Add achievements",
-      url: "/update-profile/achievements",
-      isLast: true,
-   },
-];
-
 const ProfileLevelCard: React.FC<ProfileLevelCardProps> = (props) => {
    return (
       <div className="flex flex-col rounded-xl gap-3 pt-6 border-gray-200 border bg-white">
@@ -78,7 +45,7 @@ const ProfileLevelCard: React.FC<ProfileLevelCardProps> = (props) => {
                Fill in more details to boost your chances of getting hired:
             </div>
          </div>
-         {items.map((x) => (
+         {props.items.map((x) => (
             <ProfileLevelCardItem {...x}></ProfileLevelCardItem>
          ))}
       </div>

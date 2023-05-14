@@ -28,7 +28,7 @@ const items: IProfileLevelCardItem[] = [
       url: "/update-profile/skills",
    },
 ];
-const HomeContent: React.FC<DashboardProps> = () => {
+const AllJobPostsContent: React.FC<DashboardProps> = () => {
    const [posts, setPosts] = useState<IJobPostMini[]>([]);
    React.useEffect(() => {
       getJobPostsList().then((res) => {
@@ -79,7 +79,7 @@ const HomeContent: React.FC<DashboardProps> = () => {
    );
 };
 
-const Home: React.FC<DashboardProps> = () => {
-   return <PageWrapper Component={HomeContent}></PageWrapper>;
+const AllJobPosts: React.FC<DashboardProps> = () => {
+   return <PageWrapper Component={AllJobPostsContent}></PageWrapper>;
 };
-export default Home;
+export default AllJobPosts;
