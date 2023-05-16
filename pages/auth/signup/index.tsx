@@ -2,11 +2,8 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import Navbar from "../../../components/NavbarBase";
-import {
-   GlobalContextProvider,
-   useGlobalContext,
-} from "../../../contexts/GlobalContext";
+import Navbar from "../../../components/Navbar";
+import { GlobalContextProvider, useGlobalContext } from "../../../contexts/GlobalContext";
 import { icons } from "../../../utils/helpers";
 import * as React from "react";
 import { useEffect } from "react";
@@ -32,9 +29,7 @@ const SignupComponent: React.FC = () => {
          </Head>
          <Navbar></Navbar>
          <div className="flex flex-col px-4 md:px-0 pt-12 md:pt-28 items-center md:w-200 mx-auto">
-            <div className="font-semibold text-2xl md:text-3xl mb-8 md:mb-16">
-               How can we help you?
-            </div>
+            <div className="font-semibold text-2xl md:text-3xl mb-8 md:mb-16">How can we help you?</div>
             <CustomRadioGroup
                items={[
                   {
@@ -61,9 +56,7 @@ const SignupComponent: React.FC = () => {
                data-testid="signin-get-started"
                disabled={signupType === ""}
                onClick={onSubmit}
-               className={classNames(
-                  "btn btn-primary btn-lg md:w-90 w-full md:mt-16 mt-8 mb-6"
-               )}
+               className={classNames("btn btn-primary btn-lg md:w-90 w-full md:mt-16 mt-8 mb-6")}
             >
                Get Started
             </button>

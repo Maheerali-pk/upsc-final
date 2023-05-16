@@ -2,11 +2,8 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import Navbar from "../../../components/NavbarBase";
-import {
-   GlobalContextProvider,
-   useGlobalContext,
-} from "../../../contexts/GlobalContext";
+import Navbar from "../../../components/Navbar";
+import { GlobalContextProvider, useGlobalContext } from "../../../contexts/GlobalContext";
 import { icons } from "../../../utils/helpers";
 import * as React from "react";
 import { useEffect } from "react";
@@ -64,11 +61,7 @@ const SignupStudent: React.FC = () => {
                className="min-h-full justify-center px-4 md:px-20"
             ></SignupForm>
             <div className="bg-black w-full h-full md:flex hidden">
-               <img
-                  src="/images/signup-student.png"
-                  className="object-cover w-full h-screen"
-                  alt=""
-               />
+               <img src="/images/signup-student.png" className="object-cover w-full h-screen" alt="" />
             </div>
          </div>
       </>

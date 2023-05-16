@@ -9,16 +9,9 @@ interface UserSettingDropdownItemProps {
    icon: JSX.Element;
    onClick: () => void;
 }
-const UserSettingDropdownItem: React.FC<UserSettingDropdownItemProps> = ({
-   text,
-   icon,
-   onClick,
-}) => {
+const UserSettingDropdownItem: React.FC<UserSettingDropdownItemProps> = ({ text, icon, onClick }) => {
    return (
-      <div
-         className="hover:bg-gray-50 p-2.5 flex items-center gap-3"
-         onClick={onClick}
-      >
+      <div className="hover:bg-gray-50 p-2.5 flex items-center gap-3" onClick={onClick}>
          {icon}
          <div className="text-sm font-medium text-gray-700">{text}</div>
       </div>
@@ -56,14 +49,12 @@ const UserSettingsDropdown: React.FC<UserSettingsPopupProps> = () => {
       },
    ];
    return (
-      <div className="flex flex-col rounded-lg border border-gray-200 shadow-lg -bottom-6 right-0 translate-y-full  absolute bg-white w-60">
+      <div className="flex flex-col z-10 rounded-lg border border-gray-200 shadow-lg -bottom-6 right-0 translate-y-full  absolute bg-white w-60">
          <div className="flex px-4 py-3 border-b border-gray-200">
             <div className="flex items-center gap-3">
                {icons.settingsDropdown.loggedInUser}
                <div className="flex flex-col">
-                  <div className="text-gray-700 text-sm font-semibold">
-                     User name
-                  </div>
+                  <div className="text-gray-700 text-sm font-semibold">User name</div>
                   <div className="text-gray-600 text-sm">test@gmail.com</div>
                </div>
             </div>
@@ -73,9 +64,7 @@ const UserSettingsDropdown: React.FC<UserSettingsPopupProps> = () => {
                <UserSettingDropdownItem {...item}></UserSettingDropdownItem>
             ))}
             <div className="flex flex-col rounded-lg border border-gray-200 py-4 px-3 gap-2 my-3">
-               <div className="text-gray-700 font-medium">
-                  Profile level: 56%
-               </div>
+               <div className="text-gray-700 font-medium">Profile level: 56%</div>
                <ProgressBar percentage={56}></ProgressBar>
                <div className="text-gray-500  text-xs whitespace-normal">
                   Fill in more details to boost your chances of getting hired

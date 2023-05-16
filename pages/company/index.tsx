@@ -6,9 +6,7 @@ import PageWrapper from "../../components/PageWrapper";
 import CompanyNavbar from "../../components/CompanyNavbar";
 import PrivateRoute from "../../components/PrivateRoute";
 import CompleteProfileHeader from "../../components/CompleteProfileHeader";
-import ProfileLevelCard, {
-   IProfileLevelCardItem,
-} from "../../components/ProfileLevelCard";
+import ProfileLevelCard, { IProfileLevelCardItem } from "../../components/ProfileLevelCard";
 import { icons } from "../../utils/helpers";
 import RecentPostsTable from "../../components/RecentPostsTable";
 import { getJobPostsList } from "../../apis/getJobPostsList";
@@ -43,35 +41,19 @@ const HomeContent: React.FC<DashboardProps> = () => {
          </Head>
          <CompanyNavbar selectedItem={0}></CompanyNavbar>
          <div className="flex flex-col px-28 py-8 gap-14">
-            <CompleteProfileHeader
-               totalSteps={5}
-               completedSteps={3}
-            ></CompleteProfileHeader>
+            <CompleteProfileHeader totalSteps={5} completedSteps={3}></CompleteProfileHeader>
             <div className="grid grid-cols-[auto_18rem] w-full gap-8">
                <div className="flex flex-col gap-8 ">
                   <div className="flex items-center justify-between w-full gap-2">
-                     <div className="text-gray-900 font-semibold text-3xl">
-                        Recent Posts
-                     </div>
-                     <button className="btn btn-md btn-primary w-fit">
-                        View all posts
-                     </button>
+                     <div className="text-gray-900 font-semibold text-3xl">Recent Posts</div>
+                     <button className="btn btn-md btn-primary w-fit">View all posts</button>
                   </div>
-                  <RecentPostsTable
-                     posts={posts.slice(0, 3)}
-                  ></RecentPostsTable>
+                  <RecentPostsTable posts={posts?.slice(0, 3)}></RecentPostsTable>
                   <HowToWorkWithTalent></HowToWorkWithTalent>
                </div>
                <div className="flex flex-col gap-8 ">
-                  <ProfileLevelCard
-                     items={items}
-                     completedPercentage={56}
-                  ></ProfileLevelCard>
-                  <img
-                     src="/images/ad-image.png"
-                     className="rounded-2xl"
-                     alt=""
-                  />
+                  <ProfileLevelCard items={items} completedPercentage={56}></ProfileLevelCard>
+                  <img src="/images/ad-image.png" className="rounded-2xl" alt="" />
                </div>
             </div>
          </div>

@@ -3,6 +3,7 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import { routes } from "../utils/utils";
 import { icons } from "../utils/helpers";
+console.log("hello")
 
 interface RecentPostsTableProps {
    posts: IJobPostMini[];

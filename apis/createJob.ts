@@ -35,9 +35,7 @@ export interface CreateJobBody {
    questions: string[];
 }
 
-export function convertJobApplicationToOpportunity(
-   application: IJobApplication
-): CreateJobBody {
+export function convertJobApplicationToOpportunity(application: IJobApplication): CreateJobBody {
    const opportunity: CreateJobBody = {
       opportunityType: application.opportunityType,
       position: application.position,
@@ -64,9 +62,7 @@ export function convertJobApplicationToOpportunity(
             years: parseInt(application.workExp, 10),
          },
          isMainsRequired: application.minQualification === "MAIN",
-         isInterviewRequired:
-            application.minQualification === "INTERVIEW" ||
-            application.minQualification === "MAIN",
+         isInterviewRequired: application.minQualification === "INTERVIEW" || application.minQualification === "MAIN",
       },
       openings: parseInt(application.openings, 10),
       perks: application.perks,
@@ -82,7 +78,7 @@ export function convertJobApplicationToOpportunity(
 export const createJob = (data: CreateJobBody) => {
    return customFetch<any>({
       method: "POST",
-      path: "job/create-job",
+      path: "job/company/create-job",
       data,
    });
 };

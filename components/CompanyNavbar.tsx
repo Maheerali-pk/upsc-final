@@ -10,7 +10,7 @@ interface NavbarProps {
 }
 
 const navbarItems: INavbarItem[] = [
-   { text: "Home", url: "/", icon: icons.home },
+   { text: "Home", url: "/company/", icon: icons.home },
    { text: "Dashbaord", url: "/company/dashboard", icon: icons.home },
    {
       text: "Post a job",
@@ -21,8 +21,7 @@ const navbarItems: INavbarItem[] = [
 ];
 const Navbar: React.FC<NavbarProps> = (props) => {
    const router = useRouter();
-   const [userSettingsDropdownOpen, setUserSettingsDropdownOpen] =
-      useState(false);
+   const [userSettingsDropdownOpen, setUserSettingsDropdownOpen] = useState(false);
    const onClickOnUserProfileIcon = () => {
       setUserSettingsDropdownOpen(!userSettingsDropdownOpen);
    };
@@ -30,8 +29,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
    useEffect(() => {
       if (userSettingsDropdownOpen) {
          const onClickOutside = (e: MouseEvent) => {
-            if (!userSettingsIconRef.current?.contains(e.target as HTMLElement))
-               setUserSettingsDropdownOpen(false);
+            if (!userSettingsIconRef.current?.contains(e.target as HTMLElement)) setUserSettingsDropdownOpen(false);
          };
          window.addEventListener("click", onClickOutside);
          return () => {
@@ -43,9 +41,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
       <div className="gap-4 hidden md:flex whitespace-nowrap items-center">
          <div>{icons.nofitficationWithDot}</div>
          <div
-            onClick={() =>
-               setUserSettingsDropdownOpen(!userSettingsDropdownOpen)
-            }
+            onClick={() => setUserSettingsDropdownOpen(!userSettingsDropdownOpen)}
             className="relative w-10 h-10 cursor-pointer"
             ref={userSettingsIconRef}
          >
@@ -53,19 +49,11 @@ const Navbar: React.FC<NavbarProps> = (props) => {
                src="/images/company-logo.png"
                className="rounded-full border-gray-200 border h-10 w-10 object-contain p-1"
             ></img>
-            {userSettingsDropdownOpen && (
-               <UserSettingsDropdown></UserSettingsDropdown>
-            )}
+            {userSettingsDropdownOpen && <UserSettingsDropdown></UserSettingsDropdown>}
          </div>
       </div>
    );
-   return (
-      <NavbarBase
-         selected={props.selectedItem}
-         items={navbarItems}
-         rightContent={rightContent}
-      />
-   );
+   return <NavbarBase selected={props.selectedItem} items={navbarItems} rightContent={rightContent} />;
 };
 
 export default Navbar;
