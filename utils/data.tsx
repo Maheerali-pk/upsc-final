@@ -13,6 +13,13 @@ export const monthsArray = [
    { value: "December", text: "December" },
 ];
 
+export const jobStatusToText: { [key in IJobStatus]: string } = {
+   CLOSED: "Closed",
+   HOLD: "On Hold",
+   OPEN: "Active",
+   UNDER_REVIEW: "Under Review",
+};
+
 const yearsArrayInit = [];
 for (let year = 1970; year <= 2023; year++) {
    const yearString = year.toString();

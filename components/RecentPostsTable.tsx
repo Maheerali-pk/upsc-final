@@ -3,18 +3,13 @@ import moment from "moment";
 import { useRouter } from "next/router";
 import { routes } from "../utils/utils";
 import { icons } from "../utils/helpers";
+import { jobStatusToText } from "../utils/data";
+import JobStatusBadge from "./JobStatusBadge";
 console.log("hello")
 
 interface RecentPostsTableProps {
    posts: IJobPostMini[];
 }
-
-const jobStatusToText: { [key in IJobStatus]: string } = {
-   CLOSED: "Closed",
-   HOLD: "On Hold",
-   OPEN: "Active",
-   UNDER_REVIEW: "Under Review",
-};
 
 const RecentPostsTable: React.FC<RecentPostsTableProps> = (props) => {
    const router = useRouter();
@@ -63,21 +58,7 @@ const RecentPostsTable: React.FC<RecentPostsTableProps> = (props) => {
                   {post.position}
                </div>
                <div className="flex items-center justify-center">
-                  <div
-                     className={classNames(
-                        "flex justify-center items-center rounded-2xl py-0.5 w-28 font-medium text-xs",
-                        {
-                           "text-secondary-700": post.status === "UNDER_REVIEW",
-                           "bg-secondary-50": post.status === "UNDER_REVIEW",
-                           "text-error-700": post.status === "HOLD",
-                           "bg-error-50": post.status === "HOLD",
-                           "text-success-700": post.status === "OPEN",
-                           "bg-success-50": post.status === "OPEN",
-                        }
-                     )}
-                  >
-                     {jobStatusToText[post.status]}
-                  </div>
+                  <JobStatusBadge status={post.status}></JobStatusBadge>
                </div>
                <div className="text-center text-gray-600 text-sm">
                   {post.applications}
