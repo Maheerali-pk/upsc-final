@@ -8,6 +8,7 @@ import Select from "../../components/Select";
 import { useEffect, useState } from "react";
 import AllJobPostsTable from "../../components/AllJobPostsTable";
 import { getJobPostsList } from "../../apis/getJobPostsList";
+import DateInputRange from "../../components/DateInputRange";
 
 interface DashboardProps {}
 
@@ -22,7 +23,13 @@ const jobTypeSelectOptions: ISelectOption<IJobStatus | "ALL">[] = [
 const DashboardContent: React.FC<DashboardProps> = () => {
    const [jobType, setJobType] = useState<IJobStatus | "ALL">("ALL");
    const [posts, setPosts] = useState<IJobPostMini[]>([]);
-
+   const [startDate, setStartDate] = useState<Date | null>(null);
+   const [endDate, setEndDate] = useState<Date | null>(null);
+   const onChange = (dates: [Date | null, Date | null]) => {
+      const [start, end] = dates;
+      setStartDate(start);
+      setEndDate(end);
+   };
    useEffect(() => {
       getJobPostsList().then((res) => {
          setPosts(res.docs);
@@ -52,7 +59,12 @@ const DashboardContent: React.FC<DashboardProps> = () => {
                      ></Input>
                   </div>
                   <div className="flex gap-3 items-center">
-                     Active
+                     <DateInputRange
+                        showFooter
+                        endDate={endDate}
+                        startDate={startDate}
+                        onChange={onChange}
+                     ></DateInputRange>
                      <div className="w-40">
                         <Select
                            options={jobTypeSelectOptions}
