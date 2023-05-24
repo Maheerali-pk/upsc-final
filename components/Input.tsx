@@ -23,6 +23,7 @@ interface CustomInputProps {
 
    options?: string[];
    startText?: string | JSX.Element;
+   className?: string;
 }
 
 const Input: React.FC<CustomInputProps> = (props) => {
@@ -80,10 +81,7 @@ const Input: React.FC<CustomInputProps> = (props) => {
                placeholder={props.placeholder}
                autoComplete="off"
             />
-            <div
-               onClick={() => setShowPass(!showPass)}
-               className="cursor-pointer"
-            >
+            <div onClick={() => setShowPass(!showPass)} className="cursor-pointer">
                {props.showEye && renderEye()}
             </div>
 
@@ -103,9 +101,7 @@ const Input: React.FC<CustomInputProps> = (props) => {
                      .filter((x) => x.trim())
                      .map((tag) => (
                         <div className="flex gap-1 rounded-3xl bg-gray-100 items-center py-0.5 px-2">
-                           <div className="font-medium text-sm text-gray-700">
-                              {tag}
-                           </div>
+                           <div className="font-medium text-sm text-gray-700">{tag}</div>
                            <div
                               onClick={() =>
                                  props.onChange(
@@ -125,14 +121,11 @@ const Input: React.FC<CustomInputProps> = (props) => {
          </>
       );
    };
-   const itemsToShow =
-      props.options?.filter((x) =>
-         x.toLowerCase().includes(props.value.toLowerCase())
-      ) || [];
+   const itemsToShow = props.options?.filter((x) => x.toLowerCase().includes(props.value.toLowerCase())) || [];
 
    return (
       <div
-         className={classNames("input-wrapper input-primary relative", {
+         className={classNames("input-wrapper input-primary relative " + (props.className || ""), {
             "input-error": props.state?.type === "error",
             "input-primary": props.state === undefined,
             "input-warn": props.state?.type === "warn",
@@ -142,11 +135,7 @@ const Input: React.FC<CustomInputProps> = (props) => {
          {props.label && (
             <div className="text-sm text-gray-700 font-medium">
                {props.label}{" "}
-               {props.labelSubtext ? (
-                  <span className="text-gray-400 font-normal">
-                     ({props.labelSubtext})
-                  </span>
-               ) : null}
+               {props.labelSubtext ? <span className="text-gray-400 font-normal">({props.labelSubtext})</span> : null}
             </div>
          )}
          {props.tags && renderTags()}
@@ -172,9 +161,7 @@ const Input: React.FC<CustomInputProps> = (props) => {
                selectedItem={selectedItem}
             ></SelectMenu>
          ) : null}
-         {props.state?.text && (
-            <div className="text-sm helper-text">{props.state?.text}</div>
-         )}
+         {props.state?.text && <div className="text-sm helper-text">{props.state?.text}</div>}
          {/* {props.state?.text && (
             <div className="text-sm helper-text">{props.state?.text}</div>
          )} */}

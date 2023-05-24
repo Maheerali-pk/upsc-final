@@ -12,6 +12,7 @@ interface DateInputRangeProps {
    endDate: Date | null;
    onChange: (dates: [Date | null, Date | null]) => void;
    showFooter?: boolean;
+   defaultText?: string;
 }
 const DateInputRange: React.FC<DateInputRangeProps> = (props) => {
    const [focus, setFocus] = useState(false);
@@ -19,7 +20,7 @@ const DateInputRange: React.FC<DateInputRangeProps> = (props) => {
    const [tempEndDate, setTempEndDate] = useState<Date | null>(props.endDate);
    const renderButtonContent = () => {
       if (props.startDate === null && props.endDate === null) {
-         return <div className="text-gray-500 font-semibold text-sm">{}</div>;
+         return <div className="text-gray-500 font-semibold text-sm">{props.defaultText}</div>;
       } else {
          const startDate = props.startDate ? moment(props.startDate).format("MMM D") : "";
          const endDate = props.endDate ? moment(props.endDate).format("MMM D") : "";
@@ -54,7 +55,7 @@ const DateInputRange: React.FC<DateInputRangeProps> = (props) => {
          onFocus={() => setFocus(true)}
          onBlur={() => setFocus(false)}
          onCalendarOpen={() => setFocus(true)}
-         onCalendarClose={() => setFocus(false)}
+         onClickOutside={() => setFocus(false)}
          onChange={(res) => {
             setTempStartDate(res[0]);
             setTempEndDate(res[1]);
@@ -68,7 +69,14 @@ const DateInputRange: React.FC<DateInputRangeProps> = (props) => {
                {data.children}
                {props.showFooter && (
                   <div className="flex p-4 bg-white gap-3 border-t border-gray-200">
-                     <button onClick={() => setFocus(false)} className="btn btn-gray btn-outlined btn-md">
+                     <button
+                        onClick={() => {
+                           setTempStartDate(props.startDate);
+                           setTempEndDate(props.endDate);
+                           setFocus(false);
+                        }}
+                        className="btn btn-gray btn-outlined btn-md"
+                     >
                         Cancel
                      </button>
                      <button
@@ -88,18 +96,40 @@ const DateInputRange: React.FC<DateInputRangeProps> = (props) => {
             const year = props.date.getFullYear();
             const month = moment(props.date).format("MMMM");
             return (
-               <div className="flex justify-between items-center">
-                  <div className="cursor-pointer" onClick={props.decreaseMonth}>
-                     {icons.calendarLeftIcon}
+               <div className="flex flex-col w-full">
+                  <div className="flex justify-between items-center">
+                     <div className="cursor-pointer" onClick={props.decreaseMonth}>
+                        {icons.calendarLeftIcon}
+                     </div>
+                     <div className="text-gray-700 font-semibold">
+                        {month} {year}
+                     </div>
+                     <div className="cursor-pointer" onClick={props.increaseMonth}>
+                        {icons.calendarRightIcon}
+                     </div>
                   </div>
-                  <div className="text-gray-700 font-semibold">
-                     {month} {year}
-                  </div>
-                  <div className="cursor-pointer" onClick={props.increaseMonth}>
-                     {icons.calendarRightIcon}
+                  <div className="flex w-full justify-between items-center mt-4">
+                     <div className="w-fit">
+                        <Input
+                           className="w-36"
+                           value={tempStartDate ? moment(tempStartDate).format("MMM D, YYYY") : "-"}
+                           onChange={() => {}}
+                        ></Input>
+                     </div>
+                     <div className="text-gray-500 font-normal text-base">-</div>
+                     <div className="w-fit">
+                        <Input
+                           className="w-36"
+                           value={tempEndDate ? moment(tempEndDate).format("MMM D, YYYY") : "-"}
+                           onChange={() => {}}
+                        ></Input>
+                     </div>
                   </div>
                </div>
             );
          }}
          customInput={<CustomInput></CustomInput>}
-      ></Datepic
+      ></Datepicker>
+   );
+};
+export default DateInputRange;

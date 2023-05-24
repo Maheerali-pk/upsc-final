@@ -13,11 +13,11 @@ import DateInputRange from "../../components/DateInputRange";
 interface DashboardProps {}
 
 const jobTypeSelectOptions: ISelectOption<IJobStatus | "ALL">[] = [
-   { value: "ALL", text: "All posts" },
-   { value: "OPEN", text: "Active" },
-   { value: "HOLD", text: "On Hold" },
-   { value: "UNDER_REVIEW", text: "Under review" },
-   { value: "CLOSED", text: "Closed" },
+   { value: "ALL", heading: "All posts" },
+   { value: "OPEN", heading: "Active" },
+   { value: "HOLD", heading: "On Hold" },
+   { value: "UNDER_REVIEW", heading: "Under review" },
+   { value: "CLOSED", heading: "Closed" },
 ];
 
 const DashboardContent: React.FC<DashboardProps> = () => {
@@ -62,11 +62,13 @@ const DashboardContent: React.FC<DashboardProps> = () => {
                      <DateInputRange
                         showFooter
                         endDate={endDate}
+                        defaultText="Select Dates"
                         startDate={startDate}
                         onChange={onChange}
                      ></DateInputRange>
                      <div className="w-40">
                         <Select
+                           className="w-40"
                            options={jobTypeSelectOptions}
                            onChange={(value) => setJobType(value as IJobStatus | "ALL")}
                            value={jobType}

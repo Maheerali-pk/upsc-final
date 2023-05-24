@@ -40,7 +40,7 @@ const Select = <Name extends string = string>({
       return () => window.removeEventListener("click", func);
    }, [open]);
    return (
-      <div className="select-wrapper flex flex-col gap-1.5 w-full">
+      <div className={`${className} select-wrapper flex flex-col  gap-1.5 `}>
          {props.label && (
             <div className="text-sm text-gray-700 font-medium">
                {props.label}{" "}
@@ -59,7 +59,9 @@ const Select = <Name extends string = string>({
                }
             )}
          >
-            <div className="text-gray-500">{selectedOption?.heading || selectedOption?.text || placeholder}</div>
+            <div className="text-gray-900 font-medium text-sm">
+               {selectedOption?.heading || selectedOption?.text || placeholder}
+            </div>
             <div>{icons.chevronDown}</div>
             {
                <div className={classNames("select-menu z-10", { show: open })}>
