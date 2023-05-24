@@ -10,6 +10,7 @@ interface SelectProps<Name extends string = string> {
    state?: InputState;
    label?: string;
    labelSubtext?: string;
+   className?: string;
 }
 
 const Select = <Name extends string = string>({
@@ -18,6 +19,7 @@ const Select = <Name extends string = string>({
    onChange,
    placeholder,
    state,
+   className = "",
    ...props
 }: SelectProps<Name>) => {
    const [open, setOpen] = useState(false);
@@ -42,11 +44,7 @@ const Select = <Name extends string = string>({
          {props.label && (
             <div className="text-sm text-gray-700 font-medium">
                {props.label}{" "}
-               {props.labelSubtext ? (
-                  <span className="text-gray-400 font-normal">
-                     ({props.labelSubtext})
-                  </span>
-               ) : null}
+               {props.labelSubtext ? <span className="text-gray-400 font-normal">({props.labelSubtext})</span> : null}
             </div>
          )}
          <div
@@ -61,9 +59,7 @@ const Select = <Name extends string = string>({
                }
             )}
          >
-            <div className="text-gray-500">
-               {selectedOption?.heading || selectedOption?.text || placeholder}
-            </div>
+            <div className="text-gray-500">{selectedOption?.heading || selectedOption?.text || placeholder}</div>
             <div>{icons.chevronDown}</div>
             {
                <div className={classNames("select-menu z-10", { show: open })}>
@@ -76,12 +72,8 @@ const Select = <Name extends string = string>({
                         )}
                      >
                         <div className="flex flex-col gap-[2px]">
-                           <div className="text-gray-900 font-medium ">
-                              {opt.heading}
-                           </div>
-                           <div className="text-gray-500 text-sm">
-                              {opt.text}
-                           </div>
+                           <div className="text-gray-900 font-medium ">{opt.heading}</div>
+                           <div className="text-gray-500 text-sm">{opt.text}</div>
                         </div>
                         {value === opt.value ? icons.check : <></>}
                      </div>

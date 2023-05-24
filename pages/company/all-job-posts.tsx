@@ -6,13 +6,12 @@ import PageWrapper from "../../components/PageWrapper";
 import CompanyNavbar from "../../components/CompanyNavbar";
 import PrivateRoute from "../../components/PrivateRoute";
 import CompleteProfileHeader from "../../components/CompleteProfileHeader";
-import ProfileLevelCard, {
-   IProfileLevelCardItem,
-} from "../../components/ProfileLevelCard";
+import ProfileLevelCard, { IProfileLevelCardItem } from "../../components/ProfileLevelCard";
 import { icons } from "../../utils/helpers";
 import RecentPostsTable from "../../components/RecentPostsTable";
 import { getJobPostsList } from "../../apis/getJobPostsList";
 import HowToWorkWithTalent from "../../components/HowToWorkWithTalent";
+import Input from "../../components/Input";
 
 interface DashboardProps {}
 
@@ -42,36 +41,21 @@ const AllJobPostsContent: React.FC<DashboardProps> = () => {
             <link rel="icon" href="/favicon.ico" />
          </Head>
          <CompanyNavbar selectedItem={0}></CompanyNavbar>
-         <div className="flex flex-col px-28 py-8 gap-14">
-            <CompleteProfileHeader
-               totalSteps={5}
-               completedSteps={3}
-            ></CompleteProfileHeader>
-            <div className="grid grid-cols-[auto_18rem] w-full gap-8">
-               <div className="flex flex-col gap-8 ">
-                  <div className="flex items-center justify-between w-full gap-2">
-                     <div className="text-gray-900 font-semibold text-3xl">
-                        Recent Posts
-                     </div>
-                     <button className="btn btn-md btn-primary w-fit">
-                        View all posts
-                     </button>
+         <div className="flex flex-col gap-8 py-12 pb-24">
+            <div className="flex flex-col gap-1">
+               <div className="text-gray-900 font-semibold text-3xl">Your job posts</div>
+               <div className="text-gray-600 font-normal text-base">View your job posts and applications</div>
+            </div>
+            <div className="flex flex-col gap-6 ">
+               <div className="flex justify-between gap-4 py-3">
+                  <div className="w-96">
+                     <Input
+                        startIcon={icons.searchBig}
+                        placeholder="Search for job post"
+                        value=""
+                        onChange={() => {}}
+                     ></Input>
                   </div>
-                  <RecentPostsTable
-                     posts={posts.slice(0, 3)}
-                  ></RecentPostsTable>
-                  <HowToWorkWithTalent></HowToWorkWithTalent>
-               </div>
-               <div className="flex flex-col gap-8 ">
-                  <ProfileLevelCard
-                     items={items}
-                     completedPercentage={56}
-                  ></ProfileLevelCard>
-                  <img
-                     src="/images/ad-image.png"
-                     className="rounded-2xl"
-                     alt=""
-                  />
                </div>
             </div>
          </div>

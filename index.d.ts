@@ -1,3 +1,8 @@
+interface IDropdownItem {
+   text: string;
+   icon?: JSX.Element;
+   onClick: () => void;
+}
 interface INavbarItem {
    text: string;
    url?: string;
@@ -29,14 +34,7 @@ interface InputCheck<Value extends IInputValue> {
    cond: (value?: Value) => boolean;
    state: InputState;
 }
-type InputType =
-   | "number"
-   | "text"
-   | "select"
-   | "checkbox"
-   | "multiple-checkbox"
-   | "password"
-   | "radio";
+type InputType = "number" | "text" | "select" | "checkbox" | "multiple-checkbox" | "password" | "radio";
 
 interface IInput<Value extends IInputValue> {
    type?: InputType;
@@ -51,15 +49,7 @@ interface ErrorObject {
    error: string;
 }
 
-type IInputValue =
-   | string
-   | boolean
-   | string[]
-   | (File | null)
-   | ILanguage[]
-   | IExam[]
-   | IOtherExam[]
-   | IWork[];
+type IInputValue = string | boolean | string[] | (File | null) | ILanguage[] | IExam[] | IOtherExam[] | IWork[];
 type Test = {
    email: string;
    password: string;
@@ -72,16 +62,12 @@ type X = UseFormProps<Test>;
 type UseFormProps<NamesObject extends NamesObjectDefault> = {
    [k in keyof NamesObject]: IInput<NamesObject[k]>;
 };
-type PartialFormProps<NamesObject extends NamesObjectDefault> = Partial<
-   UseFormProps<NamesObject>
->;
+type PartialFormProps<NamesObject extends NamesObjectDefault> = Partial<UseFormProps<NamesObject>>;
 type CreateStateObject<NamesObject extends NamesObjectDefault> = {
    [k in keyof Names]: InputState;
 };
 
-type GetArrayType<ArrType> = ArrType extends readonly (infer ElementType)[]
-   ? ElementType
-   : never;
+type GetArrayType<ArrType> = ArrType extends readonly (infer ElementType)[] ? ElementType : never;
 
 type CreateFormObject<NamesObject extends NamesObjectDefault> = {
    [k in keyof NamesObject]: {
@@ -105,18 +91,10 @@ type T = CreateFormObject<{
 //    [k in keyof NamesObject]: IInput<NamesObject[k]>;
 // };
 
-type IExperience = ValueObject<
-   "compName" | "startDate" | "endDate" | "description" | "role"
->;
-type IDegree = ValueObject<
-   "currentStudying" | "degree" | "stream" | "college" | "yearOfGrad" | "marks"
->;
+type IExperience = ValueObject<"compName" | "startDate" | "endDate" | "description" | "role">;
+type IDegree = ValueObject<"currentStudying" | "degree" | "stream" | "college" | "yearOfGrad" | "marks">;
 type IUPSCAttempt = ValueObject<
-   | "yearOfAttempt"
-   | "qualifiedForMains"
-   | "qualifiedForInterview"
-   | "optSubject"
-   | "language"
+   "yearOfAttempt" | "qualifiedForMains" | "qualifiedForInterview" | "optSubject" | "language"
 >;
 
 type StatePCNames =
@@ -147,13 +125,7 @@ type TestId =
    | "signin-login-link"
    | `signup-${SignUpTestId}`;
 
-type SignUpTestId =
-   | "firstname"
-   | "lastname"
-   | "phone"
-   | "email"
-   | "password"
-   | "submit";
+type SignUpTestId = "firstname" | "lastname" | "phone" | "email" | "password" | "submit";
 
 type CompanyProfileSetupTestId =
    | "name"
