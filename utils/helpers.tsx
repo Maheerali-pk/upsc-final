@@ -345,6 +345,35 @@ export const icons = {
          />
       </svg>
    ),
+   openExternalArrow: (
+      <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <path
+            d="M6.33337 14.1667L14.6667 5.83337M14.6667 5.83337H6.33337M14.6667 5.83337V14.1667"
+            stroke="#667085"
+            stroke-width="1.67"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+         />
+      </svg>
+   ),
+   alterCircle: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <g clip-path="url(#clip0_1770_56171)">
+            <path
+               d="M7.99992 5.33331V7.99998M7.99992 10.6666H8.00659M14.6666 7.99998C14.6666 11.6819 11.6818 14.6666 7.99992 14.6666C4.31802 14.6666 1.33325 11.6819 1.33325 7.99998C1.33325 4.31808 4.31802 1.33331 7.99992 1.33331C11.6818 1.33331 14.6666 4.31808 14.6666 7.99998Z"
+               stroke="#F04438"
+               stroke-width="1.33333"
+               stroke-linecap="round"
+               stroke-linejoin="round"
+            />
+         </g>
+         <defs>
+            <clipPath id="clip0_1770_56171">
+               <rect width="16" height="16" fill="white" />
+            </clipPath>
+         </defs>
+      </svg>
+   ),
    postJob: (
       <svg width="66" height="66" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg">
          <rect x="5" y="5" width="56" height="56" rx="28" fill="#FFE6D5" />
