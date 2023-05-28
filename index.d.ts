@@ -176,6 +176,15 @@ type IGrad = {
    stream: string;
 };
 
+type IWorkMini = {
+   compName: string;
+   role: string;
+   description: string;
+   currentlyWorking: boolean;
+   startDate: string;
+   endDate: string;
+};
+
 type IWork = {
    compName: string;
    role: string;
@@ -193,6 +202,7 @@ interface ISelectOption<Name extends string = string> {
    heading?: string;
    text?: string;
    value: Name;
+   badge?: string;
 }
 
 interface cy {

@@ -39,9 +39,7 @@ const proficencyOptions = [
 ];
 
 const WorkInput: React.FC<LanguageInputProps> = (props) => {
-   const [editing, setEditing] = useState(
-      props.editing === true ? true : false
-   );
+   const [editing, setEditing] = useState(props.editing === true ? true : false);
 
    const { inputsData } = useForm<IWork, {}>({
       inputs: {
@@ -78,44 +76,20 @@ const WorkInput: React.FC<LanguageInputProps> = (props) => {
             <>
                <div className="flex justify-between items-center w-full mb-6">
                   {icons.featured}
-                  <div
-                     className="cursor-pointer"
-                     onClick={() => setEditing(false)}
-                  >
+                  <div className="cursor-pointer" onClick={() => setEditing(false)}>
                      {icons.close}
                   </div>
                </div>
 
-               <div className="text-lg mb-5 font-semibold text-gray-900">
-                  Add Work Experience
-               </div>
+               <div className="text-lg mb-5 font-semibold text-gray-900">Add Work Experience</div>
                <div className="flex flex-col gap-8 mb-6">
-                  <Input
-                     {...inputsData.role}
-                     label="Title"
-                     placeholder="e.g. Tutor"
-                  ></Input>
-                  <Input
-                     {...inputsData.compName}
-                     label="Name of organization"
-                     placeholder="Type here"
-                  ></Input>
+                  <Input {...inputsData.role} label="Title" placeholder="e.g. Tutor"></Input>
+                  <Input {...inputsData.compName} label="Name of organization" placeholder="Type here"></Input>
                   <div className="gap-6 flex items-end">
-                     <Input
-                        {...inputsData.location}
-                        label="Location"
-                        placeholder="e.g. Delhi"
-                     ></Input>
-                     <Input
-                        {...inputsData.state}
-                        label=""
-                        placeholder="State"
-                     ></Input>
+                     <Input {...inputsData.location} label="Location" placeholder="e.g. Delhi"></Input>
+                     <Input {...inputsData.state} label="" placeholder="State"></Input>
                   </div>
-                  <Checkbox
-                     label="I am currently working here"
-                     {...inputsData.currentlyWorking}
-                  ></Checkbox>
+                  <Checkbox label="I am currently working here" {...inputsData.currentlyWorking}></Checkbox>
                   <div className="flex flex-col gap-8 md:flex-row md:gap-6">
                      <div className="flex gap-4 items-end w-full">
                         <Select
@@ -124,11 +98,7 @@ const WorkInput: React.FC<LanguageInputProps> = (props) => {
                            label="Start date"
                            options={monthsArray}
                         ></Select>
-                        <Select
-                           {...inputsData.startYear}
-                           placeholder="Year"
-                           options={yearsArray}
-                        ></Select>
+                        <Select {...inputsData.startYear} placeholder="Year" options={yearsArray}></Select>
                      </div>
                      <div className="flex gap-4 items-end w-full">
                         <Select
@@ -137,11 +107,7 @@ const WorkInput: React.FC<LanguageInputProps> = (props) => {
                            label="End date"
                            options={monthsArray}
                         ></Select>
-                        <Select
-                           {...inputsData.endYear}
-                           placeholder="Year"
-                           options={yearsArray}
-                        ></Select>
+                        <Select {...inputsData.endYear} placeholder="Year" options={yearsArray}></Select>
                      </div>
                   </div>
 
@@ -152,10 +118,7 @@ const WorkInput: React.FC<LanguageInputProps> = (props) => {
                      rows={4}
                   ></Textarea>
                </div>
-               <button
-                  className="btn btn-primary btn-lg"
-                  onClick={onClickOnSave}
-               >
+               <button className="btn btn-primary btn-lg" onClick={onClickOnSave}>
                   Save
                </button>
             </>

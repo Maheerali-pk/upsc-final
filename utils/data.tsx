@@ -1,16 +1,16 @@
 export const monthsArray = [
-   { value: "January", text: "January" },
-   { value: "February", text: "February" },
-   { value: "March", text: "March" },
-   { value: "April", text: "April" },
-   { value: "May", text: "May" },
-   { value: "June", text: "June" },
-   { value: "July", text: "July" },
-   { value: "August", text: "August" },
-   { value: "September", text: "September" },
-   { value: "October", text: "October" },
-   { value: "November", text: "November" },
-   { value: "December", text: "December" },
+   { value: "0", text: "January" },
+   { value: "1", text: "February" },
+   { value: "2", text: "March" },
+   { value: "3", text: "April" },
+   { value: "4", text: "May" },
+   { value: "5", text: "June" },
+   { value: "6", text: "July" },
+   { value: "7", text: "August" },
+   { value: "8", text: "September" },
+   { value: "9", text: "October" },
+   { value: "10", text: "November" },
+   { value: "11", text: "December" },
 ];
 
 export const jobStatusToText: { [key in IJobStatus]: string } = {

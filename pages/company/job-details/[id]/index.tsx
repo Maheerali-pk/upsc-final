@@ -1,10 +1,10 @@
 import Head from "next/head";
-import PageWrapper from "../../../components/PageWrapper";
-import CompanyNavbar from "../../../components/CompanyNavbar";
-import { icons } from "../../../utils/helpers";
-import JobDetailsSidebarItem from "../../../components/JobDetailsSidebarItem";
+import PageWrapper from "../../../../components/PageWrapper";
+import CompanyNavbar from "../../../../components/CompanyNavbar";
+import { icons } from "../../../../utils/helpers";
+import JobDetailsSidebarItem from "../../../../components/JobDetailsSidebarItem";
 import { useRouter } from "next/router";
-import { routes } from "../../../utils/utils";
+import { routes } from "../../../../utils/utils";
 
 interface DashboardProps {}
 

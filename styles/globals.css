@@ -395,6 +395,9 @@
       padding: 2px 6px;
       padding-bottom: 2rem;
    }
+   .select-menu.open-top {
+      @apply -translate-y-full;
+   }
    .select-menu.show {
       @apply scale-100;
    }
