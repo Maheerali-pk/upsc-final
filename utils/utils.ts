@@ -69,6 +69,7 @@ export const getDurationString = (work: IWorkMini) => {
    const start = moment(new Date(work.startDate));
    const end = work.currentlyWorking ? moment(new Date()) : moment(new Date(work.startDate));
    const diff = moment.duration(end.diff(start));
+
    const months = diff.asMonths();
    const years = diff.asYears();
    if (years === 0) {

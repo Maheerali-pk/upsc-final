@@ -34,16 +34,25 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ application, selected
       );
    };
    return (
-      <div className="flex flex-col items-center rounded-2xl gap-4 py-5 px-4 border border-gray-200 bg-white">
+      <div className="flex flex-col items-center rounded-2xl gap-4 py-5 px-4 border border-gray-200 bg-white md:p-6 md:pb-7">
          <div className="flex justify-between items-start w-full border-b border-gray-100 pb-4">
-            <div className="flex flex-col gap-1">
-               <div className="text-gray-900 font-semibold text-lg">
-                  {application.candidateID.personalInfo.name.firstName}{" "}
-                  {application.candidateID.personalInfo.name.lastName}
+            <div className="flex gap-2 items-start">
+               <Checkbox
+                  wrapperClassName="hidden md:flex translate-y-1"
+                  value={selected}
+                  onChange={onChange}
+                  label={<></>}
+               ></Checkbox>
+               <div className="flex flex-col gap-1">
+                  <div className="text-gray-900 font-semibold text-lg">
+                     {application.candidateID.personalInfo.name.firstName}{" "}
+                     {application.candidateID.personalInfo.name.lastName}
+                  </div>
+                  <div className="text-gray-500 font-medium text-sm">Pune, Maharashtra</div>
                </div>
-               <div className="text-gray-500 font-medium text-sm">Pune, Maharashtra</div>
             </div>
-            <Checkbox value={selected} onChange={onChange} label={<></>}></Checkbox>
+            <div className="text-gray-400 font-medium text-sm">Applied 2 days ago</div>
+            <Checkbox wrapperClassName="md:hidden" value={selected} onChange={onChange} label={<></>}></Checkbox>
          </div>
          <div className="flex flex-col gap-6 border-b border-gray-200 pb-4">
             <div className="flex flex-col gap-4">

@@ -21,16 +21,12 @@ module.exports = {
          },
 
          backgroundImage: {
-            "gray-600-600":
-               "conic-gradient(from 259.08deg at 50% 50%, #475467 0deg, rgba(71, 84, 103, 0) 360deg);",
+            "gray-600-600": "conic-gradient(from 259.08deg at 50% 50%, #475467 0deg, rgba(71, 84, 103, 0) 360deg);",
             "gray-600-500": "linear-gradient(90deg, #475467 0%, #667085 100%);",
             "gray-700-600": "linear-gradient(45deg, #344054 0%, #475467 100%);",
-            "gray-800-600-45":
-               "linear-gradient(45deg, #1D2939 0%, #475467 100%);",
-            "gray-800-600-90":
-               "linear-gradient(63.44deg, #1D2939 16.72%, #475467 83.39%);",
-            "gray-800-700":
-               "linear-gradient(26.57deg, #1D2939 8.33%, #344054 91.67%);",
+            "gray-800-600-45": "linear-gradient(45deg, #1D2939 0%, #475467 100%);",
+            "gray-800-600-90": "linear-gradient(63.44deg, #1D2939 16.72%, #475467 83.39%);",
+            "gray-800-700": "linear-gradient(26.57deg, #1D2939 8.33%, #344054 91.67%);",
             "gray-900-600": "linear-gradient(45deg, #101828 0%, #475467 100%);",
          },
          spacing: {
@@ -42,6 +38,7 @@ module.exports = {
             18: toRem(72),
             106: toRem(424),
             200: toRem(800),
+            17: toRem(68),
             160: toRem(640),
          },
          width: {
@@ -49,6 +46,7 @@ module.exports = {
             106: toRem(424),
             150: toRem(600),
             904: toRem(904),
+            130: toRem(520),
          },
          colors: {
             white: "#ffffff",
