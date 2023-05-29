@@ -44,7 +44,7 @@ const RecentPostsTable: React.FC<RecentPostsTableProps> = (props) => {
                <div className="text-center text-gray-600 text-sm">{post.applications}</div>
                <div
                   className="btn btn-link btn-primary text-sm"
-                  onClick={() => router.push(routes.company.jobDetails(post._id))}
+                  onClick={() => router.push(routes.company.jobDetails.base(post._id))}
                >
                   View
                </div>

@@ -34,7 +34,7 @@ const AllJobPostsTable: React.FC<AllJobPostsTableProps> = ({ posts }) => {
       if (post.status === "OPEN")
          return (
             <button
-               onClick={() => router.push(routes.company.jobDetails(post._id))}
+               onClick={() => router.push(routes.company.jobDetails.applications(post._id))}
                className="btn btn-primary btn-link"
             >
                View Applications

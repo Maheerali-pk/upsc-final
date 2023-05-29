@@ -29,12 +29,12 @@ const JobDetailsContent: React.FC<DashboardProps> = () => {
             <div className="flex flex-col w-full p-4">
                <JobDetailsSidebarItem
                   text="Overview"
-                  onClick={() => router.push(routes.company.jobDetails(router.query.id as string))}
+                  onClick={() => router.push(routes.company.jobDetails.base(router.query.id as string))}
                ></JobDetailsSidebarItem>
                <JobDetailsSidebarItem
                   text="Applications received"
                   badgeNumber={10}
-                  onClick={() => router.push(routes.company.jobDetails(router.query.id as string))}
+                  onClick={() => router.push(routes.company.jobDetails.base(router.query.id as string))}
                   selected
                ></JobDetailsSidebarItem>
             </div>
