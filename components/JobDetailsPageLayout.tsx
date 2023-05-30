@@ -20,6 +20,7 @@ interface JobDetailsPageLayoutProps {
    selectedItemValue?: JobDetailsRoute;
    children?: React.ReactNode;
    hideHeader?: boolean;
+   applications: IApplication[];
 }
 
 const JobDetailsPageLayout: React.FC<JobDetailsPageLayoutProps> = (props) => {
@@ -58,25 +59,25 @@ const JobDetailsPageLayout: React.FC<JobDetailsPageLayoutProps> = (props) => {
                ></JobDetailsSidebarItem>
                <JobDetailsSidebarItem
                   text="Applications received"
-                  badgeNumber={10}
+                  badgeNumber={props.applications.length}
                   onClick={() => router.push(routes.company.jobDetails.applications(router.query.id as string))}
                   selected={props.selectedItem === 1}
                ></JobDetailsSidebarItem>
                <JobDetailsSidebarItem
                   text="Shortlisted"
-                  badgeNumber={6}
+                  badgeNumber={props.applications.filter((x) => x.status === "SHORT_LISTED").length}
                   onClick={() => router.push(routes.company.jobDetails.applications(router.query.id as string))}
                   selected={props.selectedItem === 2}
                ></JobDetailsSidebarItem>
                <JobDetailsSidebarItem
                   text="Hired"
-                  badgeNumber={10}
+                  badgeNumber={props.applications.filter((x) => x.status === "HIRED").length}
                   onClick={() => router.push(routes.company.jobDetails.applications(router.query.id as string))}
                   selected={props.selectedItem === 3}
                ></JobDetailsSidebarItem>
                <JobDetailsSidebarItem
                   text="Not interested"
-                  badgeNumber={10}
+                  badgeNumber={props.applications.filter((x) => x.status === "REJECTED").length}
                   onClick={() => router.push(routes.company.jobDetails.applications(router.query.id as string))}
                   selected={props.selectedItem === 4}
                ></JobDetailsSidebarItem>

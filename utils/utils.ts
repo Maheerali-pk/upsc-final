@@ -65,20 +65,42 @@ export const fileToBase64 = (file: File): Promise<string | ArrayBuffer | null> =
    });
 };
 
-export const getDurationString = (work: IWorkMini) => {
-   const start = moment(new Date(work.startDate));
-   const end = work.currentlyWorking ? moment(new Date()) : moment(new Date(work.startDate));
-   const diff = moment.duration(end.diff(start));
+export const getDurationStringForWork = (work: IWorkMini) => {
+   const start = new Date(work.startDate);
+   const end = work.currentlyWorking ? new Date() : new Date(work.startDate);
+   return getDurationString(start, end);
+};
 
+export const getDurationString = (startDate: Date, endDate: Date): string => {
+   const start = moment(new Date(startDate));
+   const end = moment(new Date(endDate));
+   const diff = moment.duration(end.diff(start));
+   const seconds = diff.asSeconds();
+   const mins = diff.asMinutes();
+   const hours = diff.asHours();
+   const days = diff.asDays();
    const months = diff.asMonths();
    const years = diff.asYears();
-   if (years === 0) {
-      return `${months} months`;
+
+   let res = `${Math.floor(seconds)} second${Math.floor(seconds) > 1 ? "s" : ""}`;
+
+   if (seconds >= 60) {
+      res = `${Math.floor(mins)} minute${Math.floor(mins) > 1 ? "s" : ""}`;
    }
-   if (months === 0) {
-      return `${years} years`;
+   if (mins >= 60) {
+      res = `${Math.floor(hours)} hour${Math.floor(hours) > 1 ? "s" : ""}`;
    }
-   return `${years} years and ${months} months`;
+   if (hours >= 24) {
+      res = `${Math.floor(days)} day${Math.floor(days) > 1 ? "s" : ""}`;
+   }
+   if (days >= 30) {
+      res = `${Math.floor(months)} month${Math.floor(months) > 1 ? "s" : ""}`;
+   }
+   if (months >= 12) {
+      res = `${Math.floor(years)} year${Math.floor(years) > 1 ? "s" : ""}`;
+   }
+
+   return res;
 };
 
 export const turncateStringByWords = (str: string, len: number) => {

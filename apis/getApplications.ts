@@ -17,7 +17,7 @@ export interface IApplication {
       position: string;
    };
    coverLetter: string;
-   status: IJobStatus;
+   status: IApplicationStatus;
    createdAt: string;
 }
 

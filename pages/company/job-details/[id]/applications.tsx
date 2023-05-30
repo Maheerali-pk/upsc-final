@@ -68,7 +68,12 @@ const ApplicationsContent: React.FC<ApplicationsContentProps> = (props) => {
          {state.dialog === CandidateHiredDialog ? <CandidateHiredDialog></CandidateHiredDialog> : null}
          <CompanyNavbar selectedItem={1}></CompanyNavbar>
 
-         <JobDetailsPageLayout hideHeader={selectedApplicatoins.size > 0} jobId={props.jobId} selectedItem={1}>
+         <JobDetailsPageLayout
+            applications={applications}
+            hideHeader={selectedApplicatoins.size > 0}
+            jobId={props.jobId}
+            selectedItem={1}
+         >
             <div
                className={classNames(
                   "flex md:sticky flex-col md:px-28 md:h-17 justify-center md:justify-start gap-3 md:gap-8 py-6 px-4 md:py-0 bg-white top-0 w-full left-0 z-20 border-b border-gray-200 md:flex-row",
@@ -102,6 +107,7 @@ const ApplicationsContent: React.FC<ApplicationsContentProps> = (props) => {
                         selected={selectedApplicatoins.has(app._id)}
                         onChange={(val) => handleApplicationSelect(app._id, val)}
                         application={app}
+                        isAnySelected={selectedApplicatoins.size !== 0}
                      ></ApplicationCard>
                   </>
                ))}
