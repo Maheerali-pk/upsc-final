@@ -106,7 +106,7 @@ export const getDurationString = (startDate: Date, endDate: Date): string => {
 export const turncateStringByWords = (str: string, len: number) => {
    const words = str.split(" ");
    let res = "";
-   while (res.length + words[0].length < len) {
+   while (words.length && res.length + words[0].length < len) {
       res += " " + words.shift();
    }
    return res;

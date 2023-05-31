@@ -4,6 +4,7 @@ interface DropdownProps {
    elm: JSX.Element;
    items: IDropdownItem[];
    className?: string;
+   menuClassName?: string;
 }
 
 const Dropdown: React.FC<DropdownProps> = (props) => {
@@ -24,7 +25,11 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
       <div ref={dropdownRef} onClick={() => setOpen(!open)} className={"relative" + (props.className || "")}>
          {props.elm}
          {open && (
-            <div className=" absolute top-full translate-y-4 right-0 w-60 bg-white z-10 flex-col rounded-lg border border-gray-200 p-2 shadow-lg flex items-center ">
+            <div
+               className={` absolute top-full translate-y-4 right-0 w-60 bg-white z-10 flex-col rounded-lg border border-gray-200 p-2 shadow-lg flex items-center ${
+                  props.menuClassName || ""
+               }`}
+            >
                {props.items.map((item) => (
                   <div
                      onClick={() => {

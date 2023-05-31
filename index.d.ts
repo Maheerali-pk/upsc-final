@@ -273,7 +273,7 @@ interface ICompanyDetails {
    updatedAt: string;
 }
 type IJobStatus = "UNDER_REVIEW" | "HOLD" | "OPEN" | "CLOSED";
-type IApplicationStatus = "HIRED" | "REJECTED" | "UNDER_EVALUATION" | "SHORT_LISTED";
+type IApplicationStatus = "UNDER_REVIEW" | "HIRED" | "REJECTED" | "UNDER_EVALUATION" | "SHORTLISTED";
 interface IJobPostMini {
    _id: string;
    position: string;
