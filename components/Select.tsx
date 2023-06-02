@@ -46,11 +46,17 @@ const Select = <Name extends string = string>({
       return () => window.removeEventListener("click", func);
    }, [open]);
    return (
-      <div className={`${className} select-wrapper flex flex-col  gap-1.5 `}>
+      <div
+         className={`${className} select-wrapper flex flex-col  gap-1.5 w-full `}
+      >
          {props.label && (
             <div className="text-sm text-gray-700 font-medium">
                {props.label}{" "}
-               {props.labelSubtext ? <span className="text-gray-400 font-normal">({props.labelSubtext})</span> : null}
+               {props.labelSubtext ? (
+                  <span className="text-gray-400 font-normal">
+                     ({props.labelSubtext})
+                  </span>
+               ) : null}
             </div>
          )}
          <div
@@ -68,19 +74,26 @@ const Select = <Name extends string = string>({
          >
             <div className="flex gap-2items-center">
                <div className="text-gray-900 font-medium text-sm">
-                  {selectedOption?.heading || selectedOption?.text || placeholder}
+                  {selectedOption?.heading ||
+                     selectedOption?.text ||
+                     placeholder}
                </div>
                {selectedOption?.badge && (
-                  <div className="rounded-2xl bg-gray-100 py-0.5 px-2">{selectedOption.badge}</div>
+                  <div className="rounded-2xl bg-gray-100 py-0.5 px-2">
+                     {selectedOption.badge}
+                  </div>
                )}
             </div>
             <div>{icons.chevronDown}</div>
             {
                <div
-                  className={classNames(`select-menu z-10 ${menuClassName ? menuClassName : ""}`, {
-                     show: open,
-                     "open-top": openOnTop,
-                  })}
+                  className={classNames(
+                     `select-menu z-10 ${menuClassName ? menuClassName : ""}`,
+                     {
+                        show: open,
+                        "open-top": openOnTop,
+                     }
+                  )}
                >
                   {options.map((opt) => (
                      <div
@@ -92,10 +105,18 @@ const Select = <Name extends string = string>({
                      >
                         <div className="flex flex-col gap-[2px]">
                            <div className="flex gap-2 items-center">
-                              <div className="text-gray-900 font-medium ">{opt.heading}</div>
-                              {opt.badge && <div className="rounded-2xl bg-gray-100 py-0.5 px-2">{opt.badge}</div>}
+                              <div className="text-gray-900 font-medium ">
+                                 {opt.heading}
+                              </div>
+                              {opt.badge && (
+                                 <div className="rounded-2xl bg-gray-100 py-0.5 px-2">
+                                    {opt.badge}
+                                 </div>
+                              )}
                            </div>
-                           <div className="text-gray-500 text-sm">{opt.text}</div>
+                           <div className="text-gray-500 text-sm">
+                              {opt.text}
+                           </div>
                         </div>
                         {value === opt.value ? icons.check : <></>}
                      </div>

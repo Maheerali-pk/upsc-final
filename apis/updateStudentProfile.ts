@@ -77,6 +77,14 @@ interface UpdateStudentProfileDetailsBody {
    upscJourney?: UpscJourney;
    workExp?: WorkExperience[];
 }
+export interface StudentProfileDetails {
+   personalInfo: PersonalInfo;
+   onboardingState: string;
+   jobPref: JobPref;
+   grads: Grad[];
+   upscJourney: UpscJourney;
+   workExp: WorkExperience[];
+}
 export const UpdateStudentProfile = (data: UpdateStudentProfileDetailsBody) => {
    return customFetch<any>({
       method: "POST",

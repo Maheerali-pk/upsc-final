@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import {
    GlobalContextProvider,
+   IUser,
    useGlobalContext,
 } from "../../../contexts/GlobalContext";
 import { checks, icons } from "../../../utils/helpers";
@@ -31,11 +32,16 @@ import RadioGroup from "../../../components/RadioGroup";
 import LanguageInput from "../../../components/LanguageInput";
 import CheckboxList from "../../../components/CheckboxList";
 import ProfileSetupFooter from "../../../components/ProfileSetupFooter";
-import { UpdateStudentProfile } from "../../../apis/updateStudentProfile";
+import {
+   StudentProfileDetails,
+   UpdateStudentProfile,
+} from "../../../apis/updateStudentProfile";
 import NotificationPopup from "../../../components/NotificationPopup";
 import Navbar from "../../../components/Navbar";
 import InputWithTags from "../../../components/InputWithTags";
 import PrivateRoute from "../../../components/PrivateRoute";
+import { getCandidateProfile } from "../../../apis/getProfile";
+import { set } from "cypress/types/lodash";
 
 const StudentProfileSetup: React.FC = () => {
    const [state, dispatch] = useGlobalContext();
@@ -43,6 +49,7 @@ const StudentProfileSetup: React.FC = () => {
    const [logoUrl, setLogoUrl] = useState("");
    const [disableNext, setDisableNext] = useState(true);
    const [showNotification, setShowNotification] = useState(false);
+   const [user, setUser] = useState<StudentProfileDetails>();
    const { inputsData, onSubmit, checkForErrors } = useForm<
       {
          gender: string;
@@ -81,6 +88,11 @@ const StudentProfileSetup: React.FC = () => {
          }
       },
    });
+   useEffect(() => {
+      getCandidateProfile().then((res) => {
+         setUser(res);
+      });
+   }, []);
 
    const onClickOnNext = async () => {
       const error = onSubmit();
@@ -153,17 +165,16 @@ const StudentProfileSetup: React.FC = () => {
    return (
       <PrivateRoute purpose="CANDIDATE">
          <Head>
-            <title>Create Next App</title>
+            <title>Set up profile</title>
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <Navbar></Navbar>
 
          <div className="setup-wrapper">
             <Loader></Loader>
 
             <div className="flex flex-col ">
                <ProfileSetupHeader
-                  text="Hi Amit! Let’s set up your profile"
+                  text={`Hi ${user?.personalInfo.name?.firstName}! Let’s set up your profile`}
                   icon={icons.profileSetup.company}
                ></ProfileSetupHeader>
                <div className="student-profile-setup-item ">
