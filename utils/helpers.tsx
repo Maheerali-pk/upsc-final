@@ -1,7 +1,7 @@
 import { errors, warnings } from "./utils";
 
 export const toRem = (px: number) => `${px / 16}rem`;
-export const host = "http://65.0.77.255";
+export const host = "https://api.csenaukri.com";
 export const customFetch = async <T extends { [key: string]: any }>(
    data: CustomFetchProps
 ) => {
