@@ -1,7 +1,11 @@
 import moment from "moment";
 import { IApplication } from "../apis/getApplications";
 import { icons } from "../utils/helpers";
-import { getDurationString, getDurationStringForWork, turncateStringByWords } from "../utils/utils";
+import {
+   getDurationString,
+   getDurationStringForWork,
+   turncateStringByWords,
+} from "../utils/utils";
 import { useState } from "react";
 import Checkbox from "./Checkbox";
 import classNames from "classnames";
@@ -15,19 +19,32 @@ interface ApplicationCardProps {
    jobId: string;
 }
 
-const ApplicationCard: React.FC<ApplicationCardProps> = ({ application, selected, onChange, isAnySelected, jobId }) => {
+const ApplicationCard: React.FC<ApplicationCardProps> = ({
+   application,
+   selected,
+   onChange,
+   isAnySelected,
+   jobId,
+}) => {
    const isCoverLetterLong = application.coverLetter.length > 180;
-   const shortenedCoverLetter = turncateStringByWords(application.coverLetter, 180);
+   const shortenedCoverLetter = turncateStringByWords(
+      application.coverLetter,
+      180
+   );
    const [showingFullCoverLetter, setShowingFullCoverLetter] = useState(false);
    const renderCoverLetter = () => {
       return (
          <div className="text-gray-900 font-normal text-sm">
-            {showingFullCoverLetter ? application.coverLetter : shortenedCoverLetter}{" "}
+            {showingFullCoverLetter
+               ? application.coverLetter
+               : shortenedCoverLetter}{" "}
             {isCoverLetterLong ? (
                <>
                   {showingFullCoverLetter ? null : "... "}
                   <span
-                     onClick={() => setShowingFullCoverLetter(!showingFullCoverLetter)}
+                     onClick={() =>
+                        setShowingFullCoverLetter(!showingFullCoverLetter)
+                     }
                      className="btn btn-primary btn-link w-fit inline"
                   >
                      {showingFullCoverLetter ? "Show Less" : "Show More"}
@@ -52,26 +69,44 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ application, selected
                      {application.candidateID.personalInfo.name.firstName}{" "}
                      {application.candidateID.personalInfo.name.lastName}
                   </div>
-                  <div className="text-gray-500 font-medium text-sm">Pune, Maharashtra</div>
+                  <div className="text-gray-500 font-medium text-sm">
+                     Pune, Maharashtra
+                  </div>
                </div>
             </div>
             <div className="text-gray-400 font-medium text-sm">
-               Applied {getDurationString(new Date(application.createdAt), new Date())} ago
+               Applied{" "}
+               {getDurationString(new Date(application.createdAt), new Date())}{" "}
+               ago
             </div>
-            <Checkbox wrapperClassName="md:hidden" value={selected} onChange={onChange} label={<></>}></Checkbox>
+            <Checkbox
+               wrapperClassName="md:hidden"
+               value={selected}
+               onChange={onChange}
+               label={<></>}
+            ></Checkbox>
          </div>
-         <div className="flex flex-col gap-0 md:gap-8 border-b border-gray-200 pb-4 md:pb-8 md:grid grid-cols-[auto_auto] ">
-            <div className="text-gray-500 font-normal text-sm mb-4 md:mb-0">Work experience:</div>
+         <div className="flex flex-col gap-0 md:gap-8 border-b border-gray-200 pb-4 md:pb-8 md:grid grid-cols-[min-content_auto] w-full">
+            <div className="text-gray-500 font-normal text-sm mb-4 md:mb-0 whitespace-nowrap">
+               Work experience:
+            </div>
             <div className="flex flex-col gap-4 md:gap-3 mb-6 md:mb-0">
                {application.candidateID.workExp.slice(0, 2).map((work, i) => (
                   <div className="flex flex-col md:flex-row  gap-1 md:gap-2 md:items-center">
-                     <div className="text-gray-900 font-medium text-sm md:text-base">{work.role}</div>
+                     <div className="text-gray-900 font-medium text-sm md:text-base">
+                        {work.role}
+                     </div>
 
                      <div className="hidden md:flex ">{icons.dot}</div>
                      <div className="flex items-center gap-2">
                         <div className="text-gray-500 font-normal text-sm md:text-base">
-                           {moment(new Date(work.startDate)).format("MMM YYYY")}-
-                           {work.currentlyWorking ? "Present" : moment(new Date(work.endDate)).format("MMM YYYY")}
+                           {moment(new Date(work.startDate)).format("MMM YYYY")}
+                           -
+                           {work.currentlyWorking
+                              ? "Present"
+                              : moment(new Date(work.endDate)).format(
+                                   "MMM YYYY"
+                                )}
                         </div>
                         {icons.dot}
                         <div className="text-gray-500 font-normal text-sm md:text-base">
@@ -86,8 +121,12 @@ const ApplicationCard: React.FC<ApplicationCardProps> = ({ application, selected
                   </div>
                ))}
             </div>
-            <div className="text-gray-500 font-normal text-sm mb-1.5 md:mb-0">Cover letter: </div>
-            <div className="flex flex-col gap-1.5">{renderCoverLetter()}</div>
+            <div className="text-gray-500 font-normal text-sm mb-1.5 md:mb-0">
+               Cover letter:{" "}
+            </div>
+            <div className="flex flex-col gap-1.5 items-start">
+               {renderCoverLetter()}
+            </div>
          </div>
          <DefaultButtonGroupApplicationCard
             jobId={jobId}

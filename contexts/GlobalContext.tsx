@@ -1,6 +1,7 @@
 import React from "react";
 import OTPDialog from "../dialogs/OTPDialog";
 import { createCustomContext } from "../utils/CreateCustomContext";
+import { IApplication } from "../apis/getApplications";
 
 interface IGlobalState {
    dialog?: React.FC<any>;
@@ -8,6 +9,8 @@ interface IGlobalState {
    error: { title: string; message: string };
    user: IUser | null;
    email: string;
+   alert: { text: string } | null;
+   applications: IApplication[];
 }
 
 export interface IUser {
@@ -21,6 +24,8 @@ const initialState: IGlobalState = {
    error: { title: "", message: "" },
    email: "",
    user: null,
+   alert: null,
+   applications: [],
 };
 
 const functions = {

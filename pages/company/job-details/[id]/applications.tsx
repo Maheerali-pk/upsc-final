@@ -6,7 +6,10 @@ import JobDetailsSidebarItem from "../../../../components/JobDetailsSidebarItem"
 import { useRouter } from "next/router";
 import { routes } from "../../../../utils/utils";
 import { useEffect, useState } from "react";
-import { IApplication, getApplications } from "../../../../apis/getApplications";
+import {
+   IApplication,
+   getApplications,
+} from "../../../../apis/getApplications";
 import ApplicationCard from "../../../../components/ApplicationCard";
 import JobDetailsPageLayout from "../../../../components/JobDetailsPageLayout";
 import CompanyApplicationsPageHeader from "../../../../components/CompanyApplicationsPageHeader";
@@ -16,6 +19,7 @@ import { useGlobalContext } from "../../../../contexts/GlobalContext";
 import Loader from "../../../../components/Loader";
 import CandidateHiredDialog from "../../../../dialogs/CandidateHiredDialog";
 import classNames from "classnames";
+import Alert from "../../../../components/Alert";
 
 interface ApplicationsContentProps {
    jobId: string;
@@ -23,30 +27,39 @@ interface ApplicationsContentProps {
 
 const ApplicationsContent: React.FC<ApplicationsContentProps> = (props) => {
    const router = useRouter();
-   const [applications, setApplications] = useState<IApplication[]>([]);
-   const [selectedApplicatoins, setSelectedApplications] = useState<Set<string>>(new Set());
+   const [selectedApplicatoins, setSelectedApplications] = useState<
+      Set<string>
+   >(new Set());
    const [selectAllValue, setSelectAllValue] = useState(false);
    const [state, dispatch] = useGlobalContext();
 
    const reloadApplications = () => {
       if (props.jobId) {
+         dispatch({ setState: { loading: true } });
          getApplications(props.jobId).then((res) => {
-            setApplications(res.docs);
+            dispatch({ setState: { applications: res.docs } });
+            dispatch({ setState: { loading: false } });
          });
       }
    };
    useEffect(() => {
       reloadApplications();
    }, [props.jobId]);
+   console.log(state.applications, "all applications");
    return (
       <div className="grid grid-flow-row h-screen grid-rows-[min-content_min-content_auto] overflow-auto">
-         {state.dialog === CandidateHiredDialog ? <CandidateHiredDialog></CandidateHiredDialog> : null}
+         {state.dialog === CandidateHiredDialog ? (
+            <CandidateHiredDialog></CandidateHiredDialog>
+         ) : null}
          <CompanyNavbar selectedItem={1}></CompanyNavbar>
-
+         <Alert></Alert>
          <JobDetailsPageLayout
+            selectedStatus="UNDER_REVIEW"
             reloadApplications={reloadApplications}
-            myApplications={applications.filter((x) => x.status === "UNDER_REVIEW")}
-            allApplications={applications}
+            myApplications={state.applications.filter(
+               (x) => x.status === "UNDER_REVIEW"
+            )}
+            allApplications={state.applications}
             hideHeader={selectedApplicatoins.size > 0}
             jobId={props.jobId}
             selectedItem={1}
@@ -62,6 +75,12 @@ const Applications: React.FC = () => {
    useEffect(() => {
       setJobId(router.query.id as string);
    }, [router.query.id]);
-   return <PageWrapper Component={<ApplicationsContent jobId={jobId || ""}></ApplicationsContent>}></PageWrapper>;
+   return (
+      <PageWrapper
+         Component={
+            <ApplicationsContent jobId={jobId || ""}></ApplicationsContent>
+         }
+      ></PageWrapper>
+   );
 };
 export default Applications;

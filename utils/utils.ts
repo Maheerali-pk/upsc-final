@@ -8,7 +8,8 @@ export const errors = {
    atleast90: "The description should be at least 90 characters long",
 };
 export const warnings = {
-   gmailAddress: "👋🏻 We noticed you’re using a gmail.com address. Would you like to use your work email instead?",
+   gmailAddress:
+      "👋🏻 We noticed you’re using a gmail.com address. Would you like to use your work email instead?",
 };
 export const routes = {
    login: "/auth/login",
@@ -29,10 +30,12 @@ export const routes = {
       successfulPostJob: "/company/post-job/success",
       jobDetails: {
          base: (id: string) => `/company/job-details/${id}`,
-         applications: (id: string) => `/company/job-details/${id}/applications`,
+         applications: (id: string) =>
+            `/company/job-details/${id}/applications`,
          shortlisted: (id: string) => `/company/job-details/${id}/shortlisted`,
          hired: (id: string) => `/company/job-details/${id}/hired`,
-         notInterested: (id: string) => `/company/job-details/${id}/notInterested`,
+         notInterested: (id: string) =>
+            `/company/job-details/${id}/notInterested`,
          assignments: (id: string) => `/company/job-details/${id}/assignments`,
          chat: (id: string) => `/company/job-details/${id}/chat`,
       },
@@ -55,7 +58,9 @@ export const routes = {
    },
 } as const;
 
-export const fileToBase64 = (file: File): Promise<string | ArrayBuffer | null> => {
+export const fileToBase64 = (
+   file: File
+): Promise<string | ArrayBuffer | null> => {
    const reader = new FileReader();
    reader.readAsDataURL(file);
    return new Promise((res, rej) => {
@@ -82,7 +87,9 @@ export const getDurationString = (startDate: Date, endDate: Date): string => {
    const months = diff.asMonths();
    const years = diff.asYears();
 
-   let res = `${Math.floor(seconds)} second${Math.floor(seconds) > 1 ? "s" : ""}`;
+   let res = `${Math.floor(seconds)} second${
+      Math.floor(seconds) > 1 ? "s" : ""
+   }`;
 
    if (seconds >= 60) {
       res = `${Math.floor(mins)} minute${Math.floor(mins) > 1 ? "s" : ""}`;
@@ -110,4 +117,24 @@ export const turncateStringByWords = (str: string, len: number) => {
       res += " " + words.shift();
    }
    return res;
+};
+
+export const getApplicationAlertText = (
+   updateType: IApplicationUpdateType,
+   noOfApplications: number
+) => {
+   if (updateType === "REJECT") {
+      return `${noOfApplications} applicant${
+         noOfApplications === 1 ? "" : "s"
+      } moved to Not interested. Showing next applicants in the list`;
+   } else if (updateType === "SHORTLIST") {
+      return `Shortlisted ${noOfApplications} applicant${
+         noOfApplications === 1 ? "" : "s"
+      } . Showing next applicants in the list`;
+   } else if (updateType === "HIRE") {
+      return `Hired ${noOfApplications} applicant${
+         noOfApplications === 1 ? "" : "s"
+      } . Showing next applicants in the list`;
+   }
+   return "";
 };

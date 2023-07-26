@@ -1,8 +1,10 @@
 import classNames from "classnames";
 import { icons } from "../utils/helpers";
 import Dropdown from "./Dropdown";
-import { IApplication } from "../apis/getApplications";
+import { IApplication, getApplications } from "../apis/getApplications";
 import { updateApplication } from "../apis/updateApplication";
+import { useGlobalContext } from "../contexts/GlobalContext";
+import { getApplicationAlertText } from "../utils/utils";
 
 interface DefaultButtonGroupApplicationCardProps {
    isAnySelected?: boolean;
@@ -10,14 +12,48 @@ interface DefaultButtonGroupApplicationCardProps {
    jobId: string;
 }
 
-const DefaultButtonGroupApplicationCard: React.FC<DefaultButtonGroupApplicationCardProps> = (props) => {
-   const hire = () => {
-      updateApplication(props.jobId, { type: "HIRE", applicationIDs: [props.application._id] });
+const DefaultButtonGroupApplicationCard: React.FC<
+   DefaultButtonGroupApplicationCardProps
+> = (props) => {
+   const [state, dispatch] = useGlobalContext();
+   const handleClickOnAction = async (type: IApplicationUpdateType) => {
+      dispatch({ setState: { loading: true } });
+
+      await updateApplication(props.jobId, {
+         type,
+         applicationIDs: [props.application._id],
+      });
+      const applications = await getApplications(props.jobId);
+      dispatch({ setState: { applications: applications.docs } });
+
+      dispatch({ setState: { loading: false } });
+      dispatch({
+         setState: { alert: { text: getApplicationAlertText(type, 1) } },
+      });
+      getApplications(props.jobId);
+      setTimeout(() => {
+         dispatch({ setState: { alert: null } });
+      }, 3000);
+      return () => {
+         dispatch({ setState: { alert: null } });
+      };
    };
    const dropdownItems: IDropdownItem[] = [
-      { text: "Send Assignment", icon: icons.nextSteps.sendAssignment, onClick: () => {} },
-      { text: "Start Chat", icon: icons.nextSteps.startChat, onClick: () => {} },
-      { text: "Hire", icon: icons.nextSteps.hire, onClick: hire },
+      {
+         text: "Send Assignment",
+         icon: icons.nextSteps.sendAssignment,
+         onClick: () => {},
+      },
+      {
+         text: "Start Chat",
+         icon: icons.nextSteps.startChat,
+         onClick: () => {},
+      },
+      {
+         text: "Hire",
+         icon: icons.nextSteps.hire,
+         onClick: () => handleClickOnAction("HIRE"),
+      },
    ];
    return (
       <>
@@ -56,20 +92,34 @@ const DefaultButtonGroupApplicationCard: React.FC<DefaultButtonGroupApplicationC
             <div className="flex gap-6">
                <div className="cursor-pointer flex items-center gap-1">
                   {icons.jobCardCompany.message}
-                  <div className="text-gray-500 font-semibold text-sm">Message</div>
+                  <div className="text-gray-500 font-semibold text-sm">
+                     Message
+                  </div>
                </div>
                <div className="cursor-pointer flex items-center gap-1">
                   {icons.jobCardCompany.notes}
-                  <div className="text-gray-500 font-semibold text-sm">Add notes</div>
+                  <div className="text-gray-500 font-semibold text-sm">
+                     Add notes
+                  </div>
                </div>
             </div>
-            <div className={classNames("flex gap-3", { "opacity-0": props.isAnySelected })}>
-               <button className="btn btn-gray btn-outlined gap-2 btn-sm whitespace-nowrap">
+            <div
+               className={classNames("flex gap-3", {
+                  "opacity-0": props.isAnySelected,
+               })}
+            >
+               <button
+                  onClick={() => handleClickOnAction("REJECT")}
+                  className="btn btn-gray btn-outlined gap-2 btn-sm whitespace-nowrap"
+               >
                   {icons.jobCardCompany.notInterested}
                   Not interested
                </button>
 
-               <button className="btn btn-gray btn-outlined gap-2 btn-sm">
+               <button
+                  onClick={() => handleClickOnAction("SHORTLIST")}
+                  className="btn btn-gray btn-outlined gap-2 btn-sm"
+               >
                   {icons.jobCardCompany.shortlist}
                   Shortlist
                </button>
