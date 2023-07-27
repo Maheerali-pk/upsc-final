@@ -159,7 +159,12 @@ const LoginComponent: React.FC = () => {
                <div className="text-sm text-gray-600">
                   Don’t have an account?
                </div>
-               <div className="btn btn-link btn-primary w-fit">Sign up</div>
+               <div
+                  className="btn btn-link btn-primary w-fit"
+                  onClick={() => router.push(routes.signup.base)}
+               >
+                  Sign up
+               </div>
             </div>
          </AuthPageWrapper>
       </>
